@@ -74,7 +74,28 @@ Create annotated datasets and validated measures for relevance, topic, geographi
 - Distinguish awareness proxies from direct measurements of individual awareness.
 - Use associational language unless causal identification is justified.
 
-## Getting started
+## Getting started & Workflow
+
+We are planning to evaluate the RMSE, MAE, and % improvement over the baseline for the following models:
+
+ * Baseline (seasonal-naive) - using previous year value for this year's prediction
+ * Autoregressive/SARIMAX
+ * Random Forest
+ * XGBoost
+ * LSTM
+
+**Austin**
+
+* Environmental models
+
+**Jules**
+
+* Media + Environmental models
+
+**Zion**
+
+* Media only (twitter-only, news-only, media combined)
+
 
 This repository is being initialized. The first implementation steps are:
 
