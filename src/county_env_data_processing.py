@@ -65,6 +65,43 @@ def print_missing_report(data, label):
         print(missing_counts)
 
 
+def trim_leading_fire_data(data):
+    """
+    Remove rows before fire data becomes available for each county.
+
+    The entire row is removed so all features remain aligned by month.
+    """
+
+    data = data.copy()
+    trimmed_counties = []
+
+    for county, county_data in data.groupby(county_col, sort=False):
+        fire_available = county_data["FIRE_Acres_Burned"].notna()
+
+        if not fire_available.any():
+            raise ValueError(f"{county} has no observed fire data.")
+
+        # Position of the first row with observed fire data.
+        first_fire_position = np.where(fire_available)[0][0]
+
+        rows_removed = first_fire_position
+
+        # Keep the first observed fire month and everything after it.
+        county_data = county_data.iloc[first_fire_position:]
+
+        trimmed_counties.append(county_data)
+
+        print(
+            f"Removed {rows_removed} leading rows for {county}. "
+            f"Data now begins at "
+            f"{county_data[date_col].iloc[0]:%Y-%m}."
+        )
+
+    data = pd.concat(trimmed_counties, ignore_index=True)
+
+    return data
+
+
 # some counties like Tulare have a couple missing values
 # so we interpolate linearly (take average of prev and next vals)
 def interpolate_internal_missing(data):
@@ -160,6 +197,11 @@ def process_data(input_file=input_file, output_file=output_file):
     # check columns, duplicate county month rows, and missing months
     validate_data(data, required_columns, county_col, date_col)
     print_missing_report(data, "before processing")
+
+    # remove months before fire data is available
+    data = trim_leading_fire_data(data)
+
+    print_missing_report(data, "after trimming leading fire data")
 
     # fill inner gaps that have an observed value before and after them
     data = interpolate_internal_missing(data)
