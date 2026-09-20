@@ -15,7 +15,7 @@ from data_validation import validate_data
 # path for project root
 project_root = Path(__file__).resolve().parents[1]
 input_file = project_root/"data"/"processed"/"env_vf_aggregate"/"aggregate_all_counties_2001_2024.csv"
-output_file = project_root/"data"/"interim"/"aggregate_all_counties_2001_2024_processed.csv"
+output_file = project_root/"data"/"interim"/"all_counties_process_no_fire_2006_2024.csv"
 
 plot_folder = project_root/"results"/"ets_forecasts"
 
