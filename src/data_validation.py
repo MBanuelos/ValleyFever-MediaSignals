@@ -67,3 +67,10 @@ def validate_data(data, required_columns, county_col="County", date_col="Year-Mo
     check_required_columns(data, required_columns)
     check_duplicate_rows(data, county_col, date_col)
     check_monthly_continuity(data, county_col, date_col)
+
+def validate_agg_data(data, required_columns, date_col="Year-Month"):
+    """Run all validation checks."""
+
+    check_required_columns(data, required_columns)
+    check_duplicate_rows(data, date_col)
+    check_monthly_continuity(data, date_col)
