@@ -1,0 +1,253 @@
+County,feature,total_months,observed_months,missing_months,coverage_pct,first_observed_month,last_observed_month
+Alameda,Precipitation,288,288,0,100.0,2001-01,2024-12
+Alameda,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Alameda,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Alameda,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Alameda,windeventcount,288,288,0,100.0,2001-01,2024-12
+Alameda,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Alameda,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Alameda,AQI_PM10,288,120,168,41.67,2001-01,2010-12
+Alameda,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Alameda,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Alameda,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Alameda,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Contra Costa,Precipitation,288,288,0,100.0,2001-01,2024-12
+Contra Costa,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Contra Costa,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Contra Costa,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Contra Costa,windeventcount,288,288,0,100.0,2001-01,2024-12
+Contra Costa,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Contra Costa,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Contra Costa,AQI_PM10,288,276,12,95.83,2001-01,2023-12
+Contra Costa,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Contra Costa,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Contra Costa,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Contra Costa,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Fresno,Precipitation,288,288,0,100.0,2001-01,2024-12
+Fresno,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Fresno,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Fresno,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Fresno,windeventcount,288,288,0,100.0,2001-01,2024-12
+Fresno,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Fresno,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Fresno,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Fresno,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Fresno,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Fresno,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Fresno,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Kern,Precipitation,288,288,0,100.0,2001-01,2024-12
+Kern,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Kern,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Kern,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Kern,windeventcount,288,288,0,100.0,2001-01,2024-12
+Kern,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Kern,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Kern,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Kern,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Kern,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Kern,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Kern,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Los Angeles,Precipitation,288,288,0,100.0,2001-01,2024-12
+Los Angeles,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Los Angeles,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Los Angeles,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Los Angeles,windeventcount,288,288,0,100.0,2001-01,2024-12
+Los Angeles,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Los Angeles,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Los Angeles,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Los Angeles,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Los Angeles,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Los Angeles,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Los Angeles,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Merced,Precipitation,288,280,8,97.22,2001-01,2024-04
+Merced,Avg Rel Hum (%),288,280,8,97.22,2001-01,2024-04
+Merced,Avg Wind Speed (mph),288,280,8,97.22,2001-01,2024-04
+Merced,Wind Run (miles),288,280,8,97.22,2001-01,2024-04
+Merced,windeventcount,288,280,8,97.22,2001-01,2024-04
+Merced,Avg Soil Temp (F),288,279,9,96.88,2001-01,2024-03
+Merced,AQI_PM25,288,287,1,99.65,2001-02,2024-12
+Merced,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Merced,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Merced,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Merced,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Merced,rate_per_100k,288,241,47,83.68,2001-01,2024-12
+Monterey,Precipitation,288,288,0,100.0,2001-01,2024-12
+Monterey,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Monterey,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Monterey,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Monterey,windeventcount,288,288,0,100.0,2001-01,2024-12
+Monterey,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Monterey,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Monterey,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Monterey,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Monterey,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Monterey,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Monterey,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Orange,Precipitation,288,288,0,100.0,2001-01,2024-12
+Orange,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Orange,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Orange,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Orange,windeventcount,288,288,0,100.0,2001-01,2024-12
+Orange,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Orange,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Orange,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Orange,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Orange,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Orange,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Orange,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Riverside,Precipitation,288,288,0,100.0,2001-01,2024-12
+Riverside,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Riverside,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Riverside,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Riverside,windeventcount,288,288,0,100.0,2001-01,2024-12
+Riverside,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Riverside,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Riverside,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Riverside,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Riverside,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Riverside,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Riverside,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Sacramento,Precipitation,288,288,0,100.0,2001-01,2024-12
+Sacramento,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Sacramento,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Sacramento,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Sacramento,windeventcount,288,288,0,100.0,2001-01,2024-12
+Sacramento,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Sacramento,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Sacramento,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Sacramento,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Sacramento,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Sacramento,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Sacramento,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+San Bernardino,Precipitation,288,288,0,100.0,2001-01,2024-12
+San Bernardino,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+San Bernardino,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+San Bernardino,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+San Bernardino,windeventcount,288,288,0,100.0,2001-01,2024-12
+San Bernardino,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+San Bernardino,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+San Bernardino,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+San Bernardino,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+San Bernardino,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Bernardino,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Bernardino,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+San Diego,Precipitation,288,288,0,100.0,2001-01,2024-12
+San Diego,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+San Diego,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+San Diego,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+San Diego,windeventcount,288,288,0,100.0,2001-01,2024-12
+San Diego,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+San Diego,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+San Diego,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+San Diego,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+San Diego,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Diego,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Diego,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+San Joaquin,Precipitation,288,288,0,100.0,2001-01,2024-12
+San Joaquin,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+San Joaquin,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+San Joaquin,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+San Joaquin,windeventcount,288,288,0,100.0,2001-01,2024-12
+San Joaquin,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+San Joaquin,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+San Joaquin,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+San Joaquin,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+San Joaquin,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Joaquin,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Joaquin,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+San Luis Obispo,Precipitation,288,288,0,100.0,2001-01,2024-12
+San Luis Obispo,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+San Luis Obispo,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+San Luis Obispo,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+San Luis Obispo,windeventcount,288,288,0,100.0,2001-01,2024-12
+San Luis Obispo,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+San Luis Obispo,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+San Luis Obispo,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+San Luis Obispo,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+San Luis Obispo,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Luis Obispo,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Luis Obispo,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+San Mateo,Precipitation,288,89,199,30.9,2017-08,2024-12
+San Mateo,Avg Rel Hum (%),288,86,202,29.86,2017-08,2024-12
+San Mateo,Avg Wind Speed (mph),288,89,199,30.9,2017-08,2024-12
+San Mateo,Wind Run (miles),288,89,199,30.9,2017-08,2024-12
+San Mateo,windeventcount,288,89,199,30.9,2017-08,2024-12
+San Mateo,Avg Soil Temp (F),288,89,199,30.9,2017-08,2024-12
+San Mateo,AQI_PM25,288,277,11,96.18,2001-01,2024-12
+San Mateo,AQI_PM10,288,90,198,31.25,2001-01,2008-06
+San Mateo,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+San Mateo,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Mateo,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+San Mateo,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Santa Barbara,Precipitation,288,288,0,100.0,2001-01,2024-12
+Santa Barbara,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Santa Barbara,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Santa Barbara,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Santa Barbara,windeventcount,288,288,0,100.0,2001-01,2024-12
+Santa Barbara,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Santa Barbara,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Santa Barbara,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Santa Barbara,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Santa Barbara,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Santa Barbara,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Santa Barbara,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Santa Clara,Precipitation,288,273,15,94.79,2001-01,2024-12
+Santa Clara,Avg Rel Hum (%),288,272,16,94.44,2001-01,2024-12
+Santa Clara,Avg Wind Speed (mph),288,272,16,94.44,2001-01,2024-12
+Santa Clara,Wind Run (miles),288,273,15,94.79,2001-01,2024-12
+Santa Clara,windeventcount,288,273,15,94.79,2001-01,2024-12
+Santa Clara,Avg Soil Temp (F),288,272,16,94.44,2001-01,2024-12
+Santa Clara,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Santa Clara,AQI_PM10,288,264,24,91.67,2001-01,2022-12
+Santa Clara,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Santa Clara,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Santa Clara,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Santa Clara,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Solano,Precipitation,288,288,0,100.0,2001-01,2024-12
+Solano,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Solano,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Solano,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Solano,windeventcount,288,288,0,100.0,2001-01,2024-12
+Solano,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Solano,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Solano,AQI_PM10,288,281,7,97.57,2001-01,2024-12
+Solano,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Solano,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Solano,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Solano,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Stanislaus,Precipitation,288,288,0,100.0,2001-01,2024-12
+Stanislaus,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Stanislaus,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Stanislaus,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Stanislaus,windeventcount,288,288,0,100.0,2001-01,2024-12
+Stanislaus,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Stanislaus,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Stanislaus,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Stanislaus,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Stanislaus,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Stanislaus,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Stanislaus,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Tulare,Precipitation,288,288,0,100.0,2001-01,2024-12
+Tulare,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Tulare,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Tulare,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Tulare,windeventcount,288,288,0,100.0,2001-01,2024-12
+Tulare,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Tulare,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Tulare,AQI_PM10,288,285,3,98.96,2001-01,2024-12
+Tulare,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Tulare,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Tulare,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Tulare,rate_per_100k,288,288,0,100.0,2001-01,2024-12
+Ventura,Precipitation,288,288,0,100.0,2001-01,2024-12
+Ventura,Avg Rel Hum (%),288,288,0,100.0,2001-01,2024-12
+Ventura,Avg Wind Speed (mph),288,288,0,100.0,2001-01,2024-12
+Ventura,Wind Run (miles),288,288,0,100.0,2001-01,2024-12
+Ventura,windeventcount,288,288,0,100.0,2001-01,2024-12
+Ventura,Avg Soil Temp (F),288,288,0,100.0,2001-01,2024-12
+Ventura,AQI_PM25,288,288,0,100.0,2001-01,2024-12
+Ventura,AQI_PM10,288,288,0,100.0,2001-01,2024-12
+Ventura,FIRE_Acres_Burned,288,221,67,76.74,2006-08,2024-12
+Ventura,fungicide_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Ventura,rodent_lbs_prd_used,288,276,12,95.83,2001-01,2023-12
+Ventura,rate_per_100k,288,288,0,100.0,2001-01,2024-12
