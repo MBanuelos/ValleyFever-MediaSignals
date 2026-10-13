@@ -15,7 +15,11 @@ Design (follows the conventions in ValleyFever-MediaSignals README / notebooks)
                       training window only contains targets <= t; hyper-
                       parameters are tuned once, on the FIRST window only,
                       with TimeSeriesSplit; imputers/scalers are fit per window.
-* Models            : seasonal-naive baseline, Ridge, Random Forest, XGBoost.
+* Feature sets      : env_only, media_only, media_env. Every set also contains the
+                      county's own past case changes (autoregressive terms).
+* Models            : seasonal-naive baseline, Ridge, Random Forest, XGBoost,
+                      SARIMAX (exog lagged 6 months, top-5 exog chosen on the first
+                      window) and a NumPy LSTM (12-feature-month look-back, 6-step output).
 * Metrics           : RMSE and MAE (log-diff scale, the repo convention) and on
                       the rate_per_100k scale; % improvement vs seasonal-naive.
 """
@@ -36,6 +40,12 @@ from sklearn.model_selection import GridSearchCV, TimeSeriesSplit
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBRegressor
+from statsmodels.tsa.statespace.sarimax import SARIMAX
+
+try:
+    from numpy_lstm import NumpyLSTM
+except ImportError:  # imported as a package
+    from .numpy_lstm import NumpyLSTM
 
 warnings.filterwarnings("ignore")
 
@@ -45,7 +55,10 @@ HORIZONS = (1, 3, 6)
 MAX_STEP = max(HORIZONS)
 MEDIA_START = pd.Period("2011-01", "M")       # first month with media data
 FIRST_TARGET = pd.Period("2011-02", "M")      # first month with a log-difference
-MODELS = ("seasonal_naive", "ridge", "random_forest", "xgboost")
+MODELS = ("seasonal_naive", "ridge", "random_forest", "xgboost", "sarimax", "lstm")
+FEATURE_SETS = ("env_only", "media_only", "media_env")
+LSTM_LOOKBACK = 6
+SARIMAX_K = 5
 
 ENV_COLS = [
     "Precipitation", "Avg Rel Hum (%)", "Avg Wind Speed (mph)", "Wind Run (miles)",
@@ -106,8 +119,18 @@ def load_county_panel(county, data_dir):
     return panel
 
 
+def _set_cols(feature_set):
+    if feature_set == "env_only":
+        return list(ENV_COLS)
+    if feature_set == "media_only":
+        return list(MEDIA_COLS)
+    if feature_set == "media_env":
+        return ENV_COLS + MEDIA_COLS
+    raise ValueError(f"unknown feature_set {feature_set}")
+
+
 def _step_features(panel, step, feature_set):
-    cols = ENV_COLS + (MEDIA_COLS if feature_set == "media_env" else [])
+    cols = _set_cols(feature_set)
     X = panel[cols].shift(step)
     y = panel["logdiff_rate"]
     X["ar_lag0"] = y.shift(step)
@@ -170,6 +193,92 @@ def _importance(name, fitted, columns):
     return out
 
 
+
+# --------------------------------------------------------------------------- #
+# SARIMAX and LSTM (multi-step models: one fit per forecast origin)
+# --------------------------------------------------------------------------- #
+_EXT_EXCLUDE = ("ar_lag", "seasonal_lag12")
+
+
+def _external_cols(F):
+    return [c for c in F.columns if not (c.startswith(_EXT_EXCLUDE[0]) or c == _EXT_EXCLUDE[1])]
+
+
+def _sarimax_prepare(F6, y, rows0, k=SARIMAX_K):
+    """First window only: pick the k external features most correlated with y, then a small AIC grid for the order."""
+    ext = _external_cols(F6)
+    X0 = F6.iloc[rows0][ext]
+    y0 = y.iloc[rows0].to_numpy()
+    imp = SimpleImputer(strategy="median", keep_empty_features=True)
+    Xi = pd.DataFrame(imp.fit_transform(X0), columns=ext)
+    corr = Xi.apply(lambda c: abs(np.corrcoef(c, y0)[0, 1]) if c.std() > 0 else 0.0)
+    cols = list(corr.sort_values(ascending=False).head(k).index)
+    Z = StandardScaler().fit_transform(Xi[cols])
+    best, best_aic = (1, 0, 0, 0), np.inf
+    for (p, q, P, Q) in [(0, 0, 0, 0), (1, 0, 0, 0), (0, 1, 0, 0), (1, 1, 0, 0), (2, 0, 0, 0),
+                         (0, 0, 1, 0), (1, 0, 1, 0), (0, 1, 1, 0), (1, 1, 1, 0), (1, 0, 0, 1)]:
+        try:
+            res = SARIMAX(y0, exog=Z, order=(p, 0, q), seasonal_order=(P, 0, Q, 12), trend="c",
+                          enforce_stationarity=False, enforce_invertibility=False).fit(disp=False, maxiter=60)
+            if np.isfinite(res.aic) and res.aic < best_aic:
+                best, best_aic = (p, q, P, Q), res.aic
+        except Exception:
+            continue
+    p, q, P, Q = best
+    return dict(cols=cols, order=(p, 0, q), seasonal=(P, 0, Q, 12))
+
+
+def _sarimax_forecast(F6, y, rows, t, max_s, spec):
+    """Fit on the current window (exog lagged 6 months, so all future exog is known at t) and forecast max_s steps."""
+    cols = spec["cols"]
+    Xtr = F6.iloc[rows][cols]
+    ytr = y.iloc[rows].to_numpy()
+    imp = SimpleImputer(strategy="median", keep_empty_features=True).fit(Xtr)
+    sc = StandardScaler().fit(imp.transform(Xtr))
+    Ztr = sc.transform(imp.transform(Xtr))
+    Zf = sc.transform(imp.transform(F6.iloc[t + 1:t + 1 + max_s][cols]))
+    try:
+        res = SARIMAX(ytr, exog=Ztr, order=spec["order"], seasonal_order=spec["seasonal"], trend="c",
+                      enforce_stationarity=False, enforce_invertibility=False).fit(disp=False, maxiter=60)
+        pred = np.asarray(res.forecast(steps=max_s, exog=Zf), dtype=float)
+        names = list(res.param_names)
+        coefs = {c: abs(float(res.params[names.index(f"x{i + 1}")])) for i, c in enumerate(cols)
+                 if f"x{i + 1}" in names}
+        ok = bool(np.all(np.isfinite(pred)))
+    except Exception:
+        ok, coefs = False, {}
+    if not ok:
+        return np.full(max_s, float(ytr.mean())), {}, False
+    tot = sum(coefs.values())
+    imp_out = {c: v / tot for c, v in coefs.items()} if tot > 0 else {}
+    return pred, imp_out, True
+
+
+def _lstm_forecast(A, y_arr, pos_media, t, max_s, window_start, seed):
+    """
+    One LSTM per origin. Inputs: previous LSTM_LOOKBACK months of features (+ the case log-change),
+    outputs: the next MAX_STEP monthly log-changes. All scaling is fit on data up to t.
+    """
+    L = LSTM_LOOKBACK
+    lo = max(window_start, pos_media + L - 1)
+    idx = np.arange(lo, t - MAX_STEP + 1)                 # last month of each training sequence
+    if len(idx) < 20:
+        return np.full(max_s, np.nan)
+    hist = A[max(pos_media, 0):t + 1]
+    med = np.nanmedian(np.where(np.isfinite(hist), hist, np.nan), axis=0)
+    med = np.where(np.isfinite(med), med, 0.0)
+    B = np.where(np.isfinite(A), A, med)
+    mu, sd = B[pos_media:t + 1].mean(0), B[pos_media:t + 1].std(0)
+    sd = np.where(sd > 1e-9, sd, 1.0)
+    Z = (B - mu) / sd
+    X = np.stack([Z[i - L + 1:i + 1] for i in idx])
+    Y = np.stack([y_arr[i + 1:i + 1 + MAX_STEP] for i in idx])
+    ym, ys = Y.mean(), Y.std() if Y.std() > 1e-9 else 1.0
+    net = NumpyLSTM(Z.shape[1], MAX_STEP, hidden=24, seed=seed)
+    net.fit(X, (Y - ym) / ys, epochs=60, lr=0.01, batch=16)
+    out = net.predict(Z[t - L + 1:t + 1][None])[0] * ys + ym
+    return out[:max_s]
+
 # --------------------------------------------------------------------------- #
 # Walk-forward engine
 # --------------------------------------------------------------------------- #
@@ -199,7 +308,7 @@ def run_county(county, data_dir, feature_set="media_env", models=MODELS, verbose
         valid[s] = ok
 
     # ---- tune once, on the first window only (step 1) -------------------------
-    fitted_models = [m for m in models if m != "seasonal_naive"]
+    fitted_models = [m for m in models if m in _GRIDS]          # tuned, one fit per step
     best_params = {}
     w0 = np.arange(first_origin - TRAIN_MONTHS + 1, first_origin + 1)
     w0 = w0[valid[1][w0]]
@@ -209,10 +318,22 @@ def run_county(county, data_dir, feature_set="media_env", models=MODELS, verbose
         gs.fit(feats[1].iloc[w0], y.iloc[w0])
         best_params[m] = gs.best_params_
 
+    # ---- SARIMAX / LSTM set-up (first window only) ------------------------------
+    sar_spec, sar_fail = None, 0
+    if "sarimax" in models:
+        rows0 = np.arange(first_origin - TRAIN_MONTHS + 1, first_origin + 1)
+        rows0 = rows0[valid[6][rows0]]
+        sar_spec = _sarimax_prepare(feats[6], y, rows0)
+        best_params["sarimax"] = dict(order=sar_spec["order"], seasonal_order=sar_spec["seasonal"],
+                                      exog=sar_spec["cols"])
+    A = np.column_stack([panel[_set_cols(feature_set)].to_numpy(float), y.to_numpy(float)])
+    y_arr = y.to_numpy(float)
+
     # ---- rolling-window loop ---------------------------------------------------
     records = []
-    imp_sum = {m: {} for m in fitted_models}
-    imp_cnt = {m: 0 for m in fitted_models}
+    imp_models = fitted_models + (["sarimax"] if "sarimax" in models else [])
+    imp_sum = {m: {} for m in imp_models}
+    imp_cnt = {m: 0 for m in imp_models}
     for k, t in enumerate(origins):
         max_s = min(MAX_STEP, last - t)
         for s in range(1, max_s + 1):
@@ -234,6 +355,25 @@ def run_county(county, data_dir, feature_set="media_env", models=MODELS, verbose
                 for g, v in _importance(m, mod, list(F.columns)).items():
                     imp_sum[m][g] = imp_sum[m].get(g, 0.0) + v
                 imp_cnt[m] += 1
+        # multi-step models: one fit per origin
+        def _add(model, pr):
+            for s_i in range(1, max_s + 1):
+                records.append(dict(origin=panel.index[t], step=s_i, target=panel.index[t + s_i],
+                                    actual=float(y.iloc[t + s_i]), model=model, pred=float(pr[s_i - 1])))
+        if "sarimax" in models:
+            rows6 = np.arange(t - TRAIN_MONTHS + 1, t + 1)
+            rows6 = rows6[valid[6][rows6]]
+            pr, imp_o, ok = _sarimax_forecast(feats[6], y, rows6, t, max_s, sar_spec)
+            sar_fail += int(not ok)
+            _add("sarimax", pr)
+            if ok:
+                for g, v in imp_o.items():
+                    imp_sum["sarimax"][g] = imp_sum["sarimax"].get(g, 0.0) + v
+                imp_cnt["sarimax"] += 1
+        if "lstm" in models:
+            pr = _lstm_forecast(A, y_arr, pos[MEDIA_START], t, max_s, t - TRAIN_MONTHS + 1, SEED + t)
+            if np.all(np.isfinite(pr)):
+                _add("lstm", pr)
         if verbose and (k + 1) % 10 == 0:
             print(f"  {county} [{feature_set}] origin {k + 1}/{len(origins)}", flush=True)
 
@@ -245,7 +385,7 @@ def run_county(county, data_dir, feature_set="media_env", models=MODELS, verbose
     forecasts.insert(1, "feature_set", feature_set)
 
     imp_rows = []
-    for m in fitted_models:
+    for m in imp_models:
         for g, v in imp_sum[m].items():
             imp_rows.append(dict(county=county, feature_set=feature_set, model=m, feature=g,
                                  importance=v / max(imp_cnt[m], 1)))
@@ -255,6 +395,7 @@ def run_county(county, data_dir, feature_set="media_env", models=MODELS, verbose
                 first_forecast_month=str(panel.index[first_origin + 1]),
                 last_forecast_month=str(panel.index[last]),
                 n_origins=len(origins), train_months=TRAIN_MONTHS,
+                sarimax_fit_failures=sar_fail,
                 runtime_sec=round(time.time() - t_start, 1))
     return dict(metrics=metrics, forecasts=forecasts, importances=importances,
                 best_params={m: {k: (None if v is None else v) for k, v in p.items()}
@@ -321,14 +462,15 @@ def summarize_best(result, n_features=3, selection="rmse"):
     Pick the best model (lowest mean `selection` metric across horizons 1/3/6,
     log-diff scale) and its top features.
 
-    Top features come from the best *fitted* model (importance averaged over every
-    walk-forward fit); if seasonal-naive wins, the best fitted model is used.
+    Top features come from the best model that reports feature importance (Ridge, Random Forest,
+    XGBoost, SARIMAX); if seasonal-naive or the LSTM wins, the best of those is used.
     """
     metrics, imp = result["metrics"], result["importances"]
     score = metrics.groupby("model")[selection].mean().sort_values()
     best = score.index[0]
-    fitted_score = score[[m for m in score.index if m != "seasonal_naive"]]
-    feat_model = best if best != "seasonal_naive" else fitted_score.index[0]
+    has_imp = set(imp["model"]) if len(imp) else set()
+    fitted_score = score[[m for m in score.index if m in has_imp]]
+    feat_model = best if best in has_imp else fitted_score.index[0]
 
     fi = (imp[imp["model"] == feat_model].sort_values("importance", ascending=False)
           .reset_index(drop=True))
@@ -382,60 +524,123 @@ def best_model_for_remaining_counties(data_dir, n_top=10, counties=None, feature
 
 
 # --------------------------------------------------------------------------- #
-# Batch run
+# Batch run (results are saved per county / feature set so runs can be resumed and combined)
 # --------------------------------------------------------------------------- #
-def main(data_dir, out_dir, n_top=10, only=None):
-    data_dir, out_dir = Path(data_dir), Path(out_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
-    top, rest = top_counties(data_dir, n_top)
-    if only:
-        top = [c for c in top if c in only]
-        rest = [c for c in rest if c in only]
+def _stem(tag, feature_set, county):
+    return f"{tag}__{feature_set}__{county.replace(' ', '')}"
 
-    def collect(counties, feature_set):
-        ms, fs, imps, metas, params = [], [], [], [], {}
+
+def run_parts(data_dir, out_dir, scope="top", feature_sets=FEATURE_SETS, models=MODELS, tag="run"):
+    """Run the walk-forward for a scope ('top', 'remaining', 'all') and save one set of files per county."""
+    top, rest = top_counties(data_dir)
+    counties = {"top": top, "remaining": rest, "all": top + rest}[scope]
+    parts = Path(out_dir) / "parts"
+    parts.mkdir(parents=True, exist_ok=True)
+    for fs in feature_sets:
         for c in counties:
-            print(f"== {c} ({feature_set})", flush=True)
-            r = run_county(c, data_dir, feature_set=feature_set)
-            ms.append(r["metrics"]); fs.append(r["forecasts"]); imps.append(r["importances"])
-            metas.append(r["meta"]); params[c] = r["best_params"]
+            stem = parts / _stem(tag, fs, c)
+            if Path(f"{stem}_metrics.csv").exists():
+                continue                                     # resume
+            print(f"== {c} ({fs}) models={list(models)}", flush=True)
+            r = run_county(c, data_dir, feature_set=fs, models=models)
+            r["metrics"].to_csv(f"{stem}_metrics.csv", index=False)
+            r["forecasts"].to_csv(f"{stem}_forecasts.csv", index=False)
+            r["importances"].to_csv(f"{stem}_importance.csv", index=False)
+            json.dump(dict(meta=r["meta"], best_params=r["best_params"]), open(f"{stem}_meta.json", "w"),
+                      indent=2, default=str)
             print(f"   done in {r['meta']['runtime_sec']}s", flush=True)
-        return (pd.concat(ms, ignore_index=True), pd.concat(fs, ignore_index=True),
-                pd.concat(imps, ignore_index=True), metas, params)
 
-    # 1) media + environment, top counties
-    m, f, i, meta, params = collect(top, "media_env")
-    m.to_csv(out_dir / "top10_metrics_media_env.csv", index=False)
-    f.to_csv(out_dir / "top10_forecasts_media_env.csv", index=False)
-    i.to_csv(out_dir / "top10_feature_importance_media_env.csv", index=False)
-    json.dump(dict(meta=meta, best_params=params), open(out_dir / "top10_run_meta.json", "w"), indent=2, default=str)
 
-    # 2) remaining counties -> best model + top 3 features
-    rows = []
-    for c in rest:
-        print(f"== {c} (remaining)", flush=True)
-        r = run_county(c, data_dir, feature_set="media_env")
-        s = summarize_best(r)
-        rows.append(s)
-        r["metrics"].to_csv(out_dir / f"remaining_metrics_{c.replace(' ', '')}.csv", index=False)
-        r["importances"].to_csv(out_dir / f"remaining_importance_{c.replace(' ', '')}.csv", index=False)
-    table = pd.DataFrame(rows)
+def _read_many(paths):
+    frames = [pd.read_csv(p) for p in paths]
+    return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+
+
+def combine(data_dir, out_dir, legacy_dir=None):
+    """Merge every part (and optional earlier result files) into the final tables."""
+    out_dir = Path(out_dir)
+    parts = out_dir / "parts"
+    top, rest = top_counties(data_dir)
+    key = ["county", "feature_set", "model", "horizon"]
+
+    metrics = [_read_many(sorted(parts.glob("*_metrics.csv")))]
+    forecasts = [_read_many(sorted(parts.glob("*_forecasts.csv")))]
+    imps = [_read_many(sorted(parts.glob("*_importance.csv")))]
+    if legacy_dir:
+        L = Path(legacy_dir)
+        for fs in ("media_env", "env_only"):
+            for kind, bag in (("metrics", metrics), ("forecasts", forecasts)):
+                f = L / f"top10_{kind}_{fs}.csv"
+                if f.exists():
+                    bag.append(pd.read_csv(f))
+            f = L / f"top10_feature_importance_{fs}.csv"
+            if f.exists():
+                imps.append(pd.read_csv(f))
+        metrics.append(_read_many(sorted(L.glob("remaining_metrics_*.csv"))))
+        imps.append(_read_many(sorted(L.glob("remaining_importance_*.csv"))))
+    M = pd.concat([m for m in metrics if len(m)], ignore_index=True).drop_duplicates(key)
+    F = pd.concat([f for f in forecasts if len(f)], ignore_index=True)
+    F = F.drop_duplicates(["county", "feature_set", "model", "horizon", "target"])
+    I = pd.concat([i for i in imps if len(i)], ignore_index=True)
+    I = I.drop_duplicates(["county", "feature_set", "model", "feature"])
+
+    summaries = []
+    for fs in FEATURE_SETS:
+        Mfs, Ffs, Ifs = M[M.feature_set == fs], F[F.feature_set == fs], I[I.feature_set == fs]
+        Mfs[Mfs.county.isin(top)].to_csv(out_dir / f"top10_metrics_{fs}.csv", index=False)
+        Ffs[Ffs.county.isin(top)].to_csv(out_dir / f"top10_forecasts_{fs}.csv", index=False)
+        Ifs[Ifs.county.isin(top)].to_csv(out_dir / f"top10_feature_importance_{fs}.csv", index=False)
+        for c in top:
+            if (Mfs.county == c).any():
+                s = summarize_best(dict(metrics=Mfs[Mfs.county == c], importances=Ifs[Ifs.county == c],
+                                        meta={"county": c}))
+                s["feature_set"] = fs
+                summaries.append(s)
+    top_tab = pd.DataFrame(summaries)
     for k in range(3):
-        table[f"feature_{k + 1}"] = table["top_features"].map(lambda ff, k=k: ff[k] if len(ff) > k else None)
-    table.to_csv(out_dir / "remaining_counties_best_model_top3.csv", index=False)
+        top_tab[f"feature_{k + 1}"] = top_tab["top_features"].map(lambda f, k=k: f[k] if len(f) > k else None)
+    top_tab.to_csv(out_dir / "top10_best_model_top3.csv", index=False)
 
-    # 3) ablation: environment only, top counties (does media add anything?)
-    m2, f2, i2, _, _ = collect(top, "env_only")
-    m2.to_csv(out_dir / "top10_metrics_env_only.csv", index=False)
-    f2.to_csv(out_dir / "top10_forecasts_env_only.csv", index=False)
-    print("ALL DONE", flush=True)
+    rem_rows = []
+    Mr, Ir = M[(M.feature_set == "media_env") & M.county.isin(rest)], I[(I.feature_set == "media_env") & I.county.isin(rest)]
+    for c in rest:
+        if (Mr.county == c).any():
+            rem_rows.append(summarize_best(dict(metrics=Mr[Mr.county == c], importances=Ir[Ir.county == c],
+                                                meta={"county": c})))
+    rem = pd.DataFrame(rem_rows)
+    for k in range(3):
+        rem[f"feature_{k + 1}"] = rem["top_features"].map(lambda f, k=k: f[k] if len(f) > k else None)
+    cols = ["county", "best_model", "feature_1", "feature_2", "feature_3", "top_media_feature",
+            "features_from_model", "mean_rmse", "mean_rmse_seasonal_naive",
+            "rmse_1m", "mae_1m", "rmse_3m", "mae_3m", "rmse_6m", "mae_6m"]
+    rem[cols].round(4).to_csv(out_dir / "remaining_counties_best_model_top3.csv", index=False)
+    Mr.to_csv(out_dir / "remaining_metrics_media_env_all_models.csv", index=False)
+
+    meta = {}
+    for f in sorted(parts.glob("*_meta.json")):
+        meta[f.stem] = json.load(open(f))
+    json.dump(meta, open(out_dir / "run_meta.json", "w"), indent=2, default=str)
+    print("combined:", len(M), "metric rows;", len(top_tab), "top-10 rows;", len(rem), "remaining counties")
+    return M, top_tab, rem
 
 
 if __name__ == "__main__":
     import argparse
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--data-dir", default="data")
-    ap.add_argument("--out-dir", default="results/media_env_walk_forward")
-    ap.add_argument("--only", nargs="*", default=None, help="restrict to these counties (testing)")
+    ap = argparse.ArgumentParser(description="Walk-forward forecasting (media + environment)")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    r = sub.add_parser("run")
+    r.add_argument("--data-dir", default="data")
+    r.add_argument("--out-dir", default="results/media_env_walk_forward")
+    r.add_argument("--scope", choices=["top", "remaining", "all"], default="all")
+    r.add_argument("--feature-sets", nargs="+", default=list(FEATURE_SETS))
+    r.add_argument("--models", nargs="+", default=list(MODELS))
+    r.add_argument("--tag", default="run")
+    c = sub.add_parser("combine")
+    c.add_argument("--data-dir", default="data")
+    c.add_argument("--out-dir", default="results/media_env_walk_forward")
+    c.add_argument("--legacy-dir", default=None)
     a = ap.parse_args()
-    main(a.data_dir, a.out_dir, only=a.only)
+    if a.cmd == "run":
+        run_parts(a.data_dir, a.out_dir, a.scope, a.feature_sets, a.models, a.tag)
+    else:
+        combine(a.data_dir, a.out_dir, a.legacy_dir)
