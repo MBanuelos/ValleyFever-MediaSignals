@@ -6,11 +6,7 @@ case rate.
 
 ## Sources
 
-- `data/processed/soil_humidity_wind_precip/shwp_<County>_2001_2024.csv`
-- `data/processed/air_quality/aqi_<County>_2001_2024.csv`
-- `data/processed/fire/fire_<County>_2006_2024.csv`
-- `data/processed/pesticide_rodentcide/pr_<County>_2001_2023.csv`
-- `data/processed/vf/vf_<County>_2001_2024.csv`
+This data comes from the [ValleyCast](https://github.com/MBanuelos/ValleyCast) repository.
 
 ## Merge rules
 
@@ -26,12 +22,25 @@ case rate.
 
 | County | File |
 | --- | --- |
+| Alameda | aggregate_Alameda_2001_2024.csv |
+| Contra Costa | aggregate_ContraCosta_2001_2024.csv |
 | Fresno | aggregate_Fresno_2001_2024.csv |
 | Kern | aggregate_Kern_2001_2024.csv |
 | Los Angeles | aggregate_LosAngeles_2001_2024.csv |
+| Merced | aggregate_Merced_2001_2024.csv |
+| Monterey | aggregate_Monterey_2001_2024.csv |
 | Orange | aggregate_Orange_2001_2024.csv |
+| Riverside | aggregate_Riverside_2001_2024.csv |
+| Sacramento | aggregate_Sacramento_2001_2024.csv |
+| San Bernardino | aggregate_SanBernardino_2001_2024.csv |
 | San Diego | aggregate_SanDiego_2001_2024.csv |
+| San Joaquin | aggregate_SanJoaquin_2001_2024.csv |
 | San Luis Obispo | aggregate_SanLuisObispo_2001_2024.csv |
+| San Mateo | aggregate_SanMateo_2001_2024.csv |
+| Santa Barbara | aggregate_SantaBarbara_2001_2024.csv |
+| Santa Clara | aggregate_SantaClara_2001_2024.csv |
+| Solano | aggregate_Solano_2001_2024.csv |
+| Stanislaus | aggregate_Stanislaus_2001_2024.csv |
 | Tulare | aggregate_Tulare_2001_2024.csv |
 | Ventura | aggregate_Ventura_2001_2024.csv |
 
