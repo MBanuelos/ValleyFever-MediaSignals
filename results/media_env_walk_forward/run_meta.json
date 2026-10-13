@@ -269,6 +269,276 @@
       }
     }
   },
+  "envimp__env_only__Fresno_meta": {
+    "meta": {
+      "county": "Fresno",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 60.9
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "envimp__env_only__Kern_meta": {
+    "meta": {
+      "county": "Kern",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 57.3
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 3
+      }
+    }
+  },
+  "envimp__env_only__LosAngeles_meta": {
+    "meta": {
+      "county": "Los Angeles",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 54.5
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "envimp__env_only__Orange_meta": {
+    "meta": {
+      "county": "Orange",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 59.7
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "envimp__env_only__Riverside_meta": {
+    "meta": {
+      "county": "Riverside",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 57.5
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 3
+      }
+    }
+  },
+  "envimp__env_only__SanDiego_meta": {
+    "meta": {
+      "county": "San Diego",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 63.5
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": null,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "envimp__env_only__SanJoaquin_meta": {
+    "meta": {
+      "county": "San Joaquin",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 58.6
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": null,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 3
+      }
+    }
+  },
+  "envimp__env_only__SanLuisObispo_meta": {
+    "meta": {
+      "county": "San Luis Obispo",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 54.8
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "envimp__env_only__Tulare_meta": {
+    "meta": {
+      "county": "Tulare",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 59.3
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.1,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "envimp__env_only__Ventura_meta": {
+    "meta": {
+      "county": "Ventura",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 56.4
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": null,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
   "extra__env_only__Fresno_meta": {
     "meta": {
       "county": "Fresno",

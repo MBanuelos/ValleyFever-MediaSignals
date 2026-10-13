@@ -96,7 +96,7 @@
 <body>
 <div class="wrap">
   <h1>Valley Fever forecasts for California's ten highest-burden counties</h1>
-  <p class="lede">Six models are trained on a rolling 10-year window and forecast 1, 3 and 6 months ahead. Each county is forecast three ways: from environmental data, from news and Twitter data, and from both. Every set also uses the county's own recent case history. The seasonal-naive baseline repeats last year's value.</p>
+  <p class="lede" id="lede"></p>
   <p class="note" id="scope-note"></p>
 
   <section class="main" aria-label="Main dashboard">
@@ -122,24 +122,12 @@
 <script>
 const DATA = /*__DATA__*/null;
 
-const SETS = [
-  { key: "env_only", title: "Environment" },
-  { key: "media_only", title: "Media" },
-  { key: "media_env", title: "Media + environment" }
-];
-const LABELS = {
-  article_count: "Article count", mean_title_sentiment: "Headline sentiment", mean_title_risk: "Headline risk language",
-  mean_body_risk: "Article risk language", avg_sentiment: "Tweet sentiment", avg_risk: "Tweet risk language",
-  mean_body_sentiment: "Article body sentiment", tweet_count: "Tweet count", avg_likes: "Average tweet likes",
-  "Precipitation": "Precipitation", "Avg Rel Hum (%)": "Relative humidity", "Avg Wind Speed (mph)": "Wind speed",
-  "Wind Run (miles)": "Wind run", windeventcount: "High-wind events", "Avg Soil Temp (F)": "Soil temperature",
-  AQI_PM25: "Air quality, PM2.5", AQI_PM10: "Air quality, PM10", FIRE_Acres_Burned: "Acres burned by fire",
-  fungicide_lbs_prd_used: "Fungicide use", rodent_lbs_prd_used: "Rodenticide use",
-  "AR: recent log-change": "Recent case change", "AR: same month last year": "Same month last year"
-};
-const MODEL_ORDER = ["seasonal_naive", "ridge", "random_forest", "xgboost", "sarimax", "lstm"];
-const MODEL_NAME = { seasonal_naive: "Seasonal naive", ridge: "Ridge", random_forest: "Random forest", xgboost: "XGBoost", sarimax: "SARIMAX", lstm: "LSTM" };
-const MODEL_COLOR = { seasonal_naive: "#8A9693", ridge: "#3C5A99", random_forest: "#3E7C4F", xgboost: "#8A5A9E", sarimax: "#B9791A", lstm: "#C2455A" };
+const CFG = DATA.config;
+const SETS = CFG.feature_sets;
+const LABELS = CFG.feature_labels;
+const MODEL_ORDER = Object.keys(CFG.models);
+const MODEL_NAME = Object.fromEntries(MODEL_ORDER.map(k => [k, CFG.models[k].label]));
+const MODEL_COLOR = Object.fromEntries(MODEL_ORDER.map(k => [k, CFG.models[k].color]));
 const KIND_COLOR = { media: "#B9791A", env: "#0E6B6A", ar: "#8A9693" };
 const HORIZONS = [1, 3, 6];
 
@@ -159,14 +147,15 @@ function metric(S, model, h, key) {
 
 /* ---------- main dashboard ---------- */
 function renderMain() {
-  const wins = { env_only: 0, media_only: 0, media_env: 0 };
+  const wins = Object.fromEntries(SETS.map(s => [s.key, 0]));
   DATA.counties.forEach(c => {
     let bestK = null, bestV = Infinity;
     SETS.forEach(s => { const S = c.sets[s.key]; if (S && S.best.mean_rmse < bestV) { bestV = S.best.mean_rmse; bestK = s.key; } });
     c.winner = bestK; if (bestK) wins[bestK]++;
   });
+  const parts = SETS.map(s => `${s.title.toLowerCase()} in <b>${wins[s.key]}</b>`).join(", ");
   document.getElementById("finding").innerHTML =
-    `Lowest average error by feature set across ${DATA.counties.length} counties: environment in <b>${wins.env_only}</b>, media in <b>${wins.media_only}</b>, media + environment in <b>${wins.media_env}</b>. A dot marks each county's lowest error. Select a county to open its predictions below.`;
+    `Lowest average error by feature set across ${DATA.counties.length} counties: ${parts}. A dot marks each county's lowest error. Select a county to open its predictions below.`;
 
   let h = `<thead><tr class="group"><th></th><th></th><th></th>${SETS.map(s => `<th colspan="2" style="text-align:center">${s.title}</th>`).join("")}</tr>
     <tr><th class="l">#</th><th class="l">County</th><th>Total cases</th>${SETS.map(() => `<th class="l">Best model</th><th>Avg RMSE</th>`).join("")}</tr></thead><tbody>`;
@@ -326,13 +315,14 @@ function renderSet(s) {
 
 (function init() {
   const m = DATA.meta;
+  document.getElementById("lede").textContent = CFG.intro;
   document.getElementById("scope-note").textContent =
     `Forecast months ${m.first_forecast_month} to ${m.last_forecast_month}. Counties are ranked by total cases among the ${m.n_counties_in_data} counties with data.`;
   const sel = document.getElementById("county-select");
   sel.innerHTML = DATA.counties.map((c, i) => `<option value="${i}">${i + 1}. ${esc(c.name)}</option>`).join("");
   sel.addEventListener("change", () => selectCounty(+sel.value));
   document.getElementById("sets").innerHTML = SETS.map(s =>
-    `<details class="set" id="set-${s.key}" ${s.key === "media_env" ? "open" : ""}>
+    `<details class="set" id="set-${s.key}" ${s.key === SETS[SETS.length - 1].key ? "open" : ""}>
       <summary><span class="st">${s.title}</span><span class="ss"></span></summary><div class="set-body"></div></details>`).join("");
   renderMain();
   renderCounty();
