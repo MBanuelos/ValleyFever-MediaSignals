@@ -1,0 +1,40 @@
+{
+  "intro": "Models are trained on a rolling 10-year window and forecast 1, 3 and 6 months ahead. Each county is forecast from environmental data, from news and Twitter data, and from both. Every set also uses the county's own recent case history. The seasonal-naive baseline repeats last year's value.",
+  "feature_sets": [
+    {"key": "env_only", "title": "Environment"},
+    {"key": "media_only", "title": "Media"},
+    {"key": "media_env", "title": "Media + environment"}
+  ],
+  "models": {
+    "seasonal_naive": {"label": "Seasonal naive", "color": "#8A9693"},
+    "ridge": {"label": "Ridge", "color": "#3C5A99"},
+    "random_forest": {"label": "Random forest", "color": "#3E7C4F"},
+    "xgboost": {"label": "XGBoost", "color": "#8A5A9E"},
+    "sarimax": {"label": "SARIMAX", "color": "#B9791A"},
+    "lstm": {"label": "LSTM", "color": "#C2455A"}
+  },
+  "feature_labels": {
+    "article_count": "Article count",
+    "mean_title_sentiment": "Headline sentiment",
+    "mean_title_risk": "Headline risk language",
+    "mean_body_risk": "Article risk language",
+    "avg_sentiment": "Tweet sentiment",
+    "avg_risk": "Tweet risk language",
+    "mean_body_sentiment": "Article body sentiment",
+    "tweet_count": "Tweet count",
+    "avg_likes": "Average tweet likes",
+    "Precipitation": "Precipitation",
+    "Avg Rel Hum (%)": "Relative humidity",
+    "Avg Wind Speed (mph)": "Wind speed",
+    "Wind Run (miles)": "Wind run",
+    "windeventcount": "High-wind events",
+    "Avg Soil Temp (F)": "Soil temperature",
+    "AQI_PM25": "Air quality, PM2.5",
+    "AQI_PM10": "Air quality, PM10",
+    "FIRE_Acres_Burned": "Acres burned by fire",
+    "fungicide_lbs_prd_used": "Fungicide use",
+    "rodent_lbs_prd_used": "Rodenticide use",
+    "AR: recent log-change": "Recent case change",
+    "AR: same month last year": "Same month last year"
+  }
+}
