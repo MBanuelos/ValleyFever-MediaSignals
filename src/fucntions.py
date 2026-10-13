@@ -100,7 +100,7 @@ def check_required_columns(data, required_columns):
     print("Required-column check passed.")
 
 
-def check_duplicate_rows(data, county_col="County", date_col="Year-Month"):
+def check_duplicate_rows(data, county_col="County", date_col="year_month"):
     """Check that each county-month occurs only once."""
 
     duplicate_rows = data.duplicated(subset=[county_col, date_col], keep=False)
@@ -113,7 +113,7 @@ def check_duplicate_rows(data, county_col="County", date_col="Year-Month"):
     print("Duplicate-row check passed.")
 
 
-def check_monthly_continuity(data, county_col="County", date_col="Year-Month"):
+def check_monthly_continuity(data, county_col="County", date_col="year_month"):
     """Check that each county has one row for every month."""
 
     problems = []
