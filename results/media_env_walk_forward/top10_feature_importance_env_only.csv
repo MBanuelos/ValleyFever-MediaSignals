@@ -1,0 +1,51 @@
+county,feature_set,model,feature,importance
+Fresno,env_only,sarimax,Avg Soil Temp (F),0.3602385648151037
+Fresno,env_only,sarimax,Avg Rel Hum (%),0.2093688725204227
+Fresno,env_only,sarimax,FIRE_Acres_Burned,0.1536013049752793
+Fresno,env_only,sarimax,Precipitation,0.1346290000994347
+Fresno,env_only,sarimax,AQI_PM10,0.1421622575897596
+Kern,env_only,sarimax,Avg Soil Temp (F),0.4424689205609392
+Kern,env_only,sarimax,Avg Rel Hum (%),0.1705497630946099
+Kern,env_only,sarimax,FIRE_Acres_Burned,0.0377639435749966
+Kern,env_only,sarimax,AQI_PM10,0.2820823778958169
+Kern,env_only,sarimax,Wind Run (miles),0.0671349948736373
+Los Angeles,env_only,sarimax,Avg Soil Temp (F),0.1405070344622107
+Los Angeles,env_only,sarimax,FIRE_Acres_Burned,0.3567378240634233
+Los Angeles,env_only,sarimax,AQI_PM10,0.1065566854457909
+Los Angeles,env_only,sarimax,AQI_PM25,0.1435237421288542
+Los Angeles,env_only,sarimax,Precipitation,0.2526747138997208
+Orange,env_only,sarimax,FIRE_Acres_Burned,0.2664363112325592
+Orange,env_only,sarimax,windeventcount,0.2597927973635116
+Orange,env_only,sarimax,rodent_lbs_prd_used,0.235157966118515
+Orange,env_only,sarimax,Avg Soil Temp (F),0.1303838083691005
+Orange,env_only,sarimax,fungicide_lbs_prd_used,0.1082291169163136
+Riverside,env_only,sarimax,Avg Rel Hum (%),0.6026205656317467
+Riverside,env_only,sarimax,Precipitation,0.1197701813703434
+Riverside,env_only,sarimax,AQI_PM10,0.0989888028463481
+Riverside,env_only,sarimax,Avg Soil Temp (F),0.1347784804977668
+Riverside,env_only,sarimax,Wind Run (miles),0.043841969653795
+San Diego,env_only,sarimax,AQI_PM25,0.2767869503935623
+San Diego,env_only,sarimax,Precipitation,0.4318999926000651
+San Diego,env_only,sarimax,Wind Run (miles),0.1068870792591333
+San Diego,env_only,sarimax,AQI_PM10,0.0578793604260604
+San Diego,env_only,sarimax,Avg Wind Speed (mph),0.1265466173211789
+San Joaquin,env_only,sarimax,FIRE_Acres_Burned,0.0810215693479032
+San Joaquin,env_only,sarimax,Avg Soil Temp (F),0.2278130123501905
+San Joaquin,env_only,sarimax,windeventcount,0.2322410337203434
+San Joaquin,env_only,sarimax,fungicide_lbs_prd_used,0.2192846534560154
+San Joaquin,env_only,sarimax,AQI_PM25,0.2396397311255471
+San Luis Obispo,env_only,sarimax,FIRE_Acres_Burned,0.2688427700914249
+San Luis Obispo,env_only,sarimax,Avg Soil Temp (F),0.183266212179094
+San Luis Obispo,env_only,sarimax,Precipitation,0.1737156094514602
+San Luis Obispo,env_only,sarimax,Avg Wind Speed (mph),0.2194678687591165
+San Luis Obispo,env_only,sarimax,rodent_lbs_prd_used,0.1547075395189043
+Tulare,env_only,sarimax,FIRE_Acres_Burned,0.0942292370342285
+Tulare,env_only,sarimax,Avg Rel Hum (%),0.5144336755477867
+Tulare,env_only,sarimax,Avg Soil Temp (F),0.114090922826763
+Tulare,env_only,sarimax,rodent_lbs_prd_used,0.2202578320234924
+Tulare,env_only,sarimax,AQI_PM10,0.0569883325677292
+Ventura,env_only,sarimax,Avg Wind Speed (mph),0.1388444599782486
+Ventura,env_only,sarimax,fungicide_lbs_prd_used,0.3464928505423829
+Ventura,env_only,sarimax,Avg Soil Temp (F),0.2310961123789542
+Ventura,env_only,sarimax,AQI_PM10,0.0584961549044371
+Ventura,env_only,sarimax,windeventcount,0.225070422195977
