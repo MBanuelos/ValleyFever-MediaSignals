@@ -1,0 +1,12 @@
+county,best_model,feature_1,feature_2,feature_3,top_media_feature,features_from_model,mean_rmse,mean_rmse_seasonal_naive,rmse_1m,mae_1m,rmse_3m,mae_3m,rmse_6m,mae_6m
+Monterey,xgboost,AR: recent log-change,rodent_lbs_prd_used,FIRE_Acres_Burned,tweet_count,xgboost,0.3866,0.4873,0.3909,0.3145,0.3899,0.3234,0.3791,0.3165
+San Bernardino,ridge,AR: recent log-change,AR: same month last year,mean_body_sentiment,mean_body_sentiment,ridge,0.2009,0.231,0.2009,0.1266,0.1996,0.1252,0.2023,0.1285
+Contra Costa,random_forest,AR: recent log-change,AR: same month last year,mean_body_sentiment,mean_body_sentiment,random_forest,0.2077,0.2552,0.2128,0.1631,0.2092,0.1633,0.2012,0.1577
+Merced,ridge,AR: recent log-change,mean_body_sentiment,mean_title_risk,mean_body_sentiment,ridge,0.4651,0.6954,0.4371,0.3241,0.4714,0.3396,0.4869,0.3506
+Stanislaus,ridge,AR: recent log-change,avg_risk,windeventcount,avg_risk,ridge,0.3206,0.4606,0.3053,0.2336,0.3292,0.2551,0.3272,0.2508
+Alameda,ridge,AR: recent log-change,avg_risk,mean_body_sentiment,avg_risk,ridge,0.1913,0.2733,0.1852,0.1453,0.1925,0.1516,0.1963,0.1544
+Santa Barbara,ridge,AR: recent log-change,mean_body_risk,mean_body_sentiment,mean_body_risk,ridge,0.4058,0.5342,0.3987,0.3143,0.4152,0.3304,0.4035,0.322
+Santa Clara,ridge,AR: recent log-change,Precipitation,AR: same month last year,tweet_count,ridge,0.1805,0.2648,0.1716,0.145,0.1822,0.1549,0.1877,0.1608
+Sacramento,random_forest,AR: recent log-change,mean_title_sentiment,avg_sentiment,mean_title_sentiment,random_forest,0.1748,0.2479,0.163,0.1318,0.1795,0.1453,0.1819,0.1493
+Solano,ridge,AR: recent log-change,Precipitation,AR: same month last year,avg_sentiment,ridge,0.3209,0.42,0.311,0.2531,0.3208,0.2634,0.3308,0.2744
+San Mateo,random_forest,AR: recent log-change,Wind Run (miles),Avg Rel Hum (%),avg_sentiment,random_forest,0.2367,0.3368,0.2134,0.1659,0.2407,0.1823,0.256,0.1926
