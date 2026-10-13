@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valley Fever forecasts: top 10 California counties</title>
+<style>
+  :root {
+    --paper: #EDF0EE; --panel: #F8FAF9; --ink: #1B2A29; --soft: #5C6B69; --rule: #CBD3D0;
+    --teal: #0E6B6A; --ochre: #B9791A; --grey: #8A9693;
+    --good: #0E6B6A; --bad: #A33B2E;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: "Avenir Next", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); }
+  body { margin: 0; color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 36px 24px 64px; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 4vw, 40px); line-height: 1.1; margin: 0 0 10px; letter-spacing: -0.01em; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 20px; margin: 0 0 12px; }
+  p { margin: 0 0 10px; }
+  .lede { max-width: 70ch; color: var(--soft); margin-bottom: 4px; }
+  .note { font-size: 13px; color: var(--soft); max-width: 80ch; }
+  button, select { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  /* main dashboard */
+  .main { margin-top: 26px; }
+  .finding { margin: 0 0 14px; max-width: 80ch; }
+  .overview { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  th, td { padding: 9px 12px; text-align: right; white-space: nowrap; }
+  th.l, td.l { text-align: left; }
+  thead th { font-weight: 600; font-size: 13px; color: var(--soft); border-bottom: 1px solid var(--rule); vertical-align: bottom; }
+  thead tr.group th { text-align: center; border-bottom: 0; padding-bottom: 0; }
+  tbody tr.row { cursor: pointer; border-top: 1px solid var(--rule); }
+  tbody tr.row:hover { background: #EEF3F1; }
+  tbody tr.row[aria-selected="true"] { background: #E3EDEA; box-shadow: inset 4px 0 0 var(--teal); }
+  td.name { font-family: var(--serif); font-size: 16px; font-weight: 600; }
+  td.rank { color: var(--soft); width: 36px; padding-right: 0; }
+  td.low { font-weight: 650; }
+  td.low .mark { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); margin-right: 6px; }
+  .cell-model { color: var(--soft); font-size: 13px; }
+
+  /* county picker */
+  .picker { margin: 26px 0 14px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: baseline; }
+  .picker label { font-weight: 600; margin-right: 8px; }
+  .picker select { padding: 6px 10px; border: 1px solid var(--rule); border-radius: 5px; background: var(--panel); min-width: 200px; }
+  .picker .county-title { font-family: var(--serif); font-size: clamp(26px, 4vw, 38px); font-weight: 600; margin: 0; line-height: 1.1; }
+
+  /* dropdown sections */
+  details.set { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; margin-bottom: 14px; }
+  details.set > summary { list-style: none; cursor: pointer; padding: 16px 22px; display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: baseline; }
+  details.set > summary::-webkit-details-marker { display: none; }
+  details.set > summary::before { content: ""; width: 8px; height: 8px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(-45deg); align-self: center; transition: transform .15s; margin-right: 4px; }
+  details.set[open] > summary::before { transform: rotate(45deg); }
+  details.set > summary .st { font-family: var(--serif); font-size: 20px; font-weight: 600; }
+  details.set > summary .ss { color: var(--soft); font-size: 14px; }
+  details.set[open] > summary { border-bottom: 1px solid var(--rule); }
+  .set-body { padding: 18px 22px 22px; display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+  @media (max-width: 900px) { .set-body { grid-template-columns: 1fr; } }
+  .span { grid-column: 1 / -1; overflow-x: auto; }
+  .sub { color: var(--soft); margin-bottom: 14px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 12px 22px; align-items: center; margin-bottom: 8px; }
+  .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 5px; overflow: hidden; }
+  .seg button { background: transparent; border: 0; padding: 6px 14px; cursor: pointer; border-right: 1px solid var(--rule); }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--panel); }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .chip { display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; padding: 2px 0; cursor: pointer; font-size: 13px; }
+  .chip i { width: 18px; height: 0; border-top: 3px solid var(--c); display: inline-block; }
+  .chip i.dash { border-top-style: dashed; border-top-width: 2px; }
+  .chip[aria-pressed="false"] { opacity: .38; }
+  .chip .best { font-size: 11px; background: var(--teal); color: #fff; border-radius: 3px; padding: 0 5px; }
+  svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: var(--sans); font-size: 14px; fill: var(--soft); }
+  .readout { min-height: 22px; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .readout span { margin-right: 16px; white-space: nowrap; }
+  .readout b { font-weight: 600; }
+  .side > * + * { margin-top: 22px; }
+  h3 { font-size: 14px; font-weight: 650; margin: 0 0 8px; }
+  .bars .bar { display: grid; grid-template-columns: 148px 1fr 44px; gap: 8px; align-items: center; margin: 6px 0; font-size: 13px; }
+  .bars .track { height: 10px; background: #E1E7E4; border-radius: 2px; }
+  .bars .fill { height: 100%; border-radius: 2px; }
+  .bars .val { text-align: right; color: var(--soft); }
+  .legend-inline { font-size: 12px; color: var(--soft); display: flex; gap: 14px; margin-top: 8px; flex-wrap: wrap; }
+  .legend-inline i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .metrics th, .metrics td { padding: 6px 8px; font-size: 13px; }
+  .metrics tbody tr + tr { border-top: 1px solid var(--rule); }
+  .metrics tr.best td { font-weight: 650; background: #E3EDEA; }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+  .tag { font-size: 11px; background: var(--teal); color: #fff; border-radius: 3px; padding: 0 5px; margin-left: 6px; }
+  footer { margin-top: 30px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Valley Fever forecasts for California's ten highest-burden counties</h1>
+  <p class="lede">Six models are trained on a rolling 10-year window and forecast 1, 3 and 6 months ahead. Each county is forecast three ways: from environmental data, from news and Twitter data, and from both. Every set also uses the county's own recent case history. The seasonal-naive baseline repeats last year's value.</p>
+  <p class="note" id="scope-note"></p>
+
+  <section class="main" aria-label="Main dashboard">
+    <p class="finding" id="finding"></p>
+    <div class="overview" role="region" aria-label="County comparison">
+      <table id="overview"><caption style="position:absolute;left:-9999px">Counties ranked by total cases with the best model and average error for each feature set</caption></table>
+    </div>
+  </section>
+
+  <div class="picker">
+    <h2 class="county-title" id="county-title"></h2>
+    <span><label for="county-select">County</label><select id="county-select"></select></span>
+  </div>
+
+  <div id="sets"></div>
+
+  <footer class="note">
+    <p><b>How to read the errors.</b> RMSE and MAE are averaged over every forecast month in every rolling window, on the log-change scale the project uses (month-to-month change in the log of cases per 100,000). Smaller is better. Improvement is measured against the seasonal-naive baseline at the same horizon. Each section's summary line also gives the error in cases per 100,000, and the chart shows rates.</p>
+    <p><b>Feature sets.</b> Environment uses weather, air quality, fire and pesticide data. Media uses California-wide article and tweet measures, so every county sees the same media signal. Media + environment uses both. All three include the county's recent case changes. Feature importance is averaged over every fitted window of the best model that reports it (Ridge, Random forest, XGBoost or SARIMAX). SARIMAX importance covers only its five chosen outside predictors, because it models past cases itself. If the LSTM or the baseline is best, the importance comes from the best of the other four models. Findings are predictive and associational, not causal.</p>
+  </footer>
+</div>
+
+<script>
+const DATA = /*__DATA__*/null;
+
+const SETS = [
+  { key: "env_only", title: "Environment" },
+  { key: "media_only", title: "Media" },
+  { key: "media_env", title: "Media + environment" }
+];
+const LABELS = {
+  article_count: "Article count", mean_title_sentiment: "Headline sentiment", mean_title_risk: "Headline risk language",
+  mean_body_risk: "Article risk language", avg_sentiment: "Tweet sentiment", avg_risk: "Tweet risk language",
+  mean_body_sentiment: "Article body sentiment", tweet_count: "Tweet count", avg_likes: "Average tweet likes",
+  "Precipitation": "Precipitation", "Avg Rel Hum (%)": "Relative humidity", "Avg Wind Speed (mph)": "Wind speed",
+  "Wind Run (miles)": "Wind run", windeventcount: "High-wind events", "Avg Soil Temp (F)": "Soil temperature",
+  AQI_PM25: "Air quality, PM2.5", AQI_PM10: "Air quality, PM10", FIRE_Acres_Burned: "Acres burned by fire",
+  fungicide_lbs_prd_used: "Fungicide use", rodent_lbs_prd_used: "Rodenticide use",
+  "AR: recent log-change": "Recent case change", "AR: same month last year": "Same month last year"
+};
+const MODEL_ORDER = ["seasonal_naive", "ridge", "random_forest", "xgboost", "sarimax", "lstm"];
+const MODEL_NAME = { seasonal_naive: "Seasonal naive", ridge: "Ridge", random_forest: "Random forest", xgboost: "XGBoost", sarimax: "SARIMAX", lstm: "LSTM" };
+const MODEL_COLOR = { seasonal_naive: "#8A9693", ridge: "#3C5A99", random_forest: "#3E7C4F", xgboost: "#8A5A9E", sarimax: "#B9791A", lstm: "#C2455A" };
+const KIND_COLOR = { media: "#B9791A", env: "#0E6B6A", ar: "#8A9693" };
+const HORIZONS = [1, 3, 6];
+
+const state = { county: 0, ui: {} };
+SETS.forEach(s => state.ui[s.key] = { horizon: 3, visible: null });
+
+const f3 = x => (x == null || isNaN(x)) ? "n/a" : x.toFixed(3);
+const f2 = x => (x == null || isNaN(x)) ? "n/a" : x.toFixed(2);
+const pct = x => (x == null || isNaN(x)) ? "n/a" : (x >= 0 ? "+" : "") + x.toFixed(1) + "%";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const cur = () => DATA.counties[state.county];
+
+function metric(S, model, h, key) {
+  const r = S.metrics.find(r => r.model === model && r.horizon === h);
+  return r ? r[key] : null;
+}
+
+/* ---------- main dashboard ---------- */
+function renderMain() {
+  const wins = { env_only: 0, media_only: 0, media_env: 0 };
+  DATA.counties.forEach(c => {
+    let bestK = null, bestV = Infinity;
+    SETS.forEach(s => { const S = c.sets[s.key]; if (S && S.best.mean_rmse < bestV) { bestV = S.best.mean_rmse; bestK = s.key; } });
+    c.winner = bestK; if (bestK) wins[bestK]++;
+  });
+  document.getElementById("finding").innerHTML =
+    `Lowest average error by feature set across ${DATA.counties.length} counties: environment in <b>${wins.env_only}</b>, media in <b>${wins.media_only}</b>, media + environment in <b>${wins.media_env}</b>. A dot marks each county's lowest error. Select a county to open its predictions below.`;
+
+  let h = `<thead><tr class="group"><th></th><th></th><th></th>${SETS.map(s => `<th colspan="2" style="text-align:center">${s.title}</th>`).join("")}</tr>
+    <tr><th class="l">#</th><th class="l">County</th><th>Total cases</th>${SETS.map(() => `<th class="l">Best model</th><th>Avg RMSE</th>`).join("")}</tr></thead><tbody>`;
+  DATA.counties.forEach((c, i) => {
+    h += `<tr class="row" tabindex="0" data-i="${i}" aria-selected="${i === state.county}">
+      <td class="rank l">${i + 1}</td><td class="name l">${esc(c.name)}</td><td>${c.cases.toLocaleString()}</td>
+      ${SETS.map(s => { const S = c.sets[s.key]; if (!S) return `<td class="l">n/a</td><td>n/a</td>`;
+        const low = c.winner === s.key;
+        return `<td class="l cell-model">${MODEL_NAME[S.best.model]}</td><td class="${low ? "low" : ""}">${low ? '<span class="mark"></span>' : ""}${f3(S.best.mean_rmse)}</td>`; }).join("")}
+    </tr>`;
+  });
+  const t = document.getElementById("overview");
+  t.innerHTML = t.querySelector("caption").outerHTML + h + "</tbody>";
+  t.querySelectorAll("tr.row").forEach(r => {
+    const go = () => selectCounty(+r.dataset.i);
+    r.addEventListener("click", go);
+    r.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+  });
+}
+
+function selectCounty(i) {
+  state.county = i;
+  SETS.forEach(s => state.ui[s.key].visible = null);
+  document.getElementById("county-select").value = String(i);
+  renderMain();
+  renderCounty();
+}
+
+/* ---------- county sections ---------- */
+function renderCounty() {
+  const c = cur();
+  document.getElementById("county-title").textContent = c.name;
+  SETS.forEach(s => {
+    const S = c.sets[s.key];
+    const sum = document.querySelector(`#set-${s.key} > summary .ss`);
+    sum.textContent = S ? `Best model ${MODEL_NAME[S.best.model]}, average RMSE ${f3(S.best.mean_rmse)} (baseline ${f3(S.best.base_mean_rmse)})` : "No results";
+    renderSet(s);
+  });
+}
+
+function chartSVG(key, c, S) {
+  const ui = state.ui[key];
+  const series = S.forecasts[String(ui.horizon)] || {};
+  const base = series[S.best.model] || [];
+  const months = base.map(r => r[0]);
+  const W = 900, H = 330, m = { l: 52, r: 14, t: 26, b: 30 };
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const shown = Object.keys(series).filter(k => ui.visible.has(k));
+  let ymax = Math.max(...base.map(r => r[1]));
+  shown.forEach(k => series[k].forEach(r => { ymax = Math.max(ymax, r[2]); }));
+  ymax = Math.max(ymax * 1.08, 0.1);
+  const x = i => m.l + (months.length <= 1 ? 0 : i / (months.length - 1) * iw);
+  const y = v => m.t + ih - (v / ymax) * ih;
+  let g = "";
+  for (let i = 0; i <= 4; i++) {
+    const v = ymax * i / 4;
+    g += `<line x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}" stroke="#D7DEDB"/><text x="${m.l - 8}" y="${y(v) + 4}" text-anchor="end">${v >= 10 ? v.toFixed(0) : v.toFixed(1)}</text>`;
+  }
+  months.forEach((mo, i) => { if (mo.endsWith("-01") || i === 0) g += `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">${mo.slice(0, 4)}</text>`; });
+  const path = pts => pts.map((p, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(p).toFixed(1)}`).join("");
+  let lines = "";
+  shown.forEach(k => {
+    const isBest = k === S.best.model;
+    lines += `<path d="${path(series[k].map(r => r[2]))}" fill="none" stroke="${MODEL_COLOR[k]}" stroke-width="${isBest ? 2.6 : 1.4}" ${k === "seasonal_naive" ? 'stroke-dasharray="5 4"' : ""} stroke-linejoin="round"/>`;
+  });
+  lines += `<path d="${path(base.map(r => r[1]))}" fill="none" stroke="#1B2A29" stroke-width="2.2" stroke-linejoin="round"/>`;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Observed and forecast cases per 100,000 for ${esc(c.name)}, ${ui.horizon}-month horizon">
+    ${g}${lines}<line class="guide" x1="0" x2="0" y1="${m.t}" y2="${m.t + ih}" stroke="#1B2A29" opacity="0"/>
+    <rect class="hit" x="${m.l}" y="${m.t}" width="${iw}" height="${ih}" fill="transparent" tabindex="0"/>
+    <text x="${m.l - 40}" y="14" style="font-weight:600">Cases per 100,000 per month</text></svg>`;
+}
+
+function wireChart(key, container, S) {
+  const ui = state.ui[key];
+  const svg = container.querySelector("svg"); if (!svg) return;
+  const series = S.forecasts[String(ui.horizon)] || {};
+  const base = series[S.best.model] || [];
+  const out = container.querySelector(".readout");
+  const hit = svg.querySelector(".hit"), guide = svg.querySelector(".guide");
+  const W = 900, ml = 52, iw = W - 52 - 14;
+  let idx = base.length - 1;
+  const show = i => {
+    idx = Math.max(0, Math.min(base.length - 1, i));
+    const gx = ml + (base.length <= 1 ? 0 : idx / (base.length - 1) * iw);
+    guide.setAttribute("x1", gx); guide.setAttribute("x2", gx); guide.setAttribute("opacity", 0.5);
+    let h = `<span><b>${base[idx][0]}</b></span><span>Observed <b>${f2(base[idx][1])}</b></span>`;
+    Object.keys(series).filter(k => ui.visible.has(k)).forEach(k => {
+      if (series[k][idx]) h += `<span style="color:${MODEL_COLOR[k]}">${MODEL_NAME[k]} <b>${f2(series[k][idx][2])}</b></span>`;
+    });
+    out.innerHTML = h;
+  };
+  hit.addEventListener("mousemove", e => { const r = svg.getBoundingClientRect(); show(Math.round(((e.clientX - r.left) / r.width * W - ml) / iw * (base.length - 1))); });
+  hit.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); show(idx - 1); }
+    if (e.key === "ArrowRight") { e.preventDefault(); show(idx + 1); }
+  });
+  hit.addEventListener("focus", () => show(idx));
+  show(base.length - 1); guide.setAttribute("opacity", 0);
+}
+
+function featureBars(S) {
+  if (!S.features.length) return `<p class="note">No feature importance available.</p>`;
+  const max = Math.max(...S.features.map(f => f.imp), 0.0001);
+  return S.features.map(f => `<div class="bar"><span>${esc(LABELS[f.name] || f.name)}</span>
+    <div class="track"><div class="fill" style="width:${(f.imp / max * 100).toFixed(1)}%;background:${KIND_COLOR[f.kind]}"></div></div>
+    <span class="val">${(f.imp * 100).toFixed(1)}%</span></div>`).join("");
+}
+
+function metricsTable(S) {
+  const models = MODEL_ORDER.filter(k => S.metrics.some(r => r.model === k)).sort((a, b) => {
+    const m = k => HORIZONS.reduce((s, h) => s + (metric(S, k, h, "rmse") ?? 9), 0);
+    return m(a) - m(b);
+  });
+  let h = `<table class="metrics"><thead><tr><th class="l">Model</th>${HORIZONS.map(x => `<th>RMSE ${x} mo</th>`).join("")}${HORIZONS.map(x => `<th>MAE ${x} mo</th>`).join("")}${HORIZONS.map(x => `<th>vs baseline ${x} mo</th>`).join("")}</tr></thead><tbody>`;
+  models.forEach(k => {
+    h += `<tr class="${k === S.best.model ? "best" : ""}"><td class="l">${MODEL_NAME[k]}${k === S.best.model ? '<span class="tag">best</span>' : ""}</td>
+      ${HORIZONS.map(x => `<td>${f3(metric(S, k, x, "rmse"))}</td>`).join("")}
+      ${HORIZONS.map(x => `<td>${f3(metric(S, k, x, "mae"))}</td>`).join("")}
+      ${HORIZONS.map(x => { const v = metric(S, k, x, "pct_improve_rmse"); return `<td class="${v == null ? "" : v >= 0 ? "pos" : "neg"}">${k === "seasonal_naive" ? "baseline" : pct(v)}</td>`; }).join("")}</tr>`;
+  });
+  return h + "</tbody></table>";
+}
+
+function renderSet(s) {
+  const key = s.key, c = cur(), S = c.sets[key], ui = state.ui[key];
+  const body = document.querySelector(`#set-${key} .set-body`);
+  if (!S) { body.innerHTML = `<p class="note span">No results for this county.</p>`; return; }
+  if (!ui.visible) ui.visible = new Set(["seasonal_naive", S.best.model]);
+  const bm = S.best.model;
+  const nW = metric(S, bm, ui.horizon, "n_windows");
+  const rr = metric(S, bm, ui.horizon, "rate_rmse"), rm = metric(S, bm, ui.horizon, "rate_mae");
+  const chips = MODEL_ORDER.filter(k => (S.forecasts[String(ui.horizon)] || {})[k]).map(k =>
+    `<button class="chip" style="--c:${MODEL_COLOR[k]}" data-m="${k}" aria-pressed="${ui.visible.has(k)}"><i class="${k === "seasonal_naive" ? "dash" : ""}"></i>${MODEL_NAME[k]}${k === bm ? '<span class="best">best</span>' : ""}</button>`).join("");
+  body.innerHTML = `
+    <div class="chartcol">
+      <p class="sub">${esc(s.title)} forecasts for ${esc(c.name)}: ${MODEL_NAME[bm]} is best on average across the three horizons (RMSE ${f3(S.best.mean_rmse)} against ${f3(S.best.base_mean_rmse)} for seasonal naive). At ${ui.horizon} month${ui.horizon > 1 ? "s" : ""} its rate error is ${f2(rr)} RMSE and ${f2(rm)} MAE cases per 100,000 over ${nW} rolling windows.</p>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Forecast horizon">${HORIZONS.map(h => `<button data-h="${h}" aria-pressed="${h === ui.horizon}">${h} month${h > 1 ? "s" : ""} ahead</button>`).join("")}</div>
+        <div class="chips" role="group" aria-label="Models shown">${chips}<span class="chip" style="--c:#1B2A29;cursor:default"><i></i>Observed</span></div>
+      </div>
+      <div class="chartbox">${chartSVG(key, c, S)}</div>
+      <div class="readout" aria-live="off"></div>
+    </div>
+    <div class="side">
+      <div><h3>What drives the ${MODEL_NAME[S.best.features_model]} forecasts</h3><div class="bars">${featureBars(S)}</div>
+        <div class="legend-inline"><span><i style="background:#B9791A"></i>News and Twitter</span><span><i style="background:#0E6B6A"></i>Environment</span><span><i style="background:#8A9693"></i>Past case changes</span></div></div>
+    </div>
+    <div class="span"><h3>All models</h3>${metricsTable(S)}</div>`;
+  body.querySelectorAll("[data-h]").forEach(b => b.addEventListener("click", () => { ui.horizon = +b.dataset.h; renderSet(s); }));
+  body.querySelectorAll(".chip[data-m]").forEach(b => b.addEventListener("click", () => {
+    const k = b.dataset.m;
+    if (ui.visible.has(k)) { if (ui.visible.size > 1) ui.visible.delete(k); } else ui.visible.add(k);
+    renderSet(s);
+  }));
+  wireChart(key, body, S);
+}
+
+(function init() {
+  const m = DATA.meta;
+  document.getElementById("scope-note").textContent =
+    `Forecast months ${m.first_forecast_month} to ${m.last_forecast_month}. Counties are ranked by total cases among the ${m.n_counties_in_data} counties with data.`;
+  const sel = document.getElementById("county-select");
+  sel.innerHTML = DATA.counties.map((c, i) => `<option value="${i}">${i + 1}. ${esc(c.name)}</option>`).join("");
+  sel.addEventListener("change", () => selectCounty(+sel.value));
+  document.getElementById("sets").innerHTML = SETS.map(s =>
+    `<details class="set" id="set-${s.key}" ${s.key === "media_env" ? "open" : ""}>
+      <summary><span class="st">${s.title}</span><span class="ss"></span></summary><div class="set-body"></div></details>`).join("");
+  renderMain();
+  renderCounty();
+})();
+</script>
+</body>
+</html>

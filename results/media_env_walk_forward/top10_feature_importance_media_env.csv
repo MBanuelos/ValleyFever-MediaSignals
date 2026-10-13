@@ -1,0 +1,711 @@
+county,feature_set,model,feature,importance
+Fresno,media_env,sarimax,Avg Soil Temp (F),0.3602385648151037
+Fresno,media_env,sarimax,Avg Rel Hum (%),0.2093688725204227
+Fresno,media_env,sarimax,FIRE_Acres_Burned,0.1536013049752793
+Fresno,media_env,sarimax,Precipitation,0.1346290000994347
+Fresno,media_env,sarimax,AQI_PM10,0.1421622575897596
+Kern,media_env,sarimax,Avg Soil Temp (F),0.4424689205609392
+Kern,media_env,sarimax,Avg Rel Hum (%),0.1705497630946099
+Kern,media_env,sarimax,FIRE_Acres_Burned,0.0377639435749966
+Kern,media_env,sarimax,AQI_PM10,0.2820823778958169
+Kern,media_env,sarimax,Wind Run (miles),0.0671349948736373
+Los Angeles,media_env,sarimax,avg_likes,0.1188520563210199
+Los Angeles,media_env,sarimax,Avg Soil Temp (F),0.365354290006691
+Los Angeles,media_env,sarimax,FIRE_Acres_Burned,0.3145011848888362
+Los Angeles,media_env,sarimax,AQI_PM10,0.0952968109351249
+Los Angeles,media_env,sarimax,avg_risk,0.1059956578483278
+Orange,media_env,sarimax,avg_sentiment,0.052558265097528
+Orange,media_env,sarimax,article_count,0.341575484639612
+Orange,media_env,sarimax,FIRE_Acres_Burned,0.2467211177084225
+Orange,media_env,sarimax,windeventcount,0.0794240522364782
+Orange,media_env,sarimax,rodent_lbs_prd_used,0.2797210803179591
+Riverside,media_env,sarimax,Avg Rel Hum (%),0.6026205656317467
+Riverside,media_env,sarimax,Precipitation,0.1197701813703434
+Riverside,media_env,sarimax,AQI_PM10,0.0989888028463481
+Riverside,media_env,sarimax,Avg Soil Temp (F),0.1347784804977668
+Riverside,media_env,sarimax,Wind Run (miles),0.043841969653795
+San Diego,media_env,sarimax,AQI_PM25,0.289690763243023
+San Diego,media_env,sarimax,mean_body_risk,0.118640790942386
+San Diego,media_env,sarimax,Precipitation,0.4584776420265182
+San Diego,media_env,sarimax,avg_likes,0.061480073431141
+San Diego,media_env,sarimax,Wind Run (miles),0.0717107303569318
+San Joaquin,media_env,sarimax,mean_title_sentiment,0.3684818407815964
+San Joaquin,media_env,sarimax,FIRE_Acres_Burned,0.1667198587636234
+San Joaquin,media_env,sarimax,Avg Soil Temp (F),0.1968438946076753
+San Joaquin,media_env,sarimax,windeventcount,0.1474600174953342
+San Joaquin,media_env,sarimax,mean_body_sentiment,0.1204943883517706
+San Luis Obispo,media_env,sarimax,FIRE_Acres_Burned,0.154958686329636
+San Luis Obispo,media_env,sarimax,mean_body_risk,0.2100424581902461
+San Luis Obispo,media_env,sarimax,Avg Soil Temp (F),0.1729386903209572
+San Luis Obispo,media_env,sarimax,article_count,0.1936666107574574
+San Luis Obispo,media_env,sarimax,Precipitation,0.2683935544017032
+Tulare,media_env,sarimax,FIRE_Acres_Burned,0.0881738848662711
+Tulare,media_env,sarimax,Avg Rel Hum (%),0.5253035889498294
+Tulare,media_env,sarimax,avg_sentiment,0.0434081035804445
+Tulare,media_env,sarimax,Avg Soil Temp (F),0.1015627722505633
+Tulare,media_env,sarimax,rodent_lbs_prd_used,0.2415516503528915
+Ventura,media_env,sarimax,Avg Wind Speed (mph),0.1249243333847905
+Ventura,media_env,sarimax,fungicide_lbs_prd_used,0.4433297918098139
+Ventura,media_env,sarimax,Avg Soil Temp (F),0.1661306145305499
+Ventura,media_env,sarimax,mean_body_sentiment,0.0984117675055528
+Ventura,media_env,sarimax,AQI_PM10,0.1672034927692926
+Kern,media_env,ridge,Precipitation,0.0403412873038621
+Kern,media_env,ridge,Avg Rel Hum (%),0.0559097451508801
+Kern,media_env,ridge,Avg Wind Speed (mph),0.0306129151086092
+Kern,media_env,ridge,Wind Run (miles),0.037518714296224
+Kern,media_env,ridge,windeventcount,0.0308820847127693
+Kern,media_env,ridge,Avg Soil Temp (F),0.0525243377327177
+Kern,media_env,ridge,AQI_PM25,0.0327402858468785
+Kern,media_env,ridge,AQI_PM10,0.0394441824037417
+Kern,media_env,ridge,FIRE_Acres_Burned,0.0438651157165206
+Kern,media_env,ridge,fungicide_lbs_prd_used,0.0776741515840418
+Kern,media_env,ridge,rodent_lbs_prd_used,0.0436625742325748
+Kern,media_env,ridge,article_count,0.0252295238212545
+Kern,media_env,ridge,mean_title_sentiment,0.028592081060634
+Kern,media_env,ridge,mean_title_risk,0.0378892870094754
+Kern,media_env,ridge,mean_body_risk,0.027683392363269
+Kern,media_env,ridge,avg_sentiment,0.0340470824559211
+Kern,media_env,ridge,avg_risk,0.0209552362680866
+Kern,media_env,ridge,mean_body_sentiment,0.0242773270141038
+Kern,media_env,ridge,tweet_count,0.0277343220930316
+Kern,media_env,ridge,avg_likes,0.0381055023076977
+Kern,media_env,ridge,AR: recent log-change,0.1790584131154321
+Kern,media_env,ridge,AR: same month last year,0.0712524384022733
+Kern,media_env,random_forest,Precipitation,0.0450631102980532
+Kern,media_env,random_forest,Avg Rel Hum (%),0.052154872718527
+Kern,media_env,random_forest,Avg Wind Speed (mph),0.0449252570898903
+Kern,media_env,random_forest,Wind Run (miles),0.0432035885144503
+Kern,media_env,random_forest,windeventcount,0.0165799983245523
+Kern,media_env,random_forest,Avg Soil Temp (F),0.0660864557784557
+Kern,media_env,random_forest,AQI_PM25,0.04254585073795
+Kern,media_env,random_forest,AQI_PM10,0.048774983514506
+Kern,media_env,random_forest,FIRE_Acres_Burned,0.0431907918999267
+Kern,media_env,random_forest,fungicide_lbs_prd_used,0.0722703069442689
+Kern,media_env,random_forest,rodent_lbs_prd_used,0.0475139775973802
+Kern,media_env,random_forest,article_count,0.0129093986329313
+Kern,media_env,random_forest,mean_title_sentiment,0.0386960207599211
+Kern,media_env,random_forest,mean_title_risk,0.0227131334031195
+Kern,media_env,random_forest,mean_body_risk,0.0232980159607971
+Kern,media_env,random_forest,avg_sentiment,0.0304540927736856
+Kern,media_env,random_forest,avg_risk,0.0277391611137483
+Kern,media_env,random_forest,mean_body_sentiment,0.0268617875520441
+Kern,media_env,random_forest,tweet_count,0.0246207533343604
+Kern,media_env,random_forest,avg_likes,0.0277727577831486
+Kern,media_env,random_forest,AR: recent log-change,0.1518552572544319
+Kern,media_env,random_forest,AR: same month last year,0.0907704280138506
+Kern,media_env,xgboost,Precipitation,0.03648283961077
+Kern,media_env,xgboost,Avg Rel Hum (%),0.0473622764527799
+Kern,media_env,xgboost,Avg Wind Speed (mph),0.0414977287761946
+Kern,media_env,xgboost,Wind Run (miles),0.0423381331763573
+Kern,media_env,xgboost,windeventcount,0.0321692191456302
+Kern,media_env,xgboost,Avg Soil Temp (F),0.0620690293999337
+Kern,media_env,xgboost,AQI_PM25,0.0388547287402271
+Kern,media_env,xgboost,AQI_PM10,0.0457135572850609
+Kern,media_env,xgboost,FIRE_Acres_Burned,0.0380207935224307
+Kern,media_env,xgboost,fungicide_lbs_prd_used,0.0598636523462604
+Kern,media_env,xgboost,rodent_lbs_prd_used,0.0440353411692896
+Kern,media_env,xgboost,article_count,0.0295801575093898
+Kern,media_env,xgboost,mean_title_sentiment,0.0373127893856311
+Kern,media_env,xgboost,mean_title_risk,0.0362485709329905
+Kern,media_env,xgboost,mean_body_risk,0.0328566088039776
+Kern,media_env,xgboost,avg_sentiment,0.0365140509362786
+Kern,media_env,xgboost,avg_risk,0.0353089887568551
+Kern,media_env,xgboost,mean_body_sentiment,0.0354787342031882
+Kern,media_env,xgboost,tweet_count,0.0348906778477171
+Kern,media_env,xgboost,avg_likes,0.0356386877031354
+Kern,media_env,xgboost,AR: recent log-change,0.132396988443632
+Kern,media_env,xgboost,AR: same month last year,0.0653664458522689
+Los Angeles,media_env,ridge,Precipitation,0.0244798901080669
+Los Angeles,media_env,ridge,Avg Rel Hum (%),0.0305526109265611
+Los Angeles,media_env,ridge,Avg Wind Speed (mph),0.0198690862111904
+Los Angeles,media_env,ridge,Wind Run (miles),0.0314833378032674
+Los Angeles,media_env,ridge,windeventcount,0.0390468445340193
+Los Angeles,media_env,ridge,Avg Soil Temp (F),0.0386409446326655
+Los Angeles,media_env,ridge,AQI_PM25,0.0327508623202349
+Los Angeles,media_env,ridge,AQI_PM10,0.0290725640219595
+Los Angeles,media_env,ridge,FIRE_Acres_Burned,0.0552526461626693
+Los Angeles,media_env,ridge,fungicide_lbs_prd_used,0.0465028526592763
+Los Angeles,media_env,ridge,rodent_lbs_prd_used,0.027446408860357
+Los Angeles,media_env,ridge,article_count,0.0186646263126152
+Los Angeles,media_env,ridge,mean_title_sentiment,0.0479642276211277
+Los Angeles,media_env,ridge,mean_title_risk,0.0241878921363707
+Los Angeles,media_env,ridge,mean_body_risk,0.069297580322068
+Los Angeles,media_env,ridge,avg_sentiment,0.0293295724119077
+Los Angeles,media_env,ridge,avg_risk,0.0326963686940686
+Los Angeles,media_env,ridge,mean_body_sentiment,0.0372508448554382
+Los Angeles,media_env,ridge,tweet_count,0.036560421370206
+Los Angeles,media_env,ridge,avg_likes,0.0328383905899956
+Los Angeles,media_env,ridge,AR: recent log-change,0.1919662421092746
+Los Angeles,media_env,ridge,AR: same month last year,0.1041457853366591
+Los Angeles,media_env,random_forest,Precipitation,0.0430442180176897
+Los Angeles,media_env,random_forest,Avg Rel Hum (%),0.0364547544730453
+Los Angeles,media_env,random_forest,Avg Wind Speed (mph),0.0299891757807241
+Los Angeles,media_env,random_forest,Wind Run (miles),0.0387834567532369
+Los Angeles,media_env,random_forest,windeventcount,0.0288312415471863
+Los Angeles,media_env,random_forest,Avg Soil Temp (F),0.040110625800263
+Los Angeles,media_env,random_forest,AQI_PM25,0.0314541213933328
+Los Angeles,media_env,random_forest,AQI_PM10,0.0287230156350584
+Los Angeles,media_env,random_forest,FIRE_Acres_Burned,0.0476509895697637
+Los Angeles,media_env,random_forest,fungicide_lbs_prd_used,0.0415140206760511
+Los Angeles,media_env,random_forest,rodent_lbs_prd_used,0.0453433808002067
+Los Angeles,media_env,random_forest,article_count,0.0217638510903627
+Los Angeles,media_env,random_forest,mean_title_sentiment,0.0418321571477347
+Los Angeles,media_env,random_forest,mean_title_risk,0.0258341760207425
+Los Angeles,media_env,random_forest,mean_body_risk,0.0449654288210719
+Los Angeles,media_env,random_forest,avg_sentiment,0.0431925041658796
+Los Angeles,media_env,random_forest,avg_risk,0.043455546868909
+Los Angeles,media_env,random_forest,mean_body_sentiment,0.0451650808417895
+Los Angeles,media_env,random_forest,tweet_count,0.032916034972445
+Los Angeles,media_env,random_forest,avg_likes,0.0364296775735236
+Los Angeles,media_env,random_forest,AR: recent log-change,0.1630421881391672
+Los Angeles,media_env,random_forest,AR: same month last year,0.0895043539118154
+Los Angeles,media_env,xgboost,Precipitation,0.0385253196288476
+Los Angeles,media_env,xgboost,Avg Rel Hum (%),0.0339149296276916
+Los Angeles,media_env,xgboost,Avg Wind Speed (mph),0.0314994316675058
+Los Angeles,media_env,xgboost,Wind Run (miles),0.039504859823138
+Los Angeles,media_env,xgboost,windeventcount,0.0385499579315978
+Los Angeles,media_env,xgboost,Avg Soil Temp (F),0.038642112002922
+Los Angeles,media_env,xgboost,AQI_PM25,0.0369918388149713
+Los Angeles,media_env,xgboost,AQI_PM10,0.0389631504905608
+Los Angeles,media_env,xgboost,FIRE_Acres_Burned,0.0481687666592908
+Los Angeles,media_env,xgboost,fungicide_lbs_prd_used,0.0428118713482931
+Los Angeles,media_env,xgboost,rodent_lbs_prd_used,0.0406870387875514
+Los Angeles,media_env,xgboost,article_count,0.0331905364556961
+Los Angeles,media_env,xgboost,mean_title_sentiment,0.0389697618635021
+Los Angeles,media_env,xgboost,mean_title_risk,0.0373306819898022
+Los Angeles,media_env,xgboost,mean_body_risk,0.04446052473007
+Los Angeles,media_env,xgboost,avg_sentiment,0.0420748492391726
+Los Angeles,media_env,xgboost,avg_risk,0.0425511103241528
+Los Angeles,media_env,xgboost,mean_body_sentiment,0.0493456915793933
+Los Angeles,media_env,xgboost,tweet_count,0.0388845295585512
+Los Angeles,media_env,xgboost,avg_likes,0.0393808083060766
+Los Angeles,media_env,xgboost,AR: recent log-change,0.1440119472121882
+Los Angeles,media_env,xgboost,AR: same month last year,0.0615402819590239
+Fresno,media_env,ridge,Precipitation,0.0445416857198751
+Fresno,media_env,ridge,Avg Rel Hum (%),0.0342474837288358
+Fresno,media_env,ridge,Avg Wind Speed (mph),0.0158565135985081
+Fresno,media_env,ridge,Wind Run (miles),0.0239741083567376
+Fresno,media_env,ridge,windeventcount,0.0395514608763049
+Fresno,media_env,ridge,Avg Soil Temp (F),0.0464646839752164
+Fresno,media_env,ridge,AQI_PM25,0.0215459585364772
+Fresno,media_env,ridge,AQI_PM10,0.0466455971513957
+Fresno,media_env,ridge,FIRE_Acres_Burned,0.0409217775196772
+Fresno,media_env,ridge,fungicide_lbs_prd_used,0.0507669657434634
+Fresno,media_env,ridge,rodent_lbs_prd_used,0.0347727176711098
+Fresno,media_env,ridge,article_count,0.0225803474036519
+Fresno,media_env,ridge,mean_title_sentiment,0.0292890316055736
+Fresno,media_env,ridge,mean_title_risk,0.0402559503493984
+Fresno,media_env,ridge,mean_body_risk,0.0594895847177321
+Fresno,media_env,ridge,avg_sentiment,0.0252421316298702
+Fresno,media_env,ridge,avg_risk,0.0271770272638037
+Fresno,media_env,ridge,mean_body_sentiment,0.0332747396726497
+Fresno,media_env,ridge,tweet_count,0.0422212046577664
+Fresno,media_env,ridge,avg_likes,0.0275462639423726
+Fresno,media_env,ridge,AR: recent log-change,0.1688085309468064
+Fresno,media_env,ridge,AR: same month last year,0.1248262349327731
+Fresno,media_env,random_forest,Precipitation,0.0592621148867608
+Fresno,media_env,random_forest,Avg Rel Hum (%),0.0585325950436017
+Fresno,media_env,random_forest,Avg Wind Speed (mph),0.0338095718453561
+Fresno,media_env,random_forest,Wind Run (miles),0.0342899015573857
+Fresno,media_env,random_forest,windeventcount,0.0192054943378912
+Fresno,media_env,random_forest,Avg Soil Temp (F),0.0608947963720662
+Fresno,media_env,random_forest,AQI_PM25,0.0432321516199215
+Fresno,media_env,random_forest,AQI_PM10,0.0402047699495276
+Fresno,media_env,random_forest,FIRE_Acres_Burned,0.052519914153638
+Fresno,media_env,random_forest,fungicide_lbs_prd_used,0.0553417674690794
+Fresno,media_env,random_forest,rodent_lbs_prd_used,0.0491040270316864
+Fresno,media_env,random_forest,article_count,0.0121082620426403
+Fresno,media_env,random_forest,mean_title_sentiment,0.0234796080934353
+Fresno,media_env,random_forest,mean_title_risk,0.0210772065624494
+Fresno,media_env,random_forest,mean_body_risk,0.0392113860356666
+Fresno,media_env,random_forest,avg_sentiment,0.0251340017414065
+Fresno,media_env,random_forest,avg_risk,0.0307350754387093
+Fresno,media_env,random_forest,mean_body_sentiment,0.0329191500238852
+Fresno,media_env,random_forest,tweet_count,0.0268285755554385
+Fresno,media_env,random_forest,avg_likes,0.0410661566035777
+Fresno,media_env,random_forest,AR: recent log-change,0.1378632369575947
+Fresno,media_env,random_forest,AR: same month last year,0.103180236678281
+Fresno,media_env,xgboost,Precipitation,0.0365507580327733
+Fresno,media_env,xgboost,Avg Rel Hum (%),0.0479197954478726
+Fresno,media_env,xgboost,Avg Wind Speed (mph),0.0297434584083767
+Fresno,media_env,xgboost,Wind Run (miles),0.039011111608365
+Fresno,media_env,xgboost,windeventcount,0.0352260329152262
+Fresno,media_env,xgboost,Avg Soil Temp (F),0.0523943625029237
+Fresno,media_env,xgboost,AQI_PM25,0.0390316995138748
+Fresno,media_env,xgboost,AQI_PM10,0.0421829350298888
+Fresno,media_env,xgboost,FIRE_Acres_Burned,0.0422194858732088
+Fresno,media_env,xgboost,fungicide_lbs_prd_used,0.046115915008688
+Fresno,media_env,xgboost,rodent_lbs_prd_used,0.0467152333336557
+Fresno,media_env,xgboost,article_count,0.0329391512257196
+Fresno,media_env,xgboost,mean_title_sentiment,0.0308457756267274
+Fresno,media_env,xgboost,mean_title_risk,0.037681853056968
+Fresno,media_env,xgboost,mean_body_risk,0.0432981345447492
+Fresno,media_env,xgboost,avg_sentiment,0.0357184281997124
+Fresno,media_env,xgboost,avg_risk,0.0372808043862969
+Fresno,media_env,xgboost,mean_body_sentiment,0.0405667627407587
+Fresno,media_env,xgboost,tweet_count,0.037495664283806
+Fresno,media_env,xgboost,avg_likes,0.040969509690422
+Fresno,media_env,xgboost,AR: recent log-change,0.1397177991920446
+Fresno,media_env,xgboost,AR: same month last year,0.0663753293779405
+San Diego,media_env,ridge,Precipitation,0.0391397153226127
+San Diego,media_env,ridge,Avg Rel Hum (%),0.04082469229574
+San Diego,media_env,ridge,Avg Wind Speed (mph),0.0330469245087526
+San Diego,media_env,ridge,Wind Run (miles),0.0239442751907308
+San Diego,media_env,ridge,windeventcount,0.05746477163696
+San Diego,media_env,ridge,Avg Soil Temp (F),0.0352798749766249
+San Diego,media_env,ridge,AQI_PM25,0.0464196178763496
+San Diego,media_env,ridge,AQI_PM10,0.0415647158703275
+San Diego,media_env,ridge,FIRE_Acres_Burned,0.052181890397646
+San Diego,media_env,ridge,fungicide_lbs_prd_used,0.0353892937323972
+San Diego,media_env,ridge,rodent_lbs_prd_used,0.0294037863958598
+San Diego,media_env,ridge,article_count,0.047161075744376
+San Diego,media_env,ridge,mean_title_sentiment,0.043792791211084
+San Diego,media_env,ridge,mean_title_risk,0.0362490454411207
+San Diego,media_env,ridge,mean_body_risk,0.0452756502373994
+San Diego,media_env,ridge,avg_sentiment,0.0222810530551232
+San Diego,media_env,ridge,avg_risk,0.0345423889810373
+San Diego,media_env,ridge,mean_body_sentiment,0.0436622018882457
+San Diego,media_env,ridge,tweet_count,0.0273040170014523
+San Diego,media_env,ridge,avg_likes,0.0372216931173051
+San Diego,media_env,ridge,AR: recent log-change,0.1741172712983974
+San Diego,media_env,ridge,AR: same month last year,0.0537332538204566
+San Diego,media_env,random_forest,Precipitation,0.039277977278778
+San Diego,media_env,random_forest,Avg Rel Hum (%),0.0469388435005964
+San Diego,media_env,random_forest,Avg Wind Speed (mph),0.021662014538463
+San Diego,media_env,random_forest,Wind Run (miles),0.0284324978224469
+San Diego,media_env,random_forest,windeventcount,0.0058824915436122
+San Diego,media_env,random_forest,Avg Soil Temp (F),0.0414889769127666
+San Diego,media_env,random_forest,AQI_PM25,0.032304880059526
+San Diego,media_env,random_forest,AQI_PM10,0.0411646157434507
+San Diego,media_env,random_forest,FIRE_Acres_Burned,0.0507276869274682
+San Diego,media_env,random_forest,fungicide_lbs_prd_used,0.0483696172173733
+San Diego,media_env,random_forest,rodent_lbs_prd_used,0.031241606715799
+San Diego,media_env,random_forest,article_count,0.0227036276026109
+San Diego,media_env,random_forest,mean_title_sentiment,0.0480524279058307
+San Diego,media_env,random_forest,mean_title_risk,0.0270861867431663
+San Diego,media_env,random_forest,mean_body_risk,0.046267823081511
+San Diego,media_env,random_forest,avg_sentiment,0.0316358878633223
+San Diego,media_env,random_forest,avg_risk,0.0358787110553838
+San Diego,media_env,random_forest,mean_body_sentiment,0.0387843568726671
+San Diego,media_env,random_forest,tweet_count,0.0422296915236106
+San Diego,media_env,random_forest,avg_likes,0.0461524722541577
+San Diego,media_env,random_forest,AR: recent log-change,0.2178133357490831
+San Diego,media_env,random_forest,AR: same month last year,0.0559042710883755
+San Diego,media_env,xgboost,Precipitation,0.0361829320665624
+San Diego,media_env,xgboost,Avg Rel Hum (%),0.0397056496183625
+San Diego,media_env,xgboost,Avg Wind Speed (mph),0.0316490070441205
+San Diego,media_env,xgboost,Wind Run (miles),0.0387512665558765
+San Diego,media_env,xgboost,windeventcount,0.0274260312878757
+San Diego,media_env,xgboost,Avg Soil Temp (F),0.0431833702266005
+San Diego,media_env,xgboost,AQI_PM25,0.0395579159118835
+San Diego,media_env,xgboost,AQI_PM10,0.0426038687302389
+San Diego,media_env,xgboost,FIRE_Acres_Burned,0.042221923157023
+San Diego,media_env,xgboost,fungicide_lbs_prd_used,0.0454995654293352
+San Diego,media_env,xgboost,rodent_lbs_prd_used,0.0413347659661734
+San Diego,media_env,xgboost,article_count,0.0403416869316891
+San Diego,media_env,xgboost,mean_title_sentiment,0.0432167341802506
+San Diego,media_env,xgboost,mean_title_risk,0.0392721646990556
+San Diego,media_env,xgboost,mean_body_risk,0.04512135167999
+San Diego,media_env,xgboost,avg_sentiment,0.0394191709299877
+San Diego,media_env,xgboost,avg_risk,0.0420359597211005
+San Diego,media_env,xgboost,mean_body_sentiment,0.0431345300838825
+San Diego,media_env,xgboost,tweet_count,0.0437110569782
+San Diego,media_env,xgboost,avg_likes,0.0434835103350443
+San Diego,media_env,xgboost,AR: recent log-change,0.1484175096223073
+San Diego,media_env,xgboost,AR: same month last year,0.0437300288444391
+Tulare,media_env,ridge,Precipitation,0.0477752314576327
+Tulare,media_env,ridge,Avg Rel Hum (%),0.0417544103160431
+Tulare,media_env,ridge,Avg Wind Speed (mph),0.0237725702123255
+Tulare,media_env,ridge,Wind Run (miles),0.029161559908976
+Tulare,media_env,ridge,windeventcount,0.0269438725068794
+Tulare,media_env,ridge,Avg Soil Temp (F),0.0448156672126673
+Tulare,media_env,ridge,AQI_PM25,0.0369319027180937
+Tulare,media_env,ridge,AQI_PM10,0.0380983614456071
+Tulare,media_env,ridge,FIRE_Acres_Burned,0.0579998164350803
+Tulare,media_env,ridge,fungicide_lbs_prd_used,0.0616912006906059
+Tulare,media_env,ridge,rodent_lbs_prd_used,0.0428471524066951
+Tulare,media_env,ridge,article_count,0.0402245823288245
+Tulare,media_env,ridge,mean_title_sentiment,0.049041868249598
+Tulare,media_env,ridge,mean_title_risk,0.0336168952827898
+Tulare,media_env,ridge,mean_body_risk,0.0504138145843233
+Tulare,media_env,ridge,avg_sentiment,0.0390164395457022
+Tulare,media_env,ridge,avg_risk,0.033494698509918
+Tulare,media_env,ridge,mean_body_sentiment,0.0431708066467466
+Tulare,media_env,ridge,tweet_count,0.0235219802398543
+Tulare,media_env,ridge,avg_likes,0.0269394404640655
+Tulare,media_env,ridge,AR: recent log-change,0.1860105309899383
+Tulare,media_env,ridge,AR: same month last year,0.0227571978476325
+Tulare,media_env,random_forest,Precipitation,0.0441769343883374
+Tulare,media_env,random_forest,Avg Rel Hum (%),0.0620603674427938
+Tulare,media_env,random_forest,Avg Wind Speed (mph),0.0399484027284347
+Tulare,media_env,random_forest,Wind Run (miles),0.0398661314217093
+Tulare,media_env,random_forest,windeventcount,0.0004383940381213
+Tulare,media_env,random_forest,Avg Soil Temp (F),0.0473480313482104
+Tulare,media_env,random_forest,AQI_PM25,0.0347179227616353
+Tulare,media_env,random_forest,AQI_PM10,0.0473697251832554
+Tulare,media_env,random_forest,FIRE_Acres_Burned,0.0425791853185163
+Tulare,media_env,random_forest,fungicide_lbs_prd_used,0.0690829591947982
+Tulare,media_env,random_forest,rodent_lbs_prd_used,0.0529586576660211
+Tulare,media_env,random_forest,article_count,0.0202426470789444
+Tulare,media_env,random_forest,mean_title_sentiment,0.037650996843443
+Tulare,media_env,random_forest,mean_title_risk,0.0241367080157569
+Tulare,media_env,random_forest,mean_body_risk,0.0336164931202109
+Tulare,media_env,random_forest,avg_sentiment,0.0351749578968925
+Tulare,media_env,random_forest,avg_risk,0.0374727476695928
+Tulare,media_env,random_forest,mean_body_sentiment,0.0508509181032163
+Tulare,media_env,random_forest,tweet_count,0.026438900174685
+Tulare,media_env,random_forest,avg_likes,0.0427346771556517
+Tulare,media_env,random_forest,AR: recent log-change,0.1699649923683252
+Tulare,media_env,random_forest,AR: same month last year,0.041169250081447
+Tulare,media_env,xgboost,Precipitation,0.0297268119676921
+Tulare,media_env,xgboost,Avg Rel Hum (%),0.0412194152862132
+Tulare,media_env,xgboost,Avg Wind Speed (mph),0.0330454035999281
+Tulare,media_env,xgboost,Wind Run (miles),0.0417406880535453
+Tulare,media_env,xgboost,windeventcount,0.0054421897448464
+Tulare,media_env,xgboost,Avg Soil Temp (F),0.0461058007888493
+Tulare,media_env,xgboost,AQI_PM25,0.0391590524221426
+Tulare,media_env,xgboost,AQI_PM10,0.0481421404970494
+Tulare,media_env,xgboost,FIRE_Acres_Burned,0.0398750108457672
+Tulare,media_env,xgboost,fungicide_lbs_prd_used,0.0494041099712063
+Tulare,media_env,xgboost,rodent_lbs_prd_used,0.052266764294971
+Tulare,media_env,xgboost,article_count,0.0415399856985028
+Tulare,media_env,xgboost,mean_title_sentiment,0.0390909536756112
+Tulare,media_env,xgboost,mean_title_risk,0.0425478870809376
+Tulare,media_env,xgboost,mean_body_risk,0.0370140822717733
+Tulare,media_env,xgboost,avg_sentiment,0.039231534711842
+Tulare,media_env,xgboost,avg_risk,0.0424968019908451
+Tulare,media_env,xgboost,mean_body_sentiment,0.0529564810847503
+Tulare,media_env,xgboost,tweet_count,0.0393517769520371
+Tulare,media_env,xgboost,avg_likes,0.0475820563651852
+Tulare,media_env,xgboost,AR: recent log-change,0.1515417824234211
+Tulare,media_env,xgboost,AR: same month last year,0.0405192702728821
+Riverside,media_env,ridge,Precipitation,0.0408667768941879
+Riverside,media_env,ridge,Avg Rel Hum (%),0.0441009438406494
+Riverside,media_env,ridge,Avg Wind Speed (mph),0.0284618595688882
+Riverside,media_env,ridge,Wind Run (miles),0.031836675507759
+Riverside,media_env,ridge,windeventcount,0.0387684053471037
+Riverside,media_env,ridge,Avg Soil Temp (F),0.0327179991369541
+Riverside,media_env,ridge,AQI_PM25,0.0310585310001033
+Riverside,media_env,ridge,AQI_PM10,0.0272509568425298
+Riverside,media_env,ridge,FIRE_Acres_Burned,0.0416880455520122
+Riverside,media_env,ridge,fungicide_lbs_prd_used,0.0437247272408637
+Riverside,media_env,ridge,rodent_lbs_prd_used,0.035426713265096
+Riverside,media_env,ridge,article_count,0.0569176840198247
+Riverside,media_env,ridge,mean_title_sentiment,0.0276087897937285
+Riverside,media_env,ridge,mean_title_risk,0.0262646795919584
+Riverside,media_env,ridge,mean_body_risk,0.0445416704172646
+Riverside,media_env,ridge,avg_sentiment,0.0403290958955955
+Riverside,media_env,ridge,avg_risk,0.0369272279053404
+Riverside,media_env,ridge,mean_body_sentiment,0.0437137845684826
+Riverside,media_env,ridge,tweet_count,0.0303369174861368
+Riverside,media_env,ridge,avg_likes,0.0304326933234536
+Riverside,media_env,ridge,AR: recent log-change,0.2175219000031369
+Riverside,media_env,ridge,AR: same month last year,0.0495039227989296
+Riverside,media_env,random_forest,Precipitation,0.0462689420356144
+Riverside,media_env,random_forest,Avg Rel Hum (%),0.0448997144346729
+Riverside,media_env,random_forest,Avg Wind Speed (mph),0.0374335615147345
+Riverside,media_env,random_forest,Wind Run (miles),0.0380299389482694
+Riverside,media_env,random_forest,windeventcount,0.0266516516433805
+Riverside,media_env,random_forest,Avg Soil Temp (F),0.0397707578328004
+Riverside,media_env,random_forest,AQI_PM25,0.0404725726021772
+Riverside,media_env,random_forest,AQI_PM10,0.033457792927076
+Riverside,media_env,random_forest,FIRE_Acres_Burned,0.04184721446889
+Riverside,media_env,random_forest,fungicide_lbs_prd_used,0.0462515234959274
+Riverside,media_env,random_forest,rodent_lbs_prd_used,0.0462820044013777
+Riverside,media_env,random_forest,article_count,0.0325935828018647
+Riverside,media_env,random_forest,mean_title_sentiment,0.0494032998612289
+Riverside,media_env,random_forest,mean_title_risk,0.0245524229530276
+Riverside,media_env,random_forest,mean_body_risk,0.0389459068983251
+Riverside,media_env,random_forest,avg_sentiment,0.0429420243247951
+Riverside,media_env,random_forest,avg_risk,0.0446508590393095
+Riverside,media_env,random_forest,mean_body_sentiment,0.0423775127289362
+Riverside,media_env,random_forest,tweet_count,0.0372480846468477
+Riverside,media_env,random_forest,avg_likes,0.0409311453911087
+Riverside,media_env,random_forest,AR: recent log-change,0.1649125537225082
+Riverside,media_env,random_forest,AR: same month last year,0.0400769333271267
+Riverside,media_env,xgboost,Precipitation,0.0248037014689325
+Riverside,media_env,xgboost,Avg Rel Hum (%),0.0370937287695302
+Riverside,media_env,xgboost,Avg Wind Speed (mph),0.0309978796678622
+Riverside,media_env,xgboost,Wind Run (miles),0.037914189346144
+Riverside,media_env,xgboost,windeventcount,0.0391696770696463
+Riverside,media_env,xgboost,Avg Soil Temp (F),0.0393069570402589
+Riverside,media_env,xgboost,AQI_PM25,0.0402091295716501
+Riverside,media_env,xgboost,AQI_PM10,0.0444873694216382
+Riverside,media_env,xgboost,FIRE_Acres_Burned,0.0411759394434902
+Riverside,media_env,xgboost,fungicide_lbs_prd_used,0.0422147077967748
+Riverside,media_env,xgboost,rodent_lbs_prd_used,0.0446897968829652
+Riverside,media_env,xgboost,article_count,0.0471123023755962
+Riverside,media_env,xgboost,mean_title_sentiment,0.0410691442150024
+Riverside,media_env,xgboost,mean_title_risk,0.0383334382170598
+Riverside,media_env,xgboost,mean_body_risk,0.0419345117370637
+Riverside,media_env,xgboost,avg_sentiment,0.0441900898172633
+Riverside,media_env,xgboost,avg_risk,0.0429766514225232
+Riverside,media_env,xgboost,mean_body_sentiment,0.0433713871767584
+Riverside,media_env,xgboost,tweet_count,0.0443060891445654
+Riverside,media_env,xgboost,avg_likes,0.0435568775395616
+Riverside,media_env,xgboost,AR: recent log-change,0.1473067866014481
+Riverside,media_env,xgboost,AR: same month last year,0.0437796452742644
+San Luis Obispo,media_env,ridge,Precipitation,0.0397684951426642
+San Luis Obispo,media_env,ridge,Avg Rel Hum (%),0.0481643297076852
+San Luis Obispo,media_env,ridge,Avg Wind Speed (mph),0.0549353382836126
+San Luis Obispo,media_env,ridge,Wind Run (miles),0.0452102023108051
+San Luis Obispo,media_env,ridge,windeventcount,0.0358854496585957
+San Luis Obispo,media_env,ridge,Avg Soil Temp (F),0.0582258368397596
+San Luis Obispo,media_env,ridge,AQI_PM25,0.0200280014408641
+San Luis Obispo,media_env,ridge,AQI_PM10,0.0242484905190033
+San Luis Obispo,media_env,ridge,FIRE_Acres_Burned,0.0663138513910152
+San Luis Obispo,media_env,ridge,fungicide_lbs_prd_used,0.0612571116706443
+San Luis Obispo,media_env,ridge,rodent_lbs_prd_used,0.0550279625427618
+San Luis Obispo,media_env,ridge,article_count,0.0464191234999485
+San Luis Obispo,media_env,ridge,mean_title_sentiment,0.0270915779105719
+San Luis Obispo,media_env,ridge,mean_title_risk,0.0219560745954688
+San Luis Obispo,media_env,ridge,mean_body_risk,0.0679026124091735
+San Luis Obispo,media_env,ridge,avg_sentiment,0.0189968193698819
+San Luis Obispo,media_env,ridge,avg_risk,0.0306550967198185
+San Luis Obispo,media_env,ridge,mean_body_sentiment,0.0365756449342496
+San Luis Obispo,media_env,ridge,tweet_count,0.0291998968064582
+San Luis Obispo,media_env,ridge,avg_likes,0.0122387496849898
+San Luis Obispo,media_env,ridge,AR: recent log-change,0.1127660809721927
+San Luis Obispo,media_env,ridge,AR: same month last year,0.0871332535898346
+San Luis Obispo,media_env,random_forest,Precipitation,0.0429357898392244
+San Luis Obispo,media_env,random_forest,Avg Rel Hum (%),0.052381165242672
+San Luis Obispo,media_env,random_forest,Avg Wind Speed (mph),0.0546265781707378
+San Luis Obispo,media_env,random_forest,Wind Run (miles),0.0451935786897851
+San Luis Obispo,media_env,random_forest,windeventcount,0.0081155054893397
+San Luis Obispo,media_env,random_forest,Avg Soil Temp (F),0.0579339504949055
+San Luis Obispo,media_env,random_forest,AQI_PM25,0.033661157072413
+San Luis Obispo,media_env,random_forest,AQI_PM10,0.0237815455901902
+San Luis Obispo,media_env,random_forest,FIRE_Acres_Burned,0.0543211831961508
+San Luis Obispo,media_env,random_forest,fungicide_lbs_prd_used,0.0692997594402063
+San Luis Obispo,media_env,random_forest,rodent_lbs_prd_used,0.0592055717837974
+San Luis Obispo,media_env,random_forest,article_count,0.0157733746407698
+San Luis Obispo,media_env,random_forest,mean_title_sentiment,0.035311620892793
+San Luis Obispo,media_env,random_forest,mean_title_risk,0.0189977527751228
+San Luis Obispo,media_env,random_forest,mean_body_risk,0.053886733362091
+San Luis Obispo,media_env,random_forest,avg_sentiment,0.034688337005908
+San Luis Obispo,media_env,random_forest,avg_risk,0.039331359592533
+San Luis Obispo,media_env,random_forest,mean_body_sentiment,0.0532165623027335
+San Luis Obispo,media_env,random_forest,tweet_count,0.0280846918580683
+San Luis Obispo,media_env,random_forest,avg_likes,0.0290738511983014
+San Luis Obispo,media_env,random_forest,AR: recent log-change,0.1344587999191135
+San Luis Obispo,media_env,random_forest,AR: same month last year,0.0557211314431421
+San Luis Obispo,media_env,xgboost,Precipitation,0.0322842119855396
+San Luis Obispo,media_env,xgboost,Avg Rel Hum (%),0.0423568053727873
+San Luis Obispo,media_env,xgboost,Avg Wind Speed (mph),0.0443627033993787
+San Luis Obispo,media_env,xgboost,Wind Run (miles),0.0452438116045969
+San Luis Obispo,media_env,xgboost,windeventcount,0.0216452054636949
+San Luis Obispo,media_env,xgboost,Avg Soil Temp (F),0.0519559301028796
+San Luis Obispo,media_env,xgboost,AQI_PM25,0.0391434360657675
+San Luis Obispo,media_env,xgboost,AQI_PM10,0.0400770079759681
+San Luis Obispo,media_env,xgboost,FIRE_Acres_Burned,0.0489979962050997
+San Luis Obispo,media_env,xgboost,fungicide_lbs_prd_used,0.0484248238143674
+San Luis Obispo,media_env,xgboost,rodent_lbs_prd_used,0.04683732009512
+San Luis Obispo,media_env,xgboost,article_count,0.0330184097443679
+San Luis Obispo,media_env,xgboost,mean_title_sentiment,0.0372557379243374
+San Luis Obispo,media_env,xgboost,mean_title_risk,0.0353141917006006
+San Luis Obispo,media_env,xgboost,mean_body_risk,0.0473457260958613
+San Luis Obispo,media_env,xgboost,avg_sentiment,0.0394328852048923
+San Luis Obispo,media_env,xgboost,avg_risk,0.0392007011145045
+San Luis Obispo,media_env,xgboost,mean_body_sentiment,0.0477679059703482
+San Luis Obispo,media_env,xgboost,tweet_count,0.0390387785837054
+San Luis Obispo,media_env,xgboost,avg_likes,0.0381249495037376
+San Luis Obispo,media_env,xgboost,AR: recent log-change,0.1347612054652472
+San Luis Obispo,media_env,xgboost,AR: same month last year,0.0474102566071966
+Orange,media_env,ridge,Precipitation,0.0403219552030776
+Orange,media_env,ridge,Avg Rel Hum (%),0.040360199626629
+Orange,media_env,ridge,Avg Wind Speed (mph),0.0217456585132842
+Orange,media_env,ridge,Wind Run (miles),0.0500603283703904
+Orange,media_env,ridge,windeventcount,0.0511496233917606
+Orange,media_env,ridge,Avg Soil Temp (F),0.0241926799867462
+Orange,media_env,ridge,AQI_PM25,0.0419183871756797
+Orange,media_env,ridge,AQI_PM10,0.0386400605376884
+Orange,media_env,ridge,FIRE_Acres_Burned,0.0422367510311216
+Orange,media_env,ridge,fungicide_lbs_prd_used,0.0273865495379546
+Orange,media_env,ridge,rodent_lbs_prd_used,0.0420627880979765
+Orange,media_env,ridge,article_count,0.0611372552453583
+Orange,media_env,ridge,mean_title_sentiment,0.0221835520735045
+Orange,media_env,ridge,mean_title_risk,0.0364366565126064
+Orange,media_env,ridge,mean_body_risk,0.0252437612046183
+Orange,media_env,ridge,avg_sentiment,0.040991722161324
+Orange,media_env,ridge,avg_risk,0.0734586781913558
+Orange,media_env,ridge,mean_body_sentiment,0.0507901597395139
+Orange,media_env,ridge,tweet_count,0.0418587464153038
+Orange,media_env,ridge,avg_likes,0.0451355368439714
+Orange,media_env,ridge,AR: recent log-change,0.1538844766368909
+Orange,media_env,ridge,AR: same month last year,0.0288044735032427
+Orange,media_env,random_forest,Precipitation,0.0341571478721935
+Orange,media_env,random_forest,Avg Rel Hum (%),0.0472978972217358
+Orange,media_env,random_forest,Avg Wind Speed (mph),0.0361429227325787
+Orange,media_env,random_forest,Wind Run (miles),0.0332142261078641
+Orange,media_env,random_forest,windeventcount,0.0007983756033107
+Orange,media_env,random_forest,Avg Soil Temp (F),0.028485953789608
+Orange,media_env,random_forest,AQI_PM25,0.03681915601917
+Orange,media_env,random_forest,AQI_PM10,0.0280358050195351
+Orange,media_env,random_forest,FIRE_Acres_Burned,0.053380474549076
+Orange,media_env,random_forest,fungicide_lbs_prd_used,0.0284367115895922
+Orange,media_env,random_forest,rodent_lbs_prd_used,0.0415772736295252
+Orange,media_env,random_forest,article_count,0.0187904933993889
+Orange,media_env,random_forest,mean_title_sentiment,0.0277704162036688
+Orange,media_env,random_forest,mean_title_risk,0.0249174891250623
+Orange,media_env,random_forest,mean_body_risk,0.0276222885108539
+Orange,media_env,random_forest,avg_sentiment,0.0366508128154058
+Orange,media_env,random_forest,avg_risk,0.0746167088858461
+Orange,media_env,random_forest,mean_body_sentiment,0.057349367758586
+Orange,media_env,random_forest,tweet_count,0.0358566992670922
+Orange,media_env,random_forest,avg_likes,0.038764577579318
+Orange,media_env,random_forest,AR: recent log-change,0.2376867138063563
+Orange,media_env,random_forest,AR: same month last year,0.0516284885142315
+Orange,media_env,xgboost,Precipitation,0.0356960204449461
+Orange,media_env,xgboost,Avg Rel Hum (%),0.0414540464945566
+Orange,media_env,xgboost,Avg Wind Speed (mph),0.039324912921182
+Orange,media_env,xgboost,Wind Run (miles),0.0415631726742652
+Orange,media_env,xgboost,windeventcount,0.020724607835074
+Orange,media_env,xgboost,Avg Soil Temp (F),0.0370428723799367
+Orange,media_env,xgboost,AQI_PM25,0.0416775497387719
+Orange,media_env,xgboost,AQI_PM10,0.0424029458532731
+Orange,media_env,xgboost,FIRE_Acres_Burned,0.0438812801502177
+Orange,media_env,xgboost,fungicide_lbs_prd_used,0.0386195872408844
+Orange,media_env,xgboost,rodent_lbs_prd_used,0.042628617660676
+Orange,media_env,xgboost,article_count,0.0393651473472545
+Orange,media_env,xgboost,mean_title_sentiment,0.0355209855232271
+Orange,media_env,xgboost,mean_title_risk,0.0422429840268565
+Orange,media_env,xgboost,mean_body_risk,0.037516393138126
+Orange,media_env,xgboost,avg_sentiment,0.0413300808194204
+Orange,media_env,xgboost,avg_risk,0.0497013963353664
+Orange,media_env,xgboost,mean_body_sentiment,0.0470517875024356
+Orange,media_env,xgboost,tweet_count,0.042314865343026
+Orange,media_env,xgboost,avg_likes,0.043690568351992
+Orange,media_env,xgboost,AR: recent log-change,0.1520375924232467
+Orange,media_env,xgboost,AR: same month last year,0.0442125857952641
+San Joaquin,media_env,ridge,Precipitation,0.0467396726965451
+San Joaquin,media_env,ridge,Avg Rel Hum (%),0.0294965293425949
+San Joaquin,media_env,ridge,Avg Wind Speed (mph),0.0271678054420384
+San Joaquin,media_env,ridge,Wind Run (miles),0.0314164980389181
+San Joaquin,media_env,ridge,windeventcount,0.015711394160805
+San Joaquin,media_env,ridge,Avg Soil Temp (F),0.0596485496356215
+San Joaquin,media_env,ridge,AQI_PM25,0.0305668428810505
+San Joaquin,media_env,ridge,AQI_PM10,0.063761171363666
+San Joaquin,media_env,ridge,FIRE_Acres_Burned,0.0394026495098003
+San Joaquin,media_env,ridge,fungicide_lbs_prd_used,0.0350271110128571
+San Joaquin,media_env,ridge,rodent_lbs_prd_used,0.0486192402604892
+San Joaquin,media_env,ridge,article_count,0.0587843967573895
+San Joaquin,media_env,ridge,mean_title_sentiment,0.0547150758248086
+San Joaquin,media_env,ridge,mean_title_risk,0.0314103399156134
+San Joaquin,media_env,ridge,mean_body_risk,0.0437737772987984
+San Joaquin,media_env,ridge,avg_sentiment,0.0346258817451013
+San Joaquin,media_env,ridge,avg_risk,0.0306008176085746
+San Joaquin,media_env,ridge,mean_body_sentiment,0.0656353654741749
+San Joaquin,media_env,ridge,tweet_count,0.0283036643721009
+San Joaquin,media_env,ridge,avg_likes,0.0453974334525046
+San Joaquin,media_env,ridge,AR: recent log-change,0.139843353748876
+San Joaquin,media_env,ridge,AR: same month last year,0.039352429457671
+San Joaquin,media_env,random_forest,Precipitation,0.035179241263594
+San Joaquin,media_env,random_forest,Avg Rel Hum (%),0.0302707379341015
+San Joaquin,media_env,random_forest,Avg Wind Speed (mph),0.0260754026891524
+San Joaquin,media_env,random_forest,Wind Run (miles),0.0317348358852729
+San Joaquin,media_env,random_forest,windeventcount,0.0239086110036419
+San Joaquin,media_env,random_forest,Avg Soil Temp (F),0.0375902485540768
+San Joaquin,media_env,random_forest,AQI_PM25,0.0344313890381237
+San Joaquin,media_env,random_forest,AQI_PM10,0.054091895428154
+San Joaquin,media_env,random_forest,FIRE_Acres_Burned,0.034766218183994
+San Joaquin,media_env,random_forest,fungicide_lbs_prd_used,0.0522894901287912
+San Joaquin,media_env,random_forest,rodent_lbs_prd_used,0.0397496934255457
+San Joaquin,media_env,random_forest,article_count,0.0274647185251286
+San Joaquin,media_env,random_forest,mean_title_sentiment,0.0505343229602672
+San Joaquin,media_env,random_forest,mean_title_risk,0.0287525490987388
+San Joaquin,media_env,random_forest,mean_body_risk,0.0417132077079496
+San Joaquin,media_env,random_forest,avg_sentiment,0.0454862065883238
+San Joaquin,media_env,random_forest,avg_risk,0.0415534492281141
+San Joaquin,media_env,random_forest,mean_body_sentiment,0.0603577177476742
+San Joaquin,media_env,random_forest,tweet_count,0.0550524742644018
+San Joaquin,media_env,random_forest,avg_likes,0.0418319999301341
+San Joaquin,media_env,random_forest,AR: recent log-change,0.1495216521683361
+San Joaquin,media_env,random_forest,AR: same month last year,0.0576439382464827
+San Joaquin,media_env,xgboost,Precipitation,0.0321876627030503
+San Joaquin,media_env,xgboost,Avg Rel Hum (%),0.0365555443210314
+San Joaquin,media_env,xgboost,Avg Wind Speed (mph),0.0370425707432614
+San Joaquin,media_env,xgboost,Wind Run (miles),0.0435010180493663
+San Joaquin,media_env,xgboost,windeventcount,0.0353224465511227
+San Joaquin,media_env,xgboost,Avg Soil Temp (F),0.0447482546416474
+San Joaquin,media_env,xgboost,AQI_PM25,0.0381390358603925
+San Joaquin,media_env,xgboost,AQI_PM10,0.0500443753470252
+San Joaquin,media_env,xgboost,FIRE_Acres_Burned,0.0403525783149709
+San Joaquin,media_env,xgboost,fungicide_lbs_prd_used,0.0467827475221957
+San Joaquin,media_env,xgboost,rodent_lbs_prd_used,0.0413966079587536
+San Joaquin,media_env,xgboost,article_count,0.0393936934075416
+San Joaquin,media_env,xgboost,mean_title_sentiment,0.0432618904649503
+San Joaquin,media_env,xgboost,mean_title_risk,0.038047048331056
+San Joaquin,media_env,xgboost,mean_body_risk,0.0382788055473688
+San Joaquin,media_env,xgboost,avg_sentiment,0.0437677994050919
+San Joaquin,media_env,xgboost,avg_risk,0.0390971320763564
+San Joaquin,media_env,xgboost,mean_body_sentiment,0.0481156690248038
+San Joaquin,media_env,xgboost,tweet_count,0.0434759195288478
+San Joaquin,media_env,xgboost,avg_likes,0.0428945681296948
+San Joaquin,media_env,xgboost,AR: recent log-change,0.1293123132820983
+San Joaquin,media_env,xgboost,AR: same month last year,0.0482823187893715
+Ventura,media_env,ridge,Precipitation,0.0315762901410862
+Ventura,media_env,ridge,Avg Rel Hum (%),0.0701163845543624
+Ventura,media_env,ridge,Avg Wind Speed (mph),0.0584203260812264
+Ventura,media_env,ridge,Wind Run (miles),0.0346493597300582
+Ventura,media_env,ridge,windeventcount,0.0514680476810205
+Ventura,media_env,ridge,Avg Soil Temp (F),0.0664488928126471
+Ventura,media_env,ridge,AQI_PM25,0.0371371386111463
+Ventura,media_env,ridge,AQI_PM10,0.0610275499206321
+Ventura,media_env,ridge,FIRE_Acres_Burned,0.0075928026232448
+Ventura,media_env,ridge,fungicide_lbs_prd_used,0.0393301612698789
+Ventura,media_env,ridge,rodent_lbs_prd_used,0.0312304409598926
+Ventura,media_env,ridge,article_count,0.0308038365587474
+Ventura,media_env,ridge,mean_title_sentiment,0.0326702127004405
+Ventura,media_env,ridge,mean_title_risk,0.0320889791645732
+Ventura,media_env,ridge,mean_body_risk,0.0469528318183827
+Ventura,media_env,ridge,avg_sentiment,0.0238277156438095
+Ventura,media_env,ridge,avg_risk,0.0239195228575149
+Ventura,media_env,ridge,mean_body_sentiment,0.0260607647670391
+Ventura,media_env,ridge,tweet_count,0.0306305327805623
+Ventura,media_env,ridge,avg_likes,0.0214726620052173
+Ventura,media_env,ridge,AR: recent log-change,0.1537992114696946
+Ventura,media_env,ridge,AR: same month last year,0.0887763358488219
+Ventura,media_env,random_forest,Precipitation,0.0318680638464606
+Ventura,media_env,random_forest,Avg Rel Hum (%),0.0676200636751751
+Ventura,media_env,random_forest,Avg Wind Speed (mph),0.0617212251922621
+Ventura,media_env,random_forest,Wind Run (miles),0.0350152436818481
+Ventura,media_env,random_forest,windeventcount,0.0086231043721272
+Ventura,media_env,random_forest,Avg Soil Temp (F),0.0693107103155146
+Ventura,media_env,random_forest,AQI_PM25,0.0415964563839912
+Ventura,media_env,random_forest,AQI_PM10,0.037594087191266
+Ventura,media_env,random_forest,FIRE_Acres_Burned,0.000569709904593
+Ventura,media_env,random_forest,fungicide_lbs_prd_used,0.04347825479705
+Ventura,media_env,random_forest,rodent_lbs_prd_used,0.0485774244961629
+Ventura,media_env,random_forest,article_count,0.0238971946143519
+Ventura,media_env,random_forest,mean_title_sentiment,0.0443753802387942
+Ventura,media_env,random_forest,mean_title_risk,0.0236950792373856
+Ventura,media_env,random_forest,mean_body_risk,0.0363272821327834
+Ventura,media_env,random_forest,avg_sentiment,0.0405047104629158
+Ventura,media_env,random_forest,avg_risk,0.0384547413132548
+Ventura,media_env,random_forest,mean_body_sentiment,0.04702158447575
+Ventura,media_env,random_forest,tweet_count,0.0494003228233973
+Ventura,media_env,random_forest,avg_likes,0.0297553685759646
+Ventura,media_env,random_forest,AR: recent log-change,0.1493907451972683
+Ventura,media_env,random_forest,AR: same month last year,0.0712032470716825
+Ventura,media_env,xgboost,Precipitation,0.0224963031835367
+Ventura,media_env,xgboost,Avg Rel Hum (%),0.0398336176580607
+Ventura,media_env,xgboost,Avg Wind Speed (mph),0.0430189436074183
+Ventura,media_env,xgboost,Wind Run (miles),0.0381922099307556
+Ventura,media_env,xgboost,windeventcount,0.0354908751263363
+Ventura,media_env,xgboost,Avg Soil Temp (F),0.0526807645497984
+Ventura,media_env,xgboost,AQI_PM25,0.044172830482262
+Ventura,media_env,xgboost,AQI_PM10,0.0482456832463906
+Ventura,media_env,xgboost,FIRE_Acres_Burned,0.0109876494012465
+Ventura,media_env,xgboost,fungicide_lbs_prd_used,0.0420739396692991
+Ventura,media_env,xgboost,rodent_lbs_prd_used,0.0450249356610665
+Ventura,media_env,xgboost,article_count,0.0444964026001932
+Ventura,media_env,xgboost,mean_title_sentiment,0.0402597245615175
+Ventura,media_env,xgboost,mean_title_risk,0.0403222124483579
+Ventura,media_env,xgboost,mean_body_risk,0.0404568277228551
+Ventura,media_env,xgboost,avg_sentiment,0.042835095406767
+Ventura,media_env,xgboost,avg_risk,0.0403733310139298
+Ventura,media_env,xgboost,mean_body_sentiment,0.048361267496177
+Ventura,media_env,xgboost,tweet_count,0.0490195258224565
+Ventura,media_env,xgboost,avg_likes,0.0410488388793179
+Ventura,media_env,xgboost,AR: recent log-change,0.1379765508090805
+Ventura,media_env,xgboost,AR: same month last year,0.0526324707231761
