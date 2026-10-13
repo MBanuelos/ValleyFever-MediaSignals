@@ -227,6 +227,6 @@ def process_data(input_file=input_file, output_file=output_file, trim_leading=Tr
 
 if __name__ == "__main__":
     processed_data = process_data(input_file=input_file, 
-                                  output_file=project_root/"data"/"interim"/"top21_counties_process_fire_2001_2024.csv"
+                                  output_file=project_root/"data"/"interim"/"top21_counties_process_fire_2001_2024.csv",
                                   trim_leading=False)
     print("Processed file")
