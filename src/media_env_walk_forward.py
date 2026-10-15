@@ -530,10 +530,10 @@ def _stem(tag, feature_set, county):
     return f"{tag}__{feature_set}__{county.replace(' ', '')}"
 
 
-def run_parts(data_dir, out_dir, scope="top", feature_sets=FEATURE_SETS, models=MODELS, tag="run"):
-    """Run the walk-forward for a scope ('top', 'remaining', 'all') and save one set of files per county."""
+def run_parts(data_dir, out_dir, scope="top", feature_sets=FEATURE_SETS, models=MODELS, tag="run", counties=None):
+    """Run the walk-forward for a scope ('top', 'remaining', 'all') or an explicit county list; save one set of files per county."""
     top, rest = top_counties(data_dir)
-    counties = {"top": top, "remaining": rest, "all": top + rest}[scope]
+    counties = list(counties) if counties else {"top": top, "remaining": rest, "all": top + rest}[scope]
     parts = Path(out_dir) / "parts"
     parts.mkdir(parents=True, exist_ok=True)
     for fs in feature_sets:
@@ -551,38 +551,52 @@ def run_parts(data_dir, out_dir, scope="top", feature_sets=FEATURE_SETS, models=
             print(f"   done in {r['meta']['runtime_sec']}s", flush=True)
 
 
-def _read_many(paths):
-    frames = [pd.read_csv(p) for p in paths]
-    return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+def _newest_first(paths):
+    return sorted(paths, key=lambda p: Path(p).stat().st_mtime, reverse=True)
 
 
-def combine(data_dir, out_dir, legacy_dir=None):
-    """Merge every part (and optional earlier result files) into the final tables."""
+def _read_if(path):
+    return pd.read_csv(path) if Path(path).exists() else None
+
+
+def _merge(frames, key):
+    """Concatenate (newest first) and keep the first row per key, so newer results override older ones."""
+    frames = [f for f in frames if f is not None and len(f)]
+    if not frames:
+        return pd.DataFrame()
+    return pd.concat(frames, ignore_index=True).drop_duplicates(key, keep="first")
+
+
+def combine(data_dir, out_dir):
+    """
+    Merge new runs (out_dir/parts) INTO the saved results in out_dir.
+
+    Nothing already saved is dropped: rows are matched on (county, feature set, model, horizon, ...)
+    and a newer run replaces an older row with the same key. Running `combine` with no new parts
+    simply rewrites the same tables. To remove a model's results, delete its rows from the CSVs.
+    """
     out_dir = Path(out_dir)
     parts = out_dir / "parts"
     top, rest = top_counties(data_dir)
-    key = ["county", "feature_set", "model", "horizon"]
+    key_m = ["county", "feature_set", "model", "horizon"]
+    key_f = key_m + ["target"]
+    key_i = ["county", "feature_set", "model", "feature"]
 
-    metrics = [_read_many(sorted(parts.glob("*_metrics.csv")))]
-    forecasts = [_read_many(sorted(parts.glob("*_forecasts.csv")))]
-    imps = [_read_many(sorted(parts.glob("*_importance.csv")))]
-    if legacy_dir:
-        L = Path(legacy_dir)
-        for fs in ("media_env", "env_only"):
-            for kind, bag in (("metrics", metrics), ("forecasts", forecasts)):
-                f = L / f"top10_{kind}_{fs}.csv"
-                if f.exists():
-                    bag.append(pd.read_csv(f))
-            f = L / f"top10_feature_importance_{fs}.csv"
-            if f.exists():
-                imps.append(pd.read_csv(f))
-        metrics.append(_read_many(sorted(L.glob("remaining_metrics_*.csv"))))
-        imps.append(_read_many(sorted(L.glob("remaining_importance_*.csv"))))
-    M = pd.concat([m for m in metrics if len(m)], ignore_index=True).drop_duplicates(key)
-    F = pd.concat([f for f in forecasts if len(f)], ignore_index=True)
-    F = F.drop_duplicates(["county", "feature_set", "model", "horizon", "target"])
-    I = pd.concat([i for i in imps if len(i)], ignore_index=True)
-    I = I.drop_duplicates(["county", "feature_set", "model", "feature"])
+    def new(suffix):
+        return [pd.read_csv(p) for p in _newest_first(parts.glob(f"*_{suffix}.csv"))]
+
+    M = _merge(new("metrics")
+               + [_read_if(out_dir / f"top10_metrics_{fs}.csv") for fs in FEATURE_SETS]
+               + [_read_if(out_dir / "remaining_metrics_media_env_all_models.csv")], key_m)
+    F = _merge(new("forecasts") + [_read_if(out_dir / f"top10_forecasts_{fs}.csv") for fs in FEATURE_SETS], key_f)
+    I = _merge(new("importance")
+               + [_read_if(out_dir / f"top10_feature_importance_{fs}.csv") for fs in FEATURE_SETS]
+               + [_read_if(out_dir / "remaining_feature_importance_media_env.csv")], key_i)
+
+    # stable ordering keeps rebuilds identical and git diffs small
+    M = M.sort_values(key_m).reset_index(drop=True)
+    F = F.sort_values(key_f).reset_index(drop=True)
+    I = I.sort_values(key_i).reset_index(drop=True)
 
     summaries = []
     for fs in FEATURE_SETS:
@@ -601,12 +615,10 @@ def combine(data_dir, out_dir, legacy_dir=None):
         top_tab[f"feature_{k + 1}"] = top_tab["top_features"].map(lambda f, k=k: f[k] if len(f) > k else None)
     top_tab.to_csv(out_dir / "top10_best_model_top3.csv", index=False)
 
-    rem_rows = []
-    Mr, Ir = M[(M.feature_set == "media_env") & M.county.isin(rest)], I[(I.feature_set == "media_env") & I.county.isin(rest)]
-    for c in rest:
-        if (Mr.county == c).any():
-            rem_rows.append(summarize_best(dict(metrics=Mr[Mr.county == c], importances=Ir[Ir.county == c],
-                                                meta={"county": c})))
+    Mr = M[(M.feature_set == "media_env") & M.county.isin(rest)]
+    Ir = I[(I.feature_set == "media_env") & I.county.isin(rest)]
+    rem_rows = [summarize_best(dict(metrics=Mr[Mr.county == c], importances=Ir[Ir.county == c], meta={"county": c}))
+                for c in rest if (Mr.county == c).any()]
     rem = pd.DataFrame(rem_rows)
     for k in range(3):
         rem[f"feature_{k + 1}"] = rem["top_features"].map(lambda f, k=k: f[k] if len(f) > k else None)
@@ -615,12 +627,14 @@ def combine(data_dir, out_dir, legacy_dir=None):
             "rmse_1m", "mae_1m", "rmse_3m", "mae_3m", "rmse_6m", "mae_6m"]
     rem[cols].round(4).to_csv(out_dir / "remaining_counties_best_model_top3.csv", index=False)
     Mr.to_csv(out_dir / "remaining_metrics_media_env_all_models.csv", index=False)
+    Ir.to_csv(out_dir / "remaining_feature_importance_media_env.csv", index=False)
 
-    meta = {}
+    meta_path = out_dir / "run_meta.json"
+    meta = json.load(open(meta_path)) if meta_path.exists() else {}
     for f in sorted(parts.glob("*_meta.json")):
         meta[f.stem] = json.load(open(f))
-    json.dump(meta, open(out_dir / "run_meta.json", "w"), indent=2, default=str)
-    print("combined:", len(M), "metric rows;", len(top_tab), "top-10 rows;", len(rem), "remaining counties")
+    json.dump(meta, open(meta_path, "w"), indent=2, default=str)
+    print(f"combined: {len(M)} metric rows, {len(F)} forecast rows, {len(top_tab)} top-10 rows, {len(rem)} remaining counties")
     return M, top_tab, rem
 
 
@@ -628,19 +642,19 @@ if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser(description="Walk-forward forecasting (media + environment)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    r = sub.add_parser("run")
+    r = sub.add_parser("run", help="fit models and save new results to <out-dir>/parts")
     r.add_argument("--data-dir", default="data")
     r.add_argument("--out-dir", default="results/media_env_walk_forward")
     r.add_argument("--scope", choices=["top", "remaining", "all"], default="all")
+    r.add_argument("--counties", nargs="+", default=None, help="explicit county list (overrides --scope)")
     r.add_argument("--feature-sets", nargs="+", default=list(FEATURE_SETS))
     r.add_argument("--models", nargs="+", default=list(MODELS))
-    r.add_argument("--tag", default="run")
-    c = sub.add_parser("combine")
+    r.add_argument("--tag", default="run", help="label for this run; use a new tag per run")
+    c = sub.add_parser("combine", help="merge new runs into the saved results (nothing is dropped)")
     c.add_argument("--data-dir", default="data")
     c.add_argument("--out-dir", default="results/media_env_walk_forward")
-    c.add_argument("--legacy-dir", default=None)
     a = ap.parse_args()
     if a.cmd == "run":
-        run_parts(a.data_dir, a.out_dir, a.scope, a.feature_sets, a.models, a.tag)
+        run_parts(a.data_dir, a.out_dir, a.scope, a.feature_sets, a.models, a.tag, a.counties)
     else:
-        combine(a.data_dir, a.out_dir, a.legacy_dir)
+        combine(a.data_dir, a.out_dir)

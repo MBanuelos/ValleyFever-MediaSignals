@@ -1,0 +1,54 @@
+# Fails a pull request if dashboard.html is out of date with the files it is built from.
+# It only checks. It never commits or changes anything.
+#
+# If it fails:  python build_dashboard.py   then commit the updated dashboard.html
+# (changed result CSVs must be committed too, using: git add -f <file>)
+name: Check dashboard is up to date
+
+on:
+  pull_request:
+    paths:
+      - "dashboard.html"
+      - "dashboard_template.html"
+      - "dashboard_config.json"
+      - "build_dashboard.py"
+      - "requirements.txt"
+      - "src/**"
+      - "results/media_env_walk_forward/**"
+      - "data/interim/Media_per_county.csv"
+      - ".github/workflows/check-dashboard.yml"
+  push:
+    branches: [main]
+    paths:
+      - "dashboard.html"
+      - "dashboard_template.html"
+      - "dashboard_config.json"
+      - "build_dashboard.py"
+      - "requirements.txt"
+      - "src/**"
+      - "results/media_env_walk_forward/**"
+      - "data/interim/Media_per_county.csv"
+      - ".github/workflows/check-dashboard.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild the dashboard in memory and compare with the committed dashboard.html
+        run: python build_dashboard.py --check
