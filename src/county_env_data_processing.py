@@ -182,7 +182,7 @@ def impute_trailing_ets(data, column):
     return data
 
 # takes input and output file path as arguments 
-def process_data(input_file=input_file, output_file=output_file):
+def process_data(input_file=input_file, output_file=output_file, trim_leading=True):
     """
     Run the complete preprocessing pipeline
     Check and validate data (no duplicate or missing values)
@@ -199,9 +199,9 @@ def process_data(input_file=input_file, output_file=output_file):
     print_missing_report(data, "before processing")
 
     # remove months before fire data is available
-    data = trim_leading_fire_data(data)
-
-    print_missing_report(data, "after trimming leading fire data")
+    if trim_leading:
+        data = trim_leading_fire_data(data)
+        print_missing_report(data, "after trimming leading fire data")
 
     # fill inner gaps that have an observed value before and after them
     data = interpolate_internal_missing(data)
@@ -226,5 +226,7 @@ def process_data(input_file=input_file, output_file=output_file):
     return data
 
 if __name__ == "__main__":
-    processed_data = process_data()
+    processed_data = process_data(input_file=input_file, 
+                                  output_file=project_root/"data"/"interim"/"top21_counties_process_fire_2001_2024.csv",
+                                  trim_leading=False)
     print("Processed file")
