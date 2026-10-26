@@ -1,0 +1,381 @@
+county,feature_set,model,feature,importance
+Fresno,media_only,random_forest,AR: recent log-change,0.2589402164024283
+Fresno,media_only,random_forest,AR: same month last year,0.1890614777905342
+Fresno,media_only,random_forest,article_count,0.034613409918019
+Fresno,media_only,random_forest,avg_likes,0.072752884235167
+Fresno,media_only,random_forest,avg_risk,0.071004804737765
+Fresno,media_only,random_forest,avg_sentiment,0.0671335515901909
+Fresno,media_only,random_forest,mean_body_risk,0.0772559023589949
+Fresno,media_only,random_forest,mean_body_sentiment,0.0674005094235521
+Fresno,media_only,random_forest,mean_title_risk,0.0416564842633332
+Fresno,media_only,random_forest,mean_title_sentiment,0.0628020806906119
+Fresno,media_only,random_forest,tweet_count,0.057378678589403
+Fresno,media_only,ridge,AR: recent log-change,0.2765298789450802
+Fresno,media_only,ridge,AR: same month last year,0.2351870899113455
+Fresno,media_only,ridge,article_count,0.0421579342651117
+Fresno,media_only,ridge,avg_likes,0.03904610998773
+Fresno,media_only,ridge,avg_risk,0.0420616452362176
+Fresno,media_only,ridge,avg_sentiment,0.04671708922638
+Fresno,media_only,ridge,mean_body_risk,0.0976444772052359
+Fresno,media_only,ridge,mean_body_sentiment,0.0529603493990579
+Fresno,media_only,ridge,mean_title_risk,0.0594150020785624
+Fresno,media_only,ridge,mean_title_sentiment,0.0476677125356596
+Fresno,media_only,ridge,tweet_count,0.0606127112096188
+Fresno,media_only,sarimax,avg_sentiment,0.1371360833622849
+Fresno,media_only,sarimax,mean_body_risk,0.0762902895592704
+Fresno,media_only,sarimax,mean_title_risk,0.1058693430701676
+Fresno,media_only,sarimax,mean_title_sentiment,0.3699375227408988
+Fresno,media_only,sarimax,tweet_count,0.3107667612673781
+Fresno,media_only,xgboost,AR: recent log-change,0.2546596293315806
+Fresno,media_only,xgboost,AR: same month last year,0.1247299950743177
+Fresno,media_only,xgboost,article_count,0.0534272185320282
+Fresno,media_only,xgboost,avg_likes,0.0730645607185949
+Fresno,media_only,xgboost,avg_risk,0.0717181095635383
+Fresno,media_only,xgboost,avg_sentiment,0.0744079054716679
+Fresno,media_only,xgboost,mean_body_risk,0.0798403655704729
+Fresno,media_only,xgboost,mean_body_sentiment,0.0732024785070987
+Fresno,media_only,xgboost,mean_title_risk,0.0635183610505786
+Fresno,media_only,xgboost,mean_title_sentiment,0.0605044677342041
+Fresno,media_only,xgboost,tweet_count,0.0709269084459175
+Kern,media_only,random_forest,AR: recent log-change,0.2785036208821435
+Kern,media_only,random_forest,AR: same month last year,0.1675114128521662
+Kern,media_only,random_forest,article_count,0.0376059611350627
+Kern,media_only,random_forest,avg_likes,0.060549278214345
+Kern,media_only,random_forest,avg_risk,0.0630642789444383
+Kern,media_only,random_forest,avg_sentiment,0.074132640968556
+Kern,media_only,random_forest,mean_body_risk,0.0688944828866021
+Kern,media_only,random_forest,mean_body_sentiment,0.061512250244464
+Kern,media_only,random_forest,mean_title_risk,0.0471100172580077
+Kern,media_only,random_forest,mean_title_sentiment,0.0798849752290151
+Kern,media_only,random_forest,tweet_count,0.061231081385199
+Kern,media_only,ridge,AR: recent log-change,0.3598865169069126
+Kern,media_only,ridge,AR: same month last year,0.1778295921224868
+Kern,media_only,ridge,article_count,0.0440113304545162
+Kern,media_only,ridge,avg_likes,0.0462205424256134
+Kern,media_only,ridge,avg_risk,0.0304675122444021
+Kern,media_only,ridge,avg_sentiment,0.0645411253723443
+Kern,media_only,ridge,mean_body_risk,0.0575136289985022
+Kern,media_only,ridge,mean_body_sentiment,0.039052867689364
+Kern,media_only,ridge,mean_title_risk,0.0608775062405877
+Kern,media_only,ridge,mean_title_sentiment,0.064217880235884
+Kern,media_only,ridge,tweet_count,0.0553814973093862
+Kern,media_only,sarimax,article_count,0.0739389101505738
+Kern,media_only,sarimax,avg_likes,0.0660082945859166
+Kern,media_only,sarimax,mean_body_sentiment,0.1151993935586945
+Kern,media_only,sarimax,mean_title_sentiment,0.5839378231539128
+Kern,media_only,sarimax,tweet_count,0.1609155785509021
+Kern,media_only,xgboost,AR: recent log-change,0.2595577275986361
+Kern,media_only,xgboost,AR: same month last year,0.136755459058989
+Kern,media_only,xgboost,article_count,0.0550454242127038
+Kern,media_only,xgboost,avg_likes,0.0665232097566065
+Kern,media_only,xgboost,avg_risk,0.0663983392021998
+Kern,media_only,xgboost,avg_sentiment,0.0742303695019607
+Kern,media_only,xgboost,mean_body_risk,0.0631594322408642
+Kern,media_only,xgboost,mean_body_sentiment,0.064105392385105
+Kern,media_only,xgboost,mean_title_risk,0.0702468109702181
+Kern,media_only,xgboost,mean_title_sentiment,0.0727879735458534
+Kern,media_only,xgboost,tweet_count,0.0711898615268629
+Los Angeles,media_only,random_forest,AR: recent log-change,0.2655302699083471
+Los Angeles,media_only,random_forest,AR: same month last year,0.173793256180079
+Los Angeles,media_only,random_forest,article_count,0.0338634706894609
+Los Angeles,media_only,random_forest,avg_likes,0.0650816499901729
+Los Angeles,media_only,random_forest,avg_risk,0.0725400151997858
+Los Angeles,media_only,random_forest,avg_sentiment,0.0744027527430801
+Los Angeles,media_only,random_forest,mean_body_risk,0.0780422749563621
+Los Angeles,media_only,random_forest,mean_body_sentiment,0.0775985848321888
+Los Angeles,media_only,random_forest,mean_title_risk,0.0356082515186106
+Los Angeles,media_only,random_forest,mean_title_sentiment,0.0704480068133859
+Los Angeles,media_only,random_forest,tweet_count,0.0530914671685262
+Los Angeles,media_only,ridge,AR: recent log-change,0.3052272760638944
+Los Angeles,media_only,ridge,AR: same month last year,0.1802705847543188
+Los Angeles,media_only,ridge,article_count,0.0268055352968866
+Los Angeles,media_only,ridge,avg_likes,0.0485097480453586
+Los Angeles,media_only,ridge,avg_risk,0.0521265304538193
+Los Angeles,media_only,ridge,avg_sentiment,0.0438444449310793
+Los Angeles,media_only,ridge,mean_body_risk,0.113237798578128
+Los Angeles,media_only,ridge,mean_body_sentiment,0.0620061406176005
+Los Angeles,media_only,ridge,mean_title_risk,0.0395295590708282
+Los Angeles,media_only,ridge,mean_title_sentiment,0.0730938747389965
+Los Angeles,media_only,ridge,tweet_count,0.0553485074490892
+Los Angeles,media_only,sarimax,article_count,0.0647309305485578
+Los Angeles,media_only,sarimax,avg_likes,0.1085507502139431
+Los Angeles,media_only,sarimax,avg_risk,0.2409057162010032
+Los Angeles,media_only,sarimax,avg_sentiment,0.24923511059534
+Los Angeles,media_only,sarimax,mean_body_risk,0.3365774924411556
+Los Angeles,media_only,xgboost,AR: recent log-change,0.2554261752818699
+Los Angeles,media_only,xgboost,AR: same month last year,0.1150126490655014
+Los Angeles,media_only,xgboost,article_count,0.0493782940438866
+Los Angeles,media_only,xgboost,avg_likes,0.07410057868724
+Los Angeles,media_only,xgboost,avg_risk,0.0806490789280812
+Los Angeles,media_only,xgboost,avg_sentiment,0.0758073481130634
+Los Angeles,media_only,xgboost,mean_body_risk,0.0747058725242799
+Los Angeles,media_only,xgboost,mean_body_sentiment,0.0800813416873669
+Los Angeles,media_only,xgboost,mean_title_risk,0.0625680642257776
+Los Angeles,media_only,xgboost,mean_title_sentiment,0.0607361895286801
+Los Angeles,media_only,xgboost,tweet_count,0.0715344079142526
+Orange,media_only,random_forest,AR: recent log-change,0.303404771976885
+Orange,media_only,random_forest,AR: same month last year,0.0961517054414996
+Orange,media_only,random_forest,article_count,0.0382984461990118
+Orange,media_only,random_forest,avg_likes,0.0749073854146784
+Orange,media_only,random_forest,avg_risk,0.1021525759268992
+Orange,media_only,random_forest,avg_sentiment,0.0681261203422212
+Orange,media_only,random_forest,mean_body_risk,0.0603706097664864
+Orange,media_only,random_forest,mean_body_sentiment,0.0875617980433815
+Orange,media_only,random_forest,mean_title_risk,0.0493027971753746
+Orange,media_only,random_forest,mean_title_sentiment,0.0595040741821632
+Orange,media_only,random_forest,tweet_count,0.0602197155313985
+Orange,media_only,ridge,AR: recent log-change,0.2710905974967916
+Orange,media_only,ridge,AR: same month last year,0.0533980815843625
+Orange,media_only,ridge,article_count,0.1054261957333347
+Orange,media_only,ridge,avg_likes,0.064865469023204
+Orange,media_only,ridge,avg_risk,0.1337353379378717
+Orange,media_only,ridge,avg_sentiment,0.0729779885411881
+Orange,media_only,ridge,mean_body_risk,0.0422580484966358
+Orange,media_only,ridge,mean_body_sentiment,0.0915490104489054
+Orange,media_only,ridge,mean_title_risk,0.0632948796816076
+Orange,media_only,ridge,mean_title_sentiment,0.0327278850998325
+Orange,media_only,ridge,tweet_count,0.0686765059562657
+Orange,media_only,sarimax,article_count,0.2261588684976725
+Orange,media_only,sarimax,avg_risk,0.1008530161442751
+Orange,media_only,sarimax,avg_sentiment,0.3120071766128362
+Orange,media_only,sarimax,mean_body_risk,0.1292470550868255
+Orange,media_only,sarimax,tweet_count,0.2317338836583904
+Orange,media_only,xgboost,AR: recent log-change,0.2710770368499494
+Orange,media_only,xgboost,AR: same month last year,0.0864398711391389
+Orange,media_only,xgboost,article_count,0.049957674649862
+Orange,media_only,xgboost,avg_likes,0.0782571643755362
+Orange,media_only,xgboost,avg_risk,0.0908284714039469
+Orange,media_only,xgboost,avg_sentiment,0.0736487129886613
+Orange,media_only,xgboost,mean_body_risk,0.0651155195242226
+Orange,media_only,xgboost,mean_body_sentiment,0.078765524189248
+Orange,media_only,xgboost,mean_title_risk,0.0706102300701134
+Orange,media_only,xgboost,mean_title_sentiment,0.0562013862101392
+Orange,media_only,xgboost,tweet_count,0.0790984085991816
+Riverside,media_only,random_forest,AR: recent log-change,0.3023689951898567
+Riverside,media_only,random_forest,AR: same month last year,0.0782262144141145
+Riverside,media_only,random_forest,article_count,0.0515271084919186
+Riverside,media_only,random_forest,avg_likes,0.0699698939638531
+Riverside,media_only,random_forest,avg_risk,0.0716060639022478
+Riverside,media_only,random_forest,avg_sentiment,0.0745301145936851
+Riverside,media_only,random_forest,mean_body_risk,0.0777428501771018
+Riverside,media_only,random_forest,mean_body_sentiment,0.0825306472389409
+Riverside,media_only,random_forest,mean_title_risk,0.0395401536553188
+Riverside,media_only,random_forest,mean_title_sentiment,0.0880428275077462
+Riverside,media_only,random_forest,tweet_count,0.0639151308652161
+Riverside,media_only,ridge,AR: recent log-change,0.3714512395095575
+Riverside,media_only,ridge,AR: same month last year,0.0968888769979063
+Riverside,media_only,ridge,article_count,0.0888982343322024
+Riverside,media_only,ridge,avg_likes,0.048768143698622
+Riverside,media_only,ridge,avg_risk,0.0575063900424769
+Riverside,media_only,ridge,avg_sentiment,0.0688458920646816
+Riverside,media_only,ridge,mean_body_risk,0.0755240178154553
+Riverside,media_only,ridge,mean_body_sentiment,0.065408633096992
+Riverside,media_only,ridge,mean_title_risk,0.0380895434450102
+Riverside,media_only,ridge,mean_title_sentiment,0.0412907700597102
+Riverside,media_only,ridge,tweet_count,0.0473282589373854
+Riverside,media_only,sarimax,avg_likes,0.0970000567351008
+Riverside,media_only,sarimax,avg_risk,0.117966358985329
+Riverside,media_only,sarimax,mean_body_risk,0.2531222844893864
+Riverside,media_only,sarimax,mean_body_sentiment,0.4105846944164267
+Riverside,media_only,sarimax,tweet_count,0.1213266053737571
+Riverside,media_only,xgboost,AR: recent log-change,0.2708621507035819
+Riverside,media_only,xgboost,AR: same month last year,0.0800409836305752
+Riverside,media_only,xgboost,article_count,0.0555719748111114
+Riverside,media_only,xgboost,avg_likes,0.0786642318843474
+Riverside,media_only,xgboost,avg_risk,0.0769838931156009
+Riverside,media_only,xgboost,avg_sentiment,0.0762701000281836
+Riverside,media_only,xgboost,mean_body_risk,0.0765399309316259
+Riverside,media_only,xgboost,mean_body_sentiment,0.0721070398646086
+Riverside,media_only,xgboost,mean_title_risk,0.0669723727957893
+Riverside,media_only,xgboost,mean_title_sentiment,0.0677060034042777
+Riverside,media_only,xgboost,tweet_count,0.0782813188302978
+San Diego,media_only,random_forest,AR: recent log-change,0.3302494285938416
+San Diego,media_only,random_forest,AR: same month last year,0.0980891108387699
+San Diego,media_only,random_forest,article_count,0.0371979733149717
+San Diego,media_only,random_forest,avg_likes,0.0755024112046195
+San Diego,media_only,random_forest,avg_risk,0.0626741821861562
+San Diego,media_only,random_forest,avg_sentiment,0.0583883182753278
+San Diego,media_only,random_forest,mean_body_risk,0.0793211565585768
+San Diego,media_only,random_forest,mean_body_sentiment,0.0692049113421945
+San Diego,media_only,random_forest,mean_title_risk,0.0434916581123408
+San Diego,media_only,random_forest,mean_title_sentiment,0.0794539392857935
+San Diego,media_only,random_forest,tweet_count,0.0664269102874073
+San Diego,media_only,ridge,AR: recent log-change,0.2979339353508777
+San Diego,media_only,ridge,AR: same month last year,0.1017281250590131
+San Diego,media_only,ridge,article_count,0.080715429630734
+San Diego,media_only,ridge,avg_likes,0.0656148790165001
+San Diego,media_only,ridge,avg_risk,0.0664147180869585
+San Diego,media_only,ridge,avg_sentiment,0.0325764878260348
+San Diego,media_only,ridge,mean_body_risk,0.080572243929798
+San Diego,media_only,ridge,mean_body_sentiment,0.0772113099816021
+San Diego,media_only,ridge,mean_title_risk,0.065452174956162
+San Diego,media_only,ridge,mean_title_sentiment,0.0811574536178178
+San Diego,media_only,ridge,tweet_count,0.0506232425445015
+San Diego,media_only,sarimax,avg_likes,0.1246323500918464
+San Diego,media_only,sarimax,mean_body_risk,0.1919128335037021
+San Diego,media_only,sarimax,mean_body_sentiment,0.3144296644211725
+San Diego,media_only,sarimax,mean_title_risk,0.2152739578420872
+San Diego,media_only,sarimax,tweet_count,0.1537511941411918
+San Diego,media_only,xgboost,AR: recent log-change,0.2692882816462855
+San Diego,media_only,xgboost,AR: same month last year,0.0873844485738653
+San Diego,media_only,xgboost,article_count,0.050129776279085
+San Diego,media_only,xgboost,avg_likes,0.0830293318568502
+San Diego,media_only,xgboost,avg_risk,0.0770938714127284
+San Diego,media_only,xgboost,avg_sentiment,0.0722111869563761
+San Diego,media_only,xgboost,mean_body_risk,0.0763941582407814
+San Diego,media_only,xgboost,mean_body_sentiment,0.0734313264730679
+San Diego,media_only,xgboost,mean_title_risk,0.0656768858069123
+San Diego,media_only,xgboost,mean_title_sentiment,0.0659767272742821
+San Diego,media_only,xgboost,tweet_count,0.0793840054797652
+San Joaquin,media_only,random_forest,AR: recent log-change,0.2486780063864985
+San Joaquin,media_only,random_forest,AR: same month last year,0.0967038662131251
+San Joaquin,media_only,random_forest,article_count,0.0482264955281113
+San Joaquin,media_only,random_forest,avg_likes,0.0738748277076989
+San Joaquin,media_only,random_forest,avg_risk,0.0769915686335345
+San Joaquin,media_only,random_forest,avg_sentiment,0.0787224285259204
+San Joaquin,media_only,random_forest,mean_body_risk,0.0753699619361136
+San Joaquin,media_only,random_forest,mean_body_sentiment,0.0912422428224945
+San Joaquin,media_only,random_forest,mean_title_risk,0.0486525409567197
+San Joaquin,media_only,random_forest,mean_title_sentiment,0.0810125587254655
+San Joaquin,media_only,random_forest,tweet_count,0.0805255025643175
+San Joaquin,media_only,ridge,AR: recent log-change,0.232892865860594
+San Joaquin,media_only,ridge,AR: same month last year,0.1097183976160769
+San Joaquin,media_only,ridge,article_count,0.0923671203420787
+San Joaquin,media_only,ridge,avg_likes,0.0772615762987913
+San Joaquin,media_only,ridge,avg_risk,0.0506780024027269
+San Joaquin,media_only,ridge,avg_sentiment,0.0520456724837107
+San Joaquin,media_only,ridge,mean_body_risk,0.0969748947030803
+San Joaquin,media_only,ridge,mean_body_sentiment,0.0981116615975431
+San Joaquin,media_only,ridge,mean_title_risk,0.0525009308337131
+San Joaquin,media_only,ridge,mean_title_sentiment,0.0975479682286893
+San Joaquin,media_only,ridge,tweet_count,0.0399009096329953
+San Joaquin,media_only,sarimax,avg_likes,0.1174726664003756
+San Joaquin,media_only,sarimax,avg_sentiment,0.0716888144384091
+San Joaquin,media_only,sarimax,mean_body_risk,0.35993009934451
+San Joaquin,media_only,sarimax,mean_body_sentiment,0.1412982414298181
+San Joaquin,media_only,sarimax,mean_title_sentiment,0.3096101783868873
+San Joaquin,media_only,xgboost,AR: recent log-change,0.2466000132768504
+San Joaquin,media_only,xgboost,AR: same month last year,0.1019832639261148
+San Joaquin,media_only,xgboost,article_count,0.0514945505658484
+San Joaquin,media_only,xgboost,avg_likes,0.0730616356360319
+San Joaquin,media_only,xgboost,avg_risk,0.0728305703467646
+San Joaquin,media_only,xgboost,avg_sentiment,0.0832404900553933
+San Joaquin,media_only,xgboost,mean_body_risk,0.0681134811605062
+San Joaquin,media_only,xgboost,mean_body_sentiment,0.0802117924781724
+San Joaquin,media_only,xgboost,mean_title_risk,0.0670866297630054
+San Joaquin,media_only,xgboost,mean_title_sentiment,0.0689664362703648
+San Joaquin,media_only,xgboost,tweet_count,0.0864111365209474
+San Luis Obispo,media_only,random_forest,AR: recent log-change,0.2707503191423722
+San Luis Obispo,media_only,random_forest,AR: same month last year,0.1189822044108396
+San Luis Obispo,media_only,random_forest,article_count,0.0343463506479943
+San Luis Obispo,media_only,random_forest,avg_likes,0.0590275995506256
+San Luis Obispo,media_only,random_forest,avg_risk,0.073245456167047
+San Luis Obispo,media_only,random_forest,avg_sentiment,0.0749806402111763
+San Luis Obispo,media_only,random_forest,mean_body_risk,0.1073825555116201
+San Luis Obispo,media_only,random_forest,mean_body_sentiment,0.0989716275584699
+San Luis Obispo,media_only,random_forest,mean_title_risk,0.0360121981388073
+San Luis Obispo,media_only,random_forest,mean_title_sentiment,0.0712918384812607
+San Luis Obispo,media_only,random_forest,tweet_count,0.0550092101797864
+San Luis Obispo,media_only,ridge,AR: recent log-change,0.2334848735716147
+San Luis Obispo,media_only,ridge,AR: same month last year,0.1837240398767677
+San Luis Obispo,media_only,ridge,article_count,0.0897567875459274
+San Luis Obispo,media_only,ridge,avg_likes,0.0272095404923501
+San Luis Obispo,media_only,ridge,avg_risk,0.0603984197175054
+San Luis Obispo,media_only,ridge,avg_sentiment,0.0361626559184614
+San Luis Obispo,media_only,ridge,mean_body_risk,0.1352656345243665
+San Luis Obispo,media_only,ridge,mean_body_sentiment,0.0750307413424453
+San Luis Obispo,media_only,ridge,mean_title_risk,0.0458718614748626
+San Luis Obispo,media_only,ridge,mean_title_sentiment,0.0563653310701103
+San Luis Obispo,media_only,ridge,tweet_count,0.0567301144655879
+San Luis Obispo,media_only,sarimax,article_count,0.4202914261714189
+San Luis Obispo,media_only,sarimax,avg_sentiment,0.1026259505411164
+San Luis Obispo,media_only,sarimax,mean_body_risk,0.2932617628755655
+San Luis Obispo,media_only,sarimax,mean_body_sentiment,0.0422599523888159
+San Luis Obispo,media_only,sarimax,tweet_count,0.1415609080230831
+San Luis Obispo,media_only,xgboost,AR: recent log-change,0.2623318240825637
+San Luis Obispo,media_only,xgboost,AR: same month last year,0.0926229300538781
+San Luis Obispo,media_only,xgboost,article_count,0.0463003509991296
+San Luis Obispo,media_only,xgboost,avg_likes,0.0774959213845401
+San Luis Obispo,media_only,xgboost,avg_risk,0.0726654939123825
+San Luis Obispo,media_only,xgboost,avg_sentiment,0.0815282171931104
+San Luis Obispo,media_only,xgboost,mean_body_risk,0.0822005051756817
+San Luis Obispo,media_only,xgboost,mean_body_sentiment,0.0834522850415804
+San Luis Obispo,media_only,xgboost,mean_title_risk,0.0671795825071201
+San Luis Obispo,media_only,xgboost,mean_title_sentiment,0.0605769311045743
+San Luis Obispo,media_only,xgboost,tweet_count,0.0736459585454386
+Tulare,media_only,random_forest,AR: recent log-change,0.2935303389858537
+Tulare,media_only,random_forest,AR: same month last year,0.0918991026779334
+Tulare,media_only,random_forest,article_count,0.0406113094537403
+Tulare,media_only,random_forest,avg_likes,0.0828387937469678
+Tulare,media_only,random_forest,avg_risk,0.0745606330330219
+Tulare,media_only,random_forest,avg_sentiment,0.0687365922846395
+Tulare,media_only,random_forest,mean_body_risk,0.0701158184004204
+Tulare,media_only,random_forest,mean_body_sentiment,0.0843718951617311
+Tulare,media_only,random_forest,mean_title_risk,0.0482363322726967
+Tulare,media_only,random_forest,mean_title_sentiment,0.0827748146985819
+Tulare,media_only,random_forest,tweet_count,0.0623243692844129
+Tulare,media_only,ridge,AR: recent log-change,0.3120208018391504
+Tulare,media_only,ridge,AR: same month last year,0.0788431515524145
+Tulare,media_only,ridge,article_count,0.0705599512432783
+Tulare,media_only,ridge,avg_likes,0.0410528560539284
+Tulare,media_only,ridge,avg_risk,0.056321128414885
+Tulare,media_only,ridge,avg_sentiment,0.0723117588111821
+Tulare,media_only,ridge,mean_body_risk,0.1117105749143439
+Tulare,media_only,ridge,mean_body_sentiment,0.0768011999213029
+Tulare,media_only,ridge,mean_title_risk,0.0554261227091319
+Tulare,media_only,ridge,mean_title_sentiment,0.0815150264748856
+Tulare,media_only,ridge,tweet_count,0.0434374280654967
+Tulare,media_only,sarimax,avg_risk,0.2086910203651485
+Tulare,media_only,sarimax,avg_sentiment,0.3842629837279357
+Tulare,media_only,sarimax,mean_body_risk,0.1580928176892994
+Tulare,media_only,sarimax,mean_body_sentiment,0.1541011697425392
+Tulare,media_only,sarimax,mean_title_sentiment,0.0948520084750771
+Tulare,media_only,xgboost,AR: recent log-change,0.2522323439950573
+Tulare,media_only,xgboost,AR: same month last year,0.0815940387249627
+Tulare,media_only,xgboost,article_count,0.0659299411533367
+Tulare,media_only,xgboost,avg_likes,0.0802612578244729
+Tulare,media_only,xgboost,avg_risk,0.0764634877640359
+Tulare,media_only,xgboost,avg_sentiment,0.0712767483213289
+Tulare,media_only,xgboost,mean_body_risk,0.0697913307608069
+Tulare,media_only,xgboost,mean_body_sentiment,0.0792410685237845
+Tulare,media_only,xgboost,mean_title_risk,0.0750177409337822
+Tulare,media_only,xgboost,mean_title_sentiment,0.0740134880428686
+Tulare,media_only,xgboost,tweet_count,0.0741785539555627
+Ventura,media_only,random_forest,AR: recent log-change,0.2545896836216886
+Ventura,media_only,random_forest,AR: same month last year,0.1325508897534153
+Ventura,media_only,random_forest,article_count,0.0442678200179549
+Ventura,media_only,random_forest,avg_likes,0.057145137361682
+Ventura,media_only,random_forest,avg_risk,0.0692949428208625
+Ventura,media_only,random_forest,avg_sentiment,0.0644958436753253
+Ventura,media_only,random_forest,mean_body_risk,0.0734899134134746
+Ventura,media_only,random_forest,mean_body_sentiment,0.0841239827368448
+Ventura,media_only,random_forest,mean_title_risk,0.0555176892243491
+Ventura,media_only,random_forest,mean_title_sentiment,0.0919444321645026
+Ventura,media_only,random_forest,tweet_count,0.0725796652098999
+Ventura,media_only,ridge,AR: recent log-change,0.2948699079220867
+Ventura,media_only,ridge,AR: same month last year,0.181956942740525
+Ventura,media_only,ridge,article_count,0.0567398135106753
+Ventura,media_only,ridge,avg_likes,0.0447461998588979
+Ventura,media_only,ridge,avg_risk,0.0475787627398778
+Ventura,media_only,ridge,avg_sentiment,0.0435177099793471
+Ventura,media_only,ridge,mean_body_risk,0.0920592528986863
+Ventura,media_only,ridge,mean_body_sentiment,0.0504968938569396
+Ventura,media_only,ridge,mean_title_risk,0.0580126380359032
+Ventura,media_only,ridge,mean_title_sentiment,0.0696647133602879
+Ventura,media_only,ridge,tweet_count,0.0603571650967725
+Ventura,media_only,sarimax,avg_risk,0.2484985924422743
+Ventura,media_only,sarimax,avg_sentiment,0.4082702755675493
+Ventura,media_only,sarimax,mean_body_risk,0.132640734236406
+Ventura,media_only,sarimax,mean_body_sentiment,0.1331525160125745
+Ventura,media_only,sarimax,mean_title_risk,0.0774378817411955
+Ventura,media_only,xgboost,AR: recent log-change,0.2501156627755169
+Ventura,media_only,xgboost,AR: same month last year,0.1021833489360021
+Ventura,media_only,xgboost,article_count,0.0545670996968462
+Ventura,media_only,xgboost,avg_likes,0.0699728589713575
+Ventura,media_only,xgboost,avg_risk,0.075176806786639
+Ventura,media_only,xgboost,avg_sentiment,0.0737265999194962
+Ventura,media_only,xgboost,mean_body_risk,0.0698962715271958
+Ventura,media_only,xgboost,mean_body_sentiment,0.0791904267123629
+Ventura,media_only,xgboost,mean_title_risk,0.0699762862457275
+Ventura,media_only,xgboost,mean_title_sentiment,0.0680608545078125
+Ventura,media_only,xgboost,tweet_count,0.0871337839210426
