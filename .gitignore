@@ -14,3 +14,10 @@ Thumbs.db
 # generated project outputs
 results/*
 !results/.gitkeep
+
+# Claude Code local settings & private data
+.claude/settings.local.json
+.claude/sessions/
+.claude/todos/
+.claude/scheduled_tasks.*
+.claude/worktrees/
