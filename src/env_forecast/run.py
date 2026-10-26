@@ -2,7 +2,7 @@
 Command-line entry point.
 
     python -m src.env_forecast.run --config configs/env_baseline.json [--counties Fresno Kern]
-                                   [--development-only] [--n-jobs 4]
+                                   [--development-only] [--n-jobs 4] [--models xgboost] [--seed 7]
 
 Writes results/env/<experiment_id>/ with predictions.csv, metrics.csv, contrasts.csv,
 config.json and provenance.json. The experiment id is the config name plus a hash of the
@@ -94,11 +94,17 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--output-root", help="Override the output folder (default: config output_dir).")
     parser.add_argument("--development-only", action="store_true", help="Forecast only targets before confirmation_start.")
     parser.add_argument("--n-jobs", type=int, default=1, help="Counties run in parallel (-1 = all cores).")
+    parser.add_argument("--models", nargs="+", help="Override the configured models.")
+    parser.add_argument("--seed", type=int, help="Override the configured seed.")
     args = parser.parse_args(argv)
 
     config = HarnessConfig.from_json(args.config)
     if args.counties:
         config = dataclasses.replace(config, counties=tuple(args.counties))
+    if args.models:
+        config = dataclasses.replace(config, models=tuple(args.models))
+    if args.seed is not None:
+        config = dataclasses.replace(config, seed=args.seed)
     if args.development_only:
         config = development_only(config)
     output_dir = run_experiment(config, args.output_root, args.n_jobs)
