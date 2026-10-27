@@ -1,0 +1,13 @@
+{
+  "_comment": "Paper model set. Baselines: LR (ridge, penalty chosen by in-window time-series CV; with R inputs = AR(12)) and SARIMA/SARIMAX (regressors lagged h + availability lag). Test models: XGBoost and LSTM, each with R/E/RE. References: seasonal naive, climatology. Pesticides excluded (see paper/pesticide_test_2026-10-26.md).",
+  "extends": "env_baseline.json",
+  "name": "env_main",
+  "env_families": {"ag_chemicals": null},
+  "models": ["seasonal_naive", "climatology", "lr", "sarima", "sarimax", "xgboost", "lstm"],
+  "model_params": {
+    "ridge": null,
+    "lr": {"cv_splits": 5, "log_target": false},
+    "lstm": {"lookback": 12, "hidden_size": 8, "num_layers": 1, "dropout": 0.2, "learning_rate": 0.001, "weight_decay": 1e-05,
+             "batch_size": 32, "max_epochs": 300, "patience": 30, "validation_fraction": 0.2, "refit_full": true, "log_target": false}
+  }
+}

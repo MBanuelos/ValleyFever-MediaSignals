@@ -40,7 +40,9 @@ panel ──mask_history(t)──▶ history ──build_design(h)──▶ Desi
 | `data.py` | `load_panel` / `panel_from_frame` (validation, optional *causal* forward fill), `mask_history`. |
 | `features.py` | `build_design`: rate lags, same-month-last-year (only if published and not a duplicate lag), environmental lags and rolling means, target-month sin/cos. Defines feature sets `R`, `E`, `RE`. |
 | `tasks.py` | `ForecastTask`: the only thing a model sees. |
-| `models.py` | `ForecastModel` protocol, baselines (`seasonal_naive`, `persistence`, `climatology`), `TabularModel`, `Sarima`, and the `MODEL_BUILDERS` registry (`linear`, `ridge`, `sarima`, `xgboost`). |
+| `models.py` | `ForecastModel` protocol; baselines (`seasonal_naive`, `persistence`, `climatology`); `TabularModel`; `Sarima` / `Sarimax`; the `MODEL_BUILDERS` registry (`linear`, `ridge`, `lr`, `sarima`, `sarimax`, `xgboost`, `lstm`). |
+| `lstm.py` | `LSTMModel`: a direct network for each horizon. Inputs are monthly rows, each variable shifted by its own publication delay; scaling comes from training data only; early stopping, then a refit on all training sequences. Torch is imported only when an LSTM is requested. |
+| `imputation.py` | Origin-consistent Holt–Winters forward fill for late-published families (`forecast_fill: "ets"`). |
 | `harness.py` | `run_county` / `run_panel`: the loop over county × horizon × target × model × feature set. `n_jobs` runs counties in parallel with results identical to a serial run. |
 | `metrics.py` | `summarize` (RMSE/MAE/bias, skill vs the reference on paired targets), `paired_contrasts` (feature set A vs B per model, Diebold–Mariano with HLN correction and Newey–West h−1 lags), `diebold_mariano`. |
 | `run.py` | CLI. Writes `results/env/<experiment_id>/`. |
@@ -105,6 +107,17 @@ Whatever a model does internally, it cannot see beyond the task, so the invarian
 
 `experiment_id = <name>_<config hash>`, so an unchanged config always writes to the same folder.
 
+## Paper model set (`configs/env_main.json`)
+
+| Role | Model | Inputs |
+|---|---|---|
+| Reference | `seasonal_naive` (skill = 0), `climatology` | — |
+| Baseline | `lr`: ridge regression with the penalty chosen by TimeSeriesSplit CV inside each training window. With R it uses only the 12 rate lags, i.e. **AR(12)**. | R, E, RE |
+| Baseline | `sarima` (R) and `sarimax` (RE): each regressor enters as x[m − (h + availability lag)], so no unpublished value is used; one fit per horizon | R / RE |
+| Test | `xgboost`, `lstm` | R, E, RE |
+
+Configs can inherit from one another with `"extends": "<relative path>"`; a `null` value removes the inherited key (e.g. `"ag_chemicals": null`).
+
 ## Running
 
 From the project root, in the project venv (`.venv313`):
@@ -158,7 +171,20 @@ The synthetic panel stores, in every cell, the position of its own month, so eve
 
 Mutation check: deliberately introducing an off-by-one label window, an unmasked environmental delay, or an off-by-one rate lag makes 7, 2 and 13 tests fail respectively.
 
+Analysis scripts (run after the matching harness runs; each writes under `results/env/`):
+
+| Script | What it compares |
+|---|---|
+| `scripts/env_model_comparison.py` | Paper model set: skill, input contrasts, nonlinear vs linear |
+| `scripts/env_case_lag_check.py` | Case-lag sensitivity |
+| `scripts/env_seed_check.py` | XGBoost seed stability |
+| `scripts/env_pesticide_check.py` | Pesticide variants |
+
 ## Known limitations
+
+- Rolling means are computed from each window's own values (`features.window_mean`). pandas' running-sum rolling mean let rounding from older months reach later values, which moved SARIMAX fits.
+- The LSTM uses raw shifted columns for every family. It does not use `forecast_fill`.
+- Development-tuned settings are in `configs/env_main_tuned.json`: SARIMA(X) orders per county chosen by AIC, and LSTM settings chosen from a small grid (`scripts/env_tune_dev.py`; results in `paper/model_comparison_dev_2026-10-26.md` §5). Orders are fixed per county, not re-selected at each origin.
 
 - Values are the *current vintage*. Revisions to past case counts are not modelled; availability lags approximate reporting delay only.
 - Availability lags in `configs/env_baseline.json` are assumptions to verify (audit section D2).

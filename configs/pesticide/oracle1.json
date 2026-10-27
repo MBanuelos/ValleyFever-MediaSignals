@@ -1,0 +1,7 @@
+{
+  "_comment": "Pesticide test, RETROSPECTIVE ONLY (not operationally available): pesticide values with a 1-month delay, plus 12-month mean.",
+  "extends": "../env_baseline.json",
+  "name": "pest_oracle1",
+  "models": ["seasonal_naive", "ridge", "xgboost"],
+  "env_families": {"ag_chemicals": {"columns": ["fungicide_lbs_prd_used", "rodent_lbs_prd_used"], "availability_lag": 1, "lags": [0], "rolling_means": [12]}}
+}

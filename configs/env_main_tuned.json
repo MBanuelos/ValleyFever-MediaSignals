@@ -1,0 +1,229 @@
+{
+  "_comment": "env_main with development-tuned settings. SARIMA/SARIMAX orders: lowest mean AIC per county over training windows ending 2016-12..2019-12 (scripts/env_tune_dev.py sarima-orders); SARIMAX reuses SARIMA's order. LSTM: best of the development grid (scripts/env_tune_dev.py lstm-grid, results/env/tuning/lstm_grid.csv); dropout 0.3 vs 0.1 differed by 0.002 in score, below seed noise.",
+  "extends": "env_main.json",
+  "name": "env_main_tuned",
+  "model_params": {
+    "sarima": {
+      "county_orders": {
+        "Fresno": {
+          "order": [
+            1,
+            0,
+            0
+          ],
+          "seasonal_order": [
+            0,
+            0,
+            1,
+            12
+          ]
+        },
+        "Kern": {
+          "order": [
+            2,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            0,
+            0,
+            0,
+            12
+          ]
+        },
+        "Los Angeles": {
+          "order": [
+            1,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            0,
+            12
+          ]
+        },
+        "Orange": {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            0,
+            12
+          ]
+        },
+        "San Diego": {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            0,
+            0,
+            0,
+            12
+          ]
+        },
+        "San Luis Obispo": {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            1,
+            12
+          ]
+        },
+        "Tulare": {
+          "order": [
+            1,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            0,
+            12
+          ]
+        },
+        "Ventura": {
+          "order": [
+            2,
+            0,
+            0
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            0,
+            12
+          ]
+        }
+      }
+    },
+    "sarimax": {
+      "county_orders": {
+        "Fresno": {
+          "order": [
+            1,
+            0,
+            0
+          ],
+          "seasonal_order": [
+            0,
+            0,
+            1,
+            12
+          ]
+        },
+        "Kern": {
+          "order": [
+            2,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            0,
+            0,
+            0,
+            12
+          ]
+        },
+        "Los Angeles": {
+          "order": [
+            1,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            0,
+            12
+          ]
+        },
+        "Orange": {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            0,
+            12
+          ]
+        },
+        "San Diego": {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            0,
+            0,
+            0,
+            12
+          ]
+        },
+        "San Luis Obispo": {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            1,
+            12
+          ]
+        },
+        "Tulare": {
+          "order": [
+            1,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            0,
+            12
+          ]
+        },
+        "Ventura": {
+          "order": [
+            2,
+            0,
+            0
+          ],
+          "seasonal_order": [
+            1,
+            0,
+            0,
+            12
+          ]
+        }
+      }
+    },
+    "lstm": {
+      "lookback": 24,
+      "hidden_size": 32,
+      "dropout": 0.3,
+      "learning_rate": 0.003
+    }
+  }
+}

@@ -37,6 +37,14 @@ def random_panel(seed: int = 0) -> dict[str, pd.DataFrame]:
     return {"A": frame, "B": frame * 1.7 + 0.3}
 
 
+ALL_MODELS = ("seasonal_naive", "persistence", "climatology", "linear", "ridge", "lr", "sarima", "sarimax", "xgboost", "lstm")
+FAST_MODEL_PARAMS = {
+    "xgboost": {"params": {"n_estimators": 40}},
+    "lstm": {"max_epochs": 15, "patience": 5},
+    "sarimax": {"exog": [{"column": "w1", "rolling_mean": 3}, {"column": "f1", "log1p": True}]},
+}
+
+
 def make_config(**overrides) -> HarnessConfig:
     settings = dict(
         name="synthetic", counties=(), target_col="rate", window_months=120, horizons=(1, 3, 6),

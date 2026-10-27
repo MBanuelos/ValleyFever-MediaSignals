@@ -1,0 +1,7 @@
+{
+  "_comment": "Pesticide test: no fungicide/rodenticide features.",
+  "extends": "../env_baseline.json",
+  "name": "pest_none",
+  "models": ["seasonal_naive", "ridge", "xgboost"],
+  "env_families": {"ag_chemicals": null}
+}

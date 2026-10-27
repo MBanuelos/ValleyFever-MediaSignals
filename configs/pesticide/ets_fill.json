@@ -1,0 +1,7 @@
+{
+  "_comment": "Pesticide test: data released up to a 36-month delay, gap to last month filled by Holt-Winters ETS fitted per origin on the last 72 available months.",
+  "extends": "../env_baseline.json",
+  "name": "pest_ets_fill",
+  "models": ["seasonal_naive", "ridge", "xgboost"],
+  "env_families": {"ag_chemicals": {"columns": ["fungicide_lbs_prd_used", "rodent_lbs_prd_used"], "availability_lag": 36, "lags": [0], "rolling_means": [12], "forecast_fill": "ets", "fill_lag": 1, "fill_window": 72}}
+}

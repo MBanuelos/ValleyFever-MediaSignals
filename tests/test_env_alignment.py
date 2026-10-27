@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from conftest import MONTHS, decode_month, encoded_panel, make_config, random_panel
+from conftest import ALL_MODELS, FAST_MODEL_PARAMS, MONTHS, decode_month, encoded_panel, make_config, random_panel
 from src.env_forecast import (
     PREDICTION_COLUMNS, FeatureBlock, RateSpec, build_design, build_models, diebold_mariano, mask_history,
     run_panel, summarize, training_rows,
@@ -127,7 +127,6 @@ def test_all_models_horizons_and_feature_sets_share_target_months(config):
     assert (predictions["train_end"] == predictions["rate_info_cutoff"]).all()
 
 
-ALL_MODELS = ("seasonal_naive", "persistence", "climatology", "linear", "ridge", "sarima", "xgboost")
 
 
 @pytest.mark.parametrize("horizon", [1, 3, 6])
@@ -136,7 +135,8 @@ def test_predictions_ignore_every_value_published_after_the_origin(horizon):
     target = pd.Period("2019-07", "M")
     origin = target - horizon
     config = make_config(horizons=(horizon,), eval_start=str(target), eval_end=str(target), models=ALL_MODELS,
-                         model_params={"ridge": {"alpha": 3.0, "log_target": True}, "xgboost": {"log_target": True, "params": {"n_estimators": 40}}})
+                         model_params={**FAST_MODEL_PARAMS, "ridge": {"alpha": 3.0, "log_target": True},
+                                       "xgboost": {"log_target": True, "params": {"n_estimators": 40}}, "lr": {"log_target": True}})
     panel = random_panel()
     perturbed = {county: frame.copy() for county, frame in panel.items()}
     for frame in perturbed.values():

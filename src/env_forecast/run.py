@@ -96,6 +96,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--n-jobs", type=int, default=1, help="Counties run in parallel (-1 = all cores).")
     parser.add_argument("--models", nargs="+", help="Override the configured models.")
     parser.add_argument("--seed", type=int, help="Override the configured seed.")
+    parser.add_argument("--case-lag", type=int, help="Override the case-rate availability lag (months), for sensitivity runs.")
     args = parser.parse_args(argv)
 
     config = HarnessConfig.from_json(args.config)
@@ -105,6 +106,9 @@ def main(argv: list[str] | None = None) -> None:
         config = dataclasses.replace(config, models=tuple(args.models))
     if args.seed is not None:
         config = dataclasses.replace(config, seed=args.seed)
+    if args.case_lag is not None:
+        config = dataclasses.replace(config, name=f"{config.name}_caselag{args.case_lag}",
+                                     rate=dataclasses.replace(config.rate, availability_lag=args.case_lag))
     if args.development_only:
         config = development_only(config)
     output_dir = run_experiment(config, args.output_root, args.n_jobs)

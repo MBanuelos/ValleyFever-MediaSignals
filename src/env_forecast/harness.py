@@ -21,7 +21,8 @@ PREDICTION_COLUMNS = [
 
 
 def evaluation_targets(config: HarnessConfig) -> pd.PeriodIndex:
-    return pd.period_range(config.eval_start, config.eval_end, freq="M")
+    """Target months in [eval_start, eval_end]; eval_step > 1 thins them (used only for cheap tuning screens)."""
+    return pd.period_range(config.eval_start, config.eval_end, freq="M")[::config.eval_step]
 
 
 def period_label(target: pd.Period, config: HarnessConfig) -> str:
