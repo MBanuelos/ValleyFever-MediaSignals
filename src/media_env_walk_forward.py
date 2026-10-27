@@ -55,8 +55,13 @@ HORIZONS = (1, 3, 6)
 MAX_STEP = max(HORIZONS)
 MEDIA_START = pd.Period("2011-01", "M")       # first month with media data
 FIRST_TARGET = pd.Period("2011-02", "M")      # first month with a log-difference
-MODELS = ("seasonal_naive", "ridge", "random_forest", "xgboost", "sarimax", "lstm")
+MODELS = ("seasonal_naive", "no_change", "ridge", "random_forest", "xgboost", "sarimax", "lstm")
+BASELINES = ("seasonal_naive", "no_change")      # never chosen as the "best model"
 FEATURE_SETS = ("env_only", "media_only", "media_env")
+DIAGNOSTIC_SETS = ("ar_only",)                  # history-only check; saved but not shown as a dashboard dropdown
+# Counties left out of every calculation, with the reason shown on the dashboard
+EXCLUDED_BY_REQUEST = {"San Mateo": "excluded by request", "Alameda": "excluded by request"}
+MISSING_SHARE_LIMIT = 0.5                       # exclude a county if more than this share of its environmental data is missing
 LSTM_LOOKBACK = 6
 SARIMAX_K = 5
 
@@ -79,10 +84,36 @@ SEASONAL_GROUP = "AR: same month last year"
 # --------------------------------------------------------------------------- #
 # Data
 # --------------------------------------------------------------------------- #
+def missing_data_report(data_dir):
+    """Per county, 2011-2024: share of environmental values missing, the worst column, and the share of zero-case months."""
+    env = pd.read_csv(Path(data_dir) / "processed" / "env_vf_aggregate" / "aggregate_all_counties_2001_2024.csv")
+    env["date"] = pd.PeriodIndex(env["Year-Month"], freq="M")
+    env = env[env["date"] >= MEDIA_START]
+    rows = []
+    for county, g in env.groupby("County"):
+        miss = g[ENV_COLS].isna().mean()
+        rows.append(dict(county=county, months=len(g),
+                         env_missing_share=float(g[ENV_COLS].isna().to_numpy().mean()),
+                         worst_column=miss.idxmax(), worst_column_missing_share=float(miss.max()),
+                         zero_case_month_share=float((g["rate_per_100k"] == 0).mean())))
+    return pd.DataFrame(rows).set_index("county")
+
+
+def excluded_counties(data_dir, limit=MISSING_SHARE_LIMIT):
+    """{county: reason} for counties left out: those excluded by request plus any with mostly missing environmental data."""
+    out = dict(EXCLUDED_BY_REQUEST)
+    rep = missing_data_report(data_dir)
+    for county, r in rep.iterrows():
+        if r["env_missing_share"] > limit and county not in out:
+            out[county] = f"{r['env_missing_share']:.0%} of environmental data missing"
+    return out
+
+
 def top_counties(data_dir, n=10):
-    """Rank counties by total Valley Fever cases (2011-2024) and split top-n / remaining."""
+    """Rank counties by total Valley Fever cases (2011-2024) and split top-n / other (excluded counties removed)."""
     media = pd.read_csv(Path(data_dir) / "interim" / "Media_per_county.csv")
     totals = media.groupby("County")["num_cases"].sum().sort_values(ascending=False)
+    totals = totals[~totals.index.isin(list(excluded_counties(data_dir)))]
     return list(totals.index[:n]), list(totals.index[n:])
 
 
@@ -126,6 +157,8 @@ def _set_cols(feature_set):
         return list(MEDIA_COLS)
     if feature_set == "media_env":
         return ENV_COLS + MEDIA_COLS
+    if feature_set == "ar_only":
+        return []                       # the county's own case history only
     raise ValueError(f"unknown feature_set {feature_set}")
 
 
@@ -348,6 +381,8 @@ def run_county(county, data_dir, feature_set="media_env", models=MODELS, verbose
 
             if "seasonal_naive" in models:
                 records.append({**base, "model": "seasonal_naive", "pred": float(Xte["seasonal_lag12"].iloc[0])})
+            if "no_change" in models:                     # predicts no change from the last observed month
+                records.append({**base, "model": "no_change", "pred": 0.0})
             for m in fitted_models:
                 mod = _make_model(m).set_params(**best_params[m])
                 mod.fit(Xtr, ytr)
@@ -389,7 +424,7 @@ def run_county(county, data_dir, feature_set="media_env", models=MODELS, verbose
         for g, v in imp_sum[m].items():
             imp_rows.append(dict(county=county, feature_set=feature_set, model=m, feature=g,
                                  importance=v / max(imp_cnt[m], 1)))
-    importances = pd.DataFrame(imp_rows)
+    importances = pd.DataFrame(imp_rows, columns=["county", "feature_set", "model", "feature", "importance"])
 
     meta = dict(county=county, feature_set=feature_set, n_months=n,
                 first_forecast_month=str(panel.index[first_origin + 1]),
@@ -405,6 +440,19 @@ def run_county(county, data_dir, feature_set="media_env", models=MODELS, verbose
 
 def _rmse(e):
     return float(np.sqrt(np.mean(np.square(e)))) if len(e) else np.nan
+
+
+def add_improvements(df):
+    """% improvement over the seasonal-naive and no-change baselines, per (county, feature set, horizon)."""
+    df = df.drop(columns=[c for c in df.columns if c.startswith(("pct_improve", "pct_vs_nochange"))])
+    keys = [c for c in ("county", "feature_set", "horizon") if c in df.columns]
+    for base_model, prefix in (("seasonal_naive", "pct_improve"), ("no_change", "pct_vs_nochange")):
+        b = df[df["model"] == base_model][keys + ["rmse", "mae"]].rename(columns={"rmse": "_b_rmse", "mae": "_b_mae"})
+        df = df.merge(b.drop_duplicates(keys), on=keys, how="left")
+        for col in ("rmse", "mae"):
+            df[f"{prefix}_{col}"] = (df[f"_b_{col}"] - df[col]) / df[f"_b_{col}"] * 100.0
+        df = df.drop(columns=["_b_rmse", "_b_mae"])
+    return df
 
 
 def _evaluate(preds, panel, last):
@@ -437,12 +485,7 @@ def _evaluate(preds, panel, last):
                 avg_window_mae=float(win["err"].apply(lambda e: e.abs().mean()).mean()),
                 rate_rmse=_rmse(g["rate_err"]), rate_mae=float(g["rate_err"].abs().mean()),
             ))
-    metrics = pd.DataFrame(rows)
-    base = metrics[metrics["model"] == "seasonal_naive"].set_index("horizon")
-    if not base.empty:
-        for col in ("rmse", "mae"):
-            b = metrics["horizon"].map(base[col])
-            metrics[f"pct_improve_{col}"] = (b - metrics[col]) / b * 100.0
+    metrics = add_improvements(pd.DataFrame(rows))
     metrics = metrics.sort_values(["horizon", "rmse"]).reset_index(drop=True)
 
     # rate-scale series for plotting: month t+h forecast issued h months earlier
@@ -463,14 +506,23 @@ def summarize_best(result, n_features=3, selection="rmse"):
     log-diff scale) and its top features.
 
     Top features come from the best model that reports feature importance (Ridge, Random Forest,
-    XGBoost, SARIMAX); if seasonal-naive or the LSTM wins, the best of those is used.
+    XGBoost, SARIMAX); if the LSTM wins, the best of those is used. Baselines (seasonal naive,
+    no change) are shown for comparison but are never chosen as the best model.
     """
     metrics, imp = result["metrics"], result["importances"]
-    score = metrics.groupby("model")[selection].mean().sort_values()
+    all_score = metrics.groupby("model")[selection].mean().sort_values()
+    score = all_score[[m for m in all_score.index if m not in BASELINES]]
+    if score.empty:
+        score = all_score
     best = score.index[0]
     has_imp = set(imp["model"]) if len(imp) else set()
     fitted_score = score[[m for m in score.index if m in has_imp]]
-    feat_model = best if best in has_imp else fitted_score.index[0]
+    if best in has_imp:
+        feat_model = best
+    elif len(fitted_score):
+        feat_model = fitted_score.index[0]
+    else:
+        feat_model = None                    # no model with feature importance for this county yet
 
     fi = (imp[imp["model"] == feat_model].sort_values("importance", ascending=False)
           .reset_index(drop=True))
@@ -480,6 +532,7 @@ def summarize_best(result, n_features=3, selection="rmse"):
 
     per_h = metrics[metrics["model"] == best].set_index("horizon")
     base = metrics[metrics["model"] == "seasonal_naive"].set_index("horizon")
+    nochange = metrics[metrics["model"] == "no_change"].set_index("horizon")
     out = dict(
         county=result["meta"]["county"],
         best_model=best,
@@ -489,6 +542,7 @@ def summarize_best(result, n_features=3, selection="rmse"):
         top_media_feature=(top_media["feature"].iloc[0] if len(top_media) else None),
         mean_rmse=float(score.iloc[0]),
         mean_rmse_seasonal_naive=float(base["rmse"].mean()) if not base.empty else np.nan,
+        mean_rmse_no_change=float(nochange["rmse"].mean()) if not nochange.empty else np.nan,
     )
     for h in HORIZONS:
         out[f"rmse_{h}m"] = float(per_h.loc[h, "rmse"])
@@ -556,7 +610,14 @@ def _newest_first(paths):
 
 
 def _read_if(path):
-    return pd.read_csv(path) if Path(path).exists() else None
+    """Read a CSV if it exists and has any content; otherwise None."""
+    path = Path(path)
+    if not path.exists() or path.stat().st_size == 0:
+        return None
+    try:
+        return pd.read_csv(path)
+    except pd.errors.EmptyDataError:
+        return None
 
 
 def _merge(frames, key):
@@ -572,70 +633,85 @@ def combine(data_dir, out_dir):
     Merge new runs (out_dir/parts) INTO the saved results in out_dir.
 
     Nothing already saved is dropped: rows are matched on (county, feature set, model, horizon, ...)
-    and a newer run replaces an older row with the same key. Running `combine` with no new parts
-    simply rewrites the same tables. To remove a model's results, delete its rows from the CSVs.
+    and a newer run replaces an older row with the same key. Counties that are excluded
+    (see `excluded_counties`) are removed. Improvement columns are recomputed from the merged tables.
+    Running `combine` with no new parts simply rewrites the same tables.
+
+    Files written (feature set = env_only, media_only, media_env):
+      top10_{metrics,forecasts,feature_importance}_<feature set>.csv     the 10 highest-burden counties
+      other_{metrics,forecasts,feature_importance}_<feature set>.csv     the remaining eligible counties
+      top10_best_model_top3.csv, other_best_model_top3.csv, remaining_counties_best_model_top3.csv
+      diagnostic_history_only_metrics.csv                                 case history only (no weather or media)
     """
     out_dir = Path(out_dir)
     parts = out_dir / "parts"
     top, rest = top_counties(data_dir)
+    excluded = set(excluded_counties(data_dir))
     key_m = ["county", "feature_set", "model", "horizon"]
     key_f = key_m + ["target"]
     key_i = ["county", "feature_set", "model", "feature"]
+    all_sets = list(FEATURE_SETS) + list(DIAGNOSTIC_SETS)
 
     def new(suffix):
-        return [pd.read_csv(p) for p in _newest_first(parts.glob(f"*_{suffix}.csv"))]
+        return [_read_if(p) for p in _newest_first(parts.glob(f"*_{suffix}.csv"))]
 
-    M = _merge(new("metrics")
-               + [_read_if(out_dir / f"top10_metrics_{fs}.csv") for fs in FEATURE_SETS]
-               + [_read_if(out_dir / "remaining_metrics_media_env_all_models.csv")], key_m)
-    F = _merge(new("forecasts") + [_read_if(out_dir / f"top10_forecasts_{fs}.csv") for fs in FEATURE_SETS], key_f)
-    I = _merge(new("importance")
-               + [_read_if(out_dir / f"top10_feature_importance_{fs}.csv") for fs in FEATURE_SETS]
-               + [_read_if(out_dir / "remaining_feature_importance_media_env.csv")], key_i)
+    def saved(kind, extra=()):
+        files = [out_dir / f"{g}_{kind}_{fs}.csv" for g in ("top10", "other") for fs in FEATURE_SETS]
+        return [_read_if(f) for f in list(files) + [out_dir / e for e in extra]]
+
+    M = _merge(new("metrics") + saved("metrics", ["remaining_metrics_media_env_all_models.csv",
+                                                   "diagnostic_history_only_metrics.csv"]), key_m)
+    F = _merge(new("forecasts") + saved("forecasts"), key_f)
+    I = _merge(new("importance") + saved("feature_importance", ["remaining_feature_importance_media_env.csv"]), key_i)
+    keep = lambda d: d[~d["county"].isin(excluded)]
+    M, F, I = keep(M), keep(F), keep(I)
+    M = add_improvements(M)
 
     # stable ordering keeps rebuilds identical and git diffs small
     M = M.sort_values(key_m).reset_index(drop=True)
     F = F.sort_values(key_f).reset_index(drop=True)
     I = I.sort_values(key_i).reset_index(drop=True)
 
-    summaries = []
-    for fs in FEATURE_SETS:
-        Mfs, Ffs, Ifs = M[M.feature_set == fs], F[F.feature_set == fs], I[I.feature_set == fs]
-        Mfs[Mfs.county.isin(top)].to_csv(out_dir / f"top10_metrics_{fs}.csv", index=False)
-        Ffs[Ffs.county.isin(top)].to_csv(out_dir / f"top10_forecasts_{fs}.csv", index=False)
-        Ifs[Ifs.county.isin(top)].to_csv(out_dir / f"top10_feature_importance_{fs}.csv", index=False)
-        for c in top:
-            if (Mfs.county == c).any():
-                s = summarize_best(dict(metrics=Mfs[Mfs.county == c], importances=Ifs[Ifs.county == c],
-                                        meta={"county": c}))
-                s["feature_set"] = fs
-                summaries.append(s)
-    top_tab = pd.DataFrame(summaries)
-    for k in range(3):
-        top_tab[f"feature_{k + 1}"] = top_tab["top_features"].map(lambda f, k=k: f[k] if len(f) > k else None)
-    top_tab.to_csv(out_dir / "top10_best_model_top3.csv", index=False)
+    def summarize_group(prefix, counties):
+        rows = []
+        for fs in FEATURE_SETS:
+            Mfs, Ffs, Ifs = M[M.feature_set == fs], F[F.feature_set == fs], I[I.feature_set == fs]
+            Mfs[Mfs.county.isin(counties)].to_csv(out_dir / f"{prefix}_metrics_{fs}.csv", index=False)
+            Ffs[Ffs.county.isin(counties)].to_csv(out_dir / f"{prefix}_forecasts_{fs}.csv", index=False)
+            Ifs[Ifs.county.isin(counties)].to_csv(out_dir / f"{prefix}_feature_importance_{fs}.csv", index=False)
+            for c in counties:
+                if (~Mfs[Mfs.county == c].model.isin(BASELINES)).any():
+                    sm = summarize_best(dict(metrics=Mfs[Mfs.county == c], importances=Ifs[Ifs.county == c],
+                                             meta={"county": c}))
+                    sm["feature_set"] = fs
+                    rows.append(sm)
+        tab = pd.DataFrame(rows)
+        for k in range(3):
+            tab[f"feature_{k + 1}"] = tab["top_features"].map(lambda f, k=k: f[k] if len(f) > k else None)
+        return tab
 
-    Mr = M[(M.feature_set == "media_env") & M.county.isin(rest)]
-    Ir = I[(I.feature_set == "media_env") & I.county.isin(rest)]
-    rem_rows = [summarize_best(dict(metrics=Mr[Mr.county == c], importances=Ir[Ir.county == c], meta={"county": c}))
-                for c in rest if (Mr.county == c).any()]
-    rem = pd.DataFrame(rem_rows)
-    for k in range(3):
-        rem[f"feature_{k + 1}"] = rem["top_features"].map(lambda f, k=k: f[k] if len(f) > k else None)
+    top_tab = summarize_group("top10", top)
+    top_tab.to_csv(out_dir / "top10_best_model_top3.csv", index=False)
+    other_tab = summarize_group("other", rest)
+    other_tab.to_csv(out_dir / "other_best_model_top3.csv", index=False)
+
     cols = ["county", "best_model", "feature_1", "feature_2", "feature_3", "top_media_feature",
-            "features_from_model", "mean_rmse", "mean_rmse_seasonal_naive",
+            "features_from_model", "mean_rmse", "mean_rmse_seasonal_naive", "mean_rmse_no_change",
             "rmse_1m", "mae_1m", "rmse_3m", "mae_3m", "rmse_6m", "mae_6m"]
-    rem[cols].round(4).to_csv(out_dir / "remaining_counties_best_model_top3.csv", index=False)
-    Mr.to_csv(out_dir / "remaining_metrics_media_env_all_models.csv", index=False)
-    Ir.to_csv(out_dir / "remaining_feature_importance_media_env.csv", index=False)
+    other_tab[other_tab.feature_set == "media_env"][cols].round(4).to_csv(
+        out_dir / "remaining_counties_best_model_top3.csv", index=False)
+
+    M[M.feature_set.isin(DIAGNOSTIC_SETS)].to_csv(out_dir / "diagnostic_history_only_metrics.csv", index=False)
 
     meta_path = out_dir / "run_meta.json"
     meta = json.load(open(meta_path)) if meta_path.exists() else {}
     for f in sorted(parts.glob("*_meta.json")):
         meta[f.stem] = json.load(open(f))
+    meta = {k: v for k, v in meta.items() if v.get("meta", {}).get("county") not in excluded}
     json.dump(meta, open(meta_path, "w"), indent=2, default=str)
-    print(f"combined: {len(M)} metric rows, {len(F)} forecast rows, {len(top_tab)} top-10 rows, {len(rem)} remaining counties")
-    return M, top_tab, rem
+    print(f"combined: {len(M)} metric rows, {len(F)} forecast rows, {len(top_tab)} top-10 rows, "
+          f"{len(other_tab)} other-county rows; excluded: {sorted(excluded)}")
+    return M, top_tab, other_tab
 
 
 if __name__ == "__main__":

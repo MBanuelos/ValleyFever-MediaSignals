@@ -889,41 +889,6 @@
       }
     }
   },
-  "extra__media_env__Alameda_meta": {
-    "meta": {
-      "county": "Alameda",
-      "feature_set": "media_env",
-      "n_months": 288,
-      "first_forecast_month": "2021-02",
-      "last_forecast_month": "2024-12",
-      "n_origins": 47,
-      "train_months": 120,
-      "sarimax_fit_failures": 0,
-      "runtime_sec": 23.2
-    },
-    "best_params": {
-      "sarimax": {
-        "order": [
-          1,
-          0,
-          1
-        ],
-        "seasonal_order": [
-          0,
-          0,
-          0,
-          12
-        ],
-        "exog": [
-          "Avg Rel Hum (%)",
-          "windeventcount",
-          "fungicide_lbs_prd_used",
-          "article_count",
-          "mean_body_risk"
-        ]
-      }
-    }
-  },
   "extra__media_env__ContraCosta_meta": {
     "meta": {
       "county": "Contra Costa",
@@ -1375,41 +1340,6 @@
           "Avg Soil Temp (F)",
           "article_count",
           "Precipitation"
-        ]
-      }
-    }
-  },
-  "extra__media_env__SanMateo_meta": {
-    "meta": {
-      "county": "San Mateo",
-      "feature_set": "media_env",
-      "n_months": 288,
-      "first_forecast_month": "2021-02",
-      "last_forecast_month": "2024-12",
-      "n_origins": 47,
-      "train_months": 120,
-      "sarimax_fit_failures": 0,
-      "runtime_sec": 21.6
-    },
-    "best_params": {
-      "sarimax": {
-        "order": [
-          0,
-          0,
-          1
-        ],
-        "seasonal_order": [
-          0,
-          0,
-          0,
-          12
-        ],
-        "exog": [
-          "windeventcount",
-          "Avg Rel Hum (%)",
-          "Precipitation",
-          "Wind Run (miles)",
-          "tweet_count"
         ]
       }
     }
@@ -1970,6 +1900,2343 @@
           "avg_sentiment",
           "mean_body_risk",
           "avg_risk"
+        ]
+      }
+    }
+  },
+  "nochange__env_only__ContraCosta_meta": {
+    "meta": {
+      "county": "Contra Costa",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Fresno_meta": {
+    "meta": {
+      "county": "Fresno",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Kern_meta": {
+    "meta": {
+      "county": "Kern",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__LosAngeles_meta": {
+    "meta": {
+      "county": "Los Angeles",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Merced_meta": {
+    "meta": {
+      "county": "Merced",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Monterey_meta": {
+    "meta": {
+      "county": "Monterey",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Orange_meta": {
+    "meta": {
+      "county": "Orange",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Riverside_meta": {
+    "meta": {
+      "county": "Riverside",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Sacramento_meta": {
+    "meta": {
+      "county": "Sacramento",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__SanBernardino_meta": {
+    "meta": {
+      "county": "San Bernardino",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__SanDiego_meta": {
+    "meta": {
+      "county": "San Diego",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__SanJoaquin_meta": {
+    "meta": {
+      "county": "San Joaquin",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__SanLuisObispo_meta": {
+    "meta": {
+      "county": "San Luis Obispo",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__SantaBarbara_meta": {
+    "meta": {
+      "county": "Santa Barbara",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__SantaClara_meta": {
+    "meta": {
+      "county": "Santa Clara",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Solano_meta": {
+    "meta": {
+      "county": "Solano",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Stanislaus_meta": {
+    "meta": {
+      "county": "Stanislaus",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Tulare_meta": {
+    "meta": {
+      "county": "Tulare",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__env_only__Ventura_meta": {
+    "meta": {
+      "county": "Ventura",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__ContraCosta_meta": {
+    "meta": {
+      "county": "Contra Costa",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Fresno_meta": {
+    "meta": {
+      "county": "Fresno",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Kern_meta": {
+    "meta": {
+      "county": "Kern",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__LosAngeles_meta": {
+    "meta": {
+      "county": "Los Angeles",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Merced_meta": {
+    "meta": {
+      "county": "Merced",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Monterey_meta": {
+    "meta": {
+      "county": "Monterey",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Orange_meta": {
+    "meta": {
+      "county": "Orange",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Riverside_meta": {
+    "meta": {
+      "county": "Riverside",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Sacramento_meta": {
+    "meta": {
+      "county": "Sacramento",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__SanBernardino_meta": {
+    "meta": {
+      "county": "San Bernardino",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__SanDiego_meta": {
+    "meta": {
+      "county": "San Diego",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__SanJoaquin_meta": {
+    "meta": {
+      "county": "San Joaquin",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__SanLuisObispo_meta": {
+    "meta": {
+      "county": "San Luis Obispo",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__SantaBarbara_meta": {
+    "meta": {
+      "county": "Santa Barbara",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__SantaClara_meta": {
+    "meta": {
+      "county": "Santa Clara",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Solano_meta": {
+    "meta": {
+      "county": "Solano",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Stanislaus_meta": {
+    "meta": {
+      "county": "Stanislaus",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Tulare_meta": {
+    "meta": {
+      "county": "Tulare",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_env__Ventura_meta": {
+    "meta": {
+      "county": "Ventura",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__ContraCosta_meta": {
+    "meta": {
+      "county": "Contra Costa",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Fresno_meta": {
+    "meta": {
+      "county": "Fresno",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Kern_meta": {
+    "meta": {
+      "county": "Kern",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__LosAngeles_meta": {
+    "meta": {
+      "county": "Los Angeles",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Merced_meta": {
+    "meta": {
+      "county": "Merced",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Monterey_meta": {
+    "meta": {
+      "county": "Monterey",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Orange_meta": {
+    "meta": {
+      "county": "Orange",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Riverside_meta": {
+    "meta": {
+      "county": "Riverside",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Sacramento_meta": {
+    "meta": {
+      "county": "Sacramento",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__SanBernardino_meta": {
+    "meta": {
+      "county": "San Bernardino",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__SanDiego_meta": {
+    "meta": {
+      "county": "San Diego",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__SanJoaquin_meta": {
+    "meta": {
+      "county": "San Joaquin",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__SanLuisObispo_meta": {
+    "meta": {
+      "county": "San Luis Obispo",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__SantaBarbara_meta": {
+    "meta": {
+      "county": "Santa Barbara",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__SantaClara_meta": {
+    "meta": {
+      "county": "Santa Clara",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Solano_meta": {
+    "meta": {
+      "county": "Solano",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Stanislaus_meta": {
+    "meta": {
+      "county": "Stanislaus",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Tulare_meta": {
+    "meta": {
+      "county": "Tulare",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "nochange__media_only__Ventura_meta": {
+    "meta": {
+      "county": "Ventura",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 0.2
+    },
+    "best_params": {}
+  },
+  "other__env_only__Monterey_meta": {
+    "meta": {
+      "county": "Monterey",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 63.7
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "windeventcount",
+          "AQI_PM25",
+          "Avg Wind Speed (mph)",
+          "AQI_PM10",
+          "Avg Soil Temp (F)"
+        ]
+      }
+    }
+  },
+  "other__env_only__SanBernardino_meta": {
+    "meta": {
+      "county": "San Bernardino",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 69.3
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "Precipitation",
+          "Wind Run (miles)",
+          "AQI_PM25",
+          "Avg Soil Temp (F)",
+          "rodent_lbs_prd_used"
+        ]
+      }
+    }
+  },
+  "hist__ar_only__Fresno_meta": {
+    "meta": {
+      "county": "Fresno",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 31.2
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "hist__ar_only__Kern_meta": {
+    "meta": {
+      "county": "Kern",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 34.5
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "hist__ar_only__LosAngeles_meta": {
+    "meta": {
+      "county": "Los Angeles",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 32.4
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "hist__ar_only__Orange_meta": {
+    "meta": {
+      "county": "Orange",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 33.7
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "hist__ar_only__Riverside_meta": {
+    "meta": {
+      "county": "Riverside",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 33.7
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "hist__ar_only__SanDiego_meta": {
+    "meta": {
+      "county": "San Diego",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 35.9
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 3
+      }
+    }
+  },
+  "hist__ar_only__SanJoaquin_meta": {
+    "meta": {
+      "county": "San Joaquin",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 31.4
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 1000.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "hist__ar_only__SanLuisObispo_meta": {
+    "meta": {
+      "county": "San Luis Obispo",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 32.8
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "hist__ar_only__Tulare_meta": {
+    "meta": {
+      "county": "Tulare",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 33.3
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "hist__ar_only__Ventura_meta": {
+    "meta": {
+      "county": "Ventura",
+      "feature_set": "ar_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 32.6
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 1000.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      }
+    }
+  },
+  "other__env_only__ContraCosta_meta": {
+    "meta": {
+      "county": "Contra Costa",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 78.3
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 3
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "FIRE_Acres_Burned",
+          "Avg Rel Hum (%)",
+          "Precipitation",
+          "Avg Wind Speed (mph)",
+          "Wind Run (miles)"
+        ]
+      }
+    }
+  },
+  "other__env_only__Merced_meta": {
+    "meta": {
+      "county": "Merced",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 69.8
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          0,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "windeventcount",
+          "fungicide_lbs_prd_used",
+          "AQI_PM10",
+          "Avg Wind Speed (mph)",
+          "Precipitation"
+        ]
+      }
+    }
+  },
+  "other__env_only__Sacramento_meta": {
+    "meta": {
+      "county": "Sacramento",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 58.8
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          0,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "Wind Run (miles)",
+          "windeventcount",
+          "Avg Soil Temp (F)",
+          "Avg Wind Speed (mph)",
+          "Precipitation"
+        ]
+      }
+    }
+  },
+  "other__env_only__SantaBarbara_meta": {
+    "meta": {
+      "county": "Santa Barbara",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 60.7
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": null,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.1,
+        "xgbregressor__max_depth": 3
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "windeventcount",
+          "Avg Wind Speed (mph)",
+          "FIRE_Acres_Burned",
+          "Wind Run (miles)",
+          "Precipitation"
+        ]
+      }
+    }
+  },
+  "other__env_only__SantaClara_meta": {
+    "meta": {
+      "county": "Santa Clara",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 64.4
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 3
+      },
+      "sarimax": {
+        "order": [
+          0,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "windeventcount",
+          "Avg Soil Temp (F)",
+          "fungicide_lbs_prd_used",
+          "rodent_lbs_prd_used",
+          "AQI_PM10"
+        ]
+      }
+    }
+  },
+  "other__env_only__Solano_meta": {
+    "meta": {
+      "county": "Solano",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 59.1
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": null,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "rodent_lbs_prd_used",
+          "fungicide_lbs_prd_used",
+          "AQI_PM10",
+          "Avg Wind Speed (mph)",
+          "windeventcount"
+        ]
+      }
+    }
+  },
+  "other__env_only__Stanislaus_meta": {
+    "meta": {
+      "county": "Stanislaus",
+      "feature_set": "env_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 69.7
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "windeventcount",
+          "fungicide_lbs_prd_used",
+          "Wind Run (miles)",
+          "AQI_PM10",
+          "Avg Wind Speed (mph)"
+        ]
+      }
+    }
+  },
+  "other__media_env__ContraCosta_meta": {
+    "meta": {
+      "county": "Contra Costa",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 65.5
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 3
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "FIRE_Acres_Burned",
+          "mean_title_sentiment",
+          "Avg Rel Hum (%)",
+          "avg_sentiment",
+          "Precipitation"
+        ]
+      }
+    }
+  },
+  "other__media_env__Merced_meta": {
+    "meta": {
+      "county": "Merced",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 71.5
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 3
+      },
+      "sarimax": {
+        "order": [
+          0,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "mean_body_risk",
+          "windeventcount",
+          "fungicide_lbs_prd_used",
+          "mean_title_risk",
+          "avg_risk"
+        ]
+      }
+    }
+  },
+  "other__media_env__Monterey_meta": {
+    "meta": {
+      "county": "Monterey",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 65.5
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "windeventcount",
+          "mean_body_sentiment",
+          "AQI_PM25",
+          "Avg Wind Speed (mph)",
+          "AQI_PM10"
+        ]
+      }
+    }
+  },
+  "other__media_env__Sacramento_meta": {
+    "meta": {
+      "county": "Sacramento",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 63.3
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          0,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "avg_risk",
+          "avg_sentiment",
+          "mean_body_risk",
+          "Wind Run (miles)",
+          "windeventcount"
+        ]
+      }
+    }
+  },
+  "other__media_env__SanBernardino_meta": {
+    "meta": {
+      "county": "San Bernardino",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 62.1
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.1,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "avg_risk",
+          "Precipitation",
+          "mean_title_risk",
+          "article_count",
+          "mean_title_sentiment"
+        ]
+      }
+    }
+  },
+  "other__media_env__SantaBarbara_meta": {
+    "meta": {
+      "county": "Santa Barbara",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 61.8
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "windeventcount",
+          "Avg Wind Speed (mph)",
+          "FIRE_Acres_Burned",
+          "mean_body_sentiment",
+          "Wind Run (miles)"
+        ]
+      }
+    }
+  },
+  "other__media_env__SantaClara_meta": {
+    "meta": {
+      "county": "Santa Clara",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 72.7
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": null,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          0,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "mean_title_sentiment",
+          "windeventcount",
+          "Avg Soil Temp (F)",
+          "tweet_count",
+          "mean_body_risk"
+        ]
+      }
+    }
+  },
+  "other__media_env__Solano_meta": {
+    "meta": {
+      "county": "Solano",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 66.8
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 1000.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": null,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.1,
+        "xgbregressor__max_depth": 3
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "mean_body_sentiment",
+          "avg_sentiment",
+          "article_count",
+          "rodent_lbs_prd_used",
+          "avg_likes"
+        ]
+      }
+    }
+  },
+  "other__media_env__Stanislaus_meta": {
+    "meta": {
+      "county": "Stanislaus",
+      "feature_set": "media_env",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 73.3
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "windeventcount",
+          "avg_risk",
+          "fungicide_lbs_prd_used",
+          "Wind Run (miles)",
+          "AQI_PM10"
+        ]
+      }
+    }
+  },
+  "other__media_only__ContraCosta_meta": {
+    "meta": {
+      "county": "Contra Costa",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 59.0
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "mean_title_sentiment",
+          "avg_sentiment",
+          "avg_risk",
+          "mean_body_sentiment",
+          "mean_title_risk"
+        ]
+      }
+    }
+  },
+  "other__media_only__Merced_meta": {
+    "meta": {
+      "county": "Merced",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 66.1
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "mean_body_risk",
+          "mean_title_risk",
+          "avg_risk",
+          "mean_body_sentiment",
+          "avg_likes"
+        ]
+      }
+    }
+  },
+  "other__media_only__Monterey_meta": {
+    "meta": {
+      "county": "Monterey",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 55.3
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 1000.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          0,
+          0,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "mean_body_sentiment",
+          "avg_sentiment",
+          "mean_body_risk",
+          "mean_title_sentiment",
+          "article_count"
+        ]
+      }
+    }
+  },
+  "other__media_only__Sacramento_meta": {
+    "meta": {
+      "county": "Sacramento",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 58.1
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          2,
+          0,
+          0
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "avg_risk",
+          "avg_sentiment",
+          "mean_body_risk",
+          "mean_title_risk",
+          "mean_title_sentiment"
+        ]
+      }
+    }
+  },
+  "other__media_only__SanBernardino_meta": {
+    "meta": {
+      "county": "San Bernardino",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 63.1
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 6,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 3
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "avg_risk",
+          "mean_title_risk",
+          "article_count",
+          "mean_title_sentiment",
+          "avg_likes"
+        ]
+      }
+    }
+  },
+  "other__media_only__SantaBarbara_meta": {
+    "meta": {
+      "county": "Santa Barbara",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 57.0
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.1,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "mean_body_sentiment",
+          "article_count",
+          "avg_sentiment",
+          "mean_body_risk",
+          "mean_title_risk"
+        ]
+      }
+    }
+  },
+  "other__media_only__SantaClara_meta": {
+    "meta": {
+      "county": "Santa Clara",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 61.0
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 10.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 2
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "mean_title_sentiment",
+          "tweet_count",
+          "mean_body_risk",
+          "mean_body_sentiment",
+          "avg_risk"
+        ]
+      }
+    }
+  },
+  "other__media_only__Solano_meta": {
+    "meta": {
+      "county": "Solano",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 56.4
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 1000.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 0.33,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "mean_body_sentiment",
+          "avg_sentiment",
+          "article_count",
+          "avg_likes",
+          "mean_body_risk"
+        ]
+      }
+    }
+  },
+  "other__media_only__Stanislaus_meta": {
+    "meta": {
+      "county": "Stanislaus",
+      "feature_set": "media_only",
+      "n_months": 288,
+      "first_forecast_month": "2021-02",
+      "last_forecast_month": "2024-12",
+      "n_origins": 47,
+      "train_months": 120,
+      "sarimax_fit_failures": 0,
+      "runtime_sec": 67.0
+    },
+    "best_params": {
+      "ridge": {
+        "ridge__alpha": 100.0
+      },
+      "random_forest": {
+        "randomforestregressor__max_depth": 3,
+        "randomforestregressor__max_features": 1.0,
+        "randomforestregressor__min_samples_leaf": 5
+      },
+      "xgboost": {
+        "xgbregressor__learning_rate": 0.05,
+        "xgbregressor__max_depth": 2
+      },
+      "sarimax": {
+        "order": [
+          1,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          0,
+          12
+        ],
+        "exog": [
+          "avg_risk",
+          "avg_sentiment",
+          "mean_body_sentiment",
+          "article_count",
+          "avg_likes"
         ]
       }
     }

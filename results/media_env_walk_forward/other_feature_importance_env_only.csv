@@ -1,0 +1,397 @@
+county,feature_set,model,feature,importance
+Contra Costa,env_only,random_forest,AQI_PM10,0.04866690360026
+Contra Costa,env_only,random_forest,AQI_PM25,0.0467007600904559
+Contra Costa,env_only,random_forest,AR: recent log-change,0.2718912504054814
+Contra Costa,env_only,random_forest,AR: same month last year,0.0733808648109682
+Contra Costa,env_only,random_forest,Avg Rel Hum (%),0.0755597346884866
+Contra Costa,env_only,random_forest,Avg Soil Temp (F),0.0536146506359238
+Contra Costa,env_only,random_forest,Avg Wind Speed (mph),0.0708203407409713
+Contra Costa,env_only,random_forest,FIRE_Acres_Burned,0.0666045030095997
+Contra Costa,env_only,random_forest,Precipitation,0.0602786419358304
+Contra Costa,env_only,random_forest,Wind Run (miles),0.0533383146640265
+Contra Costa,env_only,random_forest,fungicide_lbs_prd_used,0.0642725850417536
+Contra Costa,env_only,random_forest,rodent_lbs_prd_used,0.0838234923910825
+Contra Costa,env_only,random_forest,windeventcount,0.0310479579851593
+Contra Costa,env_only,ridge,AQI_PM10,0.0382729748408248
+Contra Costa,env_only,ridge,AQI_PM25,0.0442578955409608
+Contra Costa,env_only,ridge,AR: recent log-change,0.2210658464185612
+Contra Costa,env_only,ridge,AR: same month last year,0.0711226692724375
+Contra Costa,env_only,ridge,Avg Rel Hum (%),0.076968243396749
+Contra Costa,env_only,ridge,Avg Soil Temp (F),0.0665115400987462
+Contra Costa,env_only,ridge,Avg Wind Speed (mph),0.066492680750445
+Contra Costa,env_only,ridge,FIRE_Acres_Burned,0.0892507022762266
+Contra Costa,env_only,ridge,Precipitation,0.0861095434706804
+Contra Costa,env_only,ridge,Wind Run (miles),0.0666025828608683
+Contra Costa,env_only,ridge,fungicide_lbs_prd_used,0.0597976510275813
+Contra Costa,env_only,ridge,rodent_lbs_prd_used,0.0627883700919277
+Contra Costa,env_only,ridge,windeventcount,0.0507592999539906
+Contra Costa,env_only,sarimax,Avg Rel Hum (%),0.0950615467071714
+Contra Costa,env_only,sarimax,Avg Wind Speed (mph),0.2065034526548331
+Contra Costa,env_only,sarimax,FIRE_Acres_Burned,0.1019794658397024
+Contra Costa,env_only,sarimax,Precipitation,0.4052026971815963
+Contra Costa,env_only,sarimax,Wind Run (miles),0.1912528376166965
+Contra Costa,env_only,xgboost,AQI_PM10,0.061424428067846
+Contra Costa,env_only,xgboost,AQI_PM25,0.0623163756381237
+Contra Costa,env_only,xgboost,AR: recent log-change,0.2289756628918931
+Contra Costa,env_only,xgboost,AR: same month last year,0.0709438356973032
+Contra Costa,env_only,xgboost,Avg Rel Hum (%),0.0599526923061867
+Contra Costa,env_only,xgboost,Avg Soil Temp (F),0.0639769494583816
+Contra Costa,env_only,xgboost,Avg Wind Speed (mph),0.0599322332944016
+Contra Costa,env_only,xgboost,FIRE_Acres_Burned,0.0714729375557537
+Contra Costa,env_only,xgboost,Precipitation,0.049294746625154
+Contra Costa,env_only,xgboost,Wind Run (miles),0.064172379751151
+Contra Costa,env_only,xgboost,fungicide_lbs_prd_used,0.071670586676111
+Contra Costa,env_only,xgboost,rodent_lbs_prd_used,0.0781330081614544
+Contra Costa,env_only,xgboost,windeventcount,0.0577341638762395
+Merced,env_only,random_forest,AQI_PM10,0.049611876392462
+Merced,env_only,random_forest,AQI_PM25,0.0701413551239421
+Merced,env_only,random_forest,AR: recent log-change,0.3789644299890533
+Merced,env_only,random_forest,AR: same month last year,0.0710330907997278
+Merced,env_only,random_forest,Avg Rel Hum (%),0.0415841049522342
+Merced,env_only,random_forest,Avg Soil Temp (F),0.0619667342458599
+Merced,env_only,random_forest,Avg Wind Speed (mph),0.0397865356060675
+Merced,env_only,random_forest,FIRE_Acres_Burned,0.0549788253326175
+Merced,env_only,random_forest,Precipitation,0.0417710379128348
+Merced,env_only,random_forest,Wind Run (miles),0.0386098525337823
+Merced,env_only,random_forest,fungicide_lbs_prd_used,0.0677639467233212
+Merced,env_only,random_forest,rodent_lbs_prd_used,0.0596331573621407
+Merced,env_only,random_forest,windeventcount,0.0241550530259561
+Merced,env_only,ridge,AQI_PM10,0.0462400274386875
+Merced,env_only,ridge,AQI_PM25,0.0397744886817737
+Merced,env_only,ridge,AR: recent log-change,0.371845918184197
+Merced,env_only,ridge,AR: same month last year,0.0581815828346282
+Merced,env_only,ridge,Avg Rel Hum (%),0.0295935750340883
+Merced,env_only,ridge,Avg Soil Temp (F),0.0871661290085201
+Merced,env_only,ridge,Avg Wind Speed (mph),0.0495174886156716
+Merced,env_only,ridge,FIRE_Acres_Burned,0.0391170199416041
+Merced,env_only,ridge,Precipitation,0.0648093496382279
+Merced,env_only,ridge,Wind Run (miles),0.0366240995074513
+Merced,env_only,ridge,fungicide_lbs_prd_used,0.0653921901280613
+Merced,env_only,ridge,rodent_lbs_prd_used,0.0657607475315643
+Merced,env_only,ridge,windeventcount,0.0459773834555241
+Merced,env_only,sarimax,AQI_PM10,0.1631913833302857
+Merced,env_only,sarimax,Avg Wind Speed (mph),0.1245942733166082
+Merced,env_only,sarimax,Precipitation,0.3987276881123104
+Merced,env_only,sarimax,fungicide_lbs_prd_used,0.194556331720037
+Merced,env_only,sarimax,windeventcount,0.1189303235207587
+Merced,env_only,xgboost,AQI_PM10,0.0670287301072047
+Merced,env_only,xgboost,AQI_PM25,0.072931990185845
+Merced,env_only,xgboost,AR: recent log-change,0.2372606894267692
+Merced,env_only,xgboost,AR: same month last year,0.0648181195154196
+Merced,env_only,xgboost,Avg Rel Hum (%),0.054823218462876
+Merced,env_only,xgboost,Avg Soil Temp (F),0.0690080765739023
+Merced,env_only,xgboost,Avg Wind Speed (mph),0.0601426725819221
+Merced,env_only,xgboost,FIRE_Acres_Burned,0.0633787096523015
+Merced,env_only,xgboost,Precipitation,0.0522906271319844
+Merced,env_only,xgboost,Wind Run (miles),0.0612465684764375
+Merced,env_only,xgboost,fungicide_lbs_prd_used,0.0687555087100132
+Merced,env_only,xgboost,rodent_lbs_prd_used,0.0713665918382283
+Merced,env_only,xgboost,windeventcount,0.0569484973370959
+Monterey,env_only,random_forest,AQI_PM10,0.0580133456198178
+Monterey,env_only,random_forest,AQI_PM25,0.0546594527709999
+Monterey,env_only,random_forest,AR: recent log-change,0.2097303368422653
+Monterey,env_only,random_forest,AR: same month last year,0.0599494763768553
+Monterey,env_only,random_forest,Avg Rel Hum (%),0.0568443346017462
+Monterey,env_only,random_forest,Avg Soil Temp (F),0.0748687192043412
+Monterey,env_only,random_forest,Avg Wind Speed (mph),0.0690111765505012
+Monterey,env_only,random_forest,FIRE_Acres_Burned,0.0849985777774745
+Monterey,env_only,random_forest,Precipitation,0.0565788919158626
+Monterey,env_only,random_forest,Wind Run (miles),0.065536818476204
+Monterey,env_only,random_forest,fungicide_lbs_prd_used,0.066584425866292
+Monterey,env_only,random_forest,rodent_lbs_prd_used,0.0796596179234485
+Monterey,env_only,random_forest,windeventcount,0.0635648260741911
+Monterey,env_only,ridge,AQI_PM10,0.0771466301096031
+Monterey,env_only,ridge,AQI_PM25,0.0772053646975235
+Monterey,env_only,ridge,AR: recent log-change,0.2585643893626624
+Monterey,env_only,ridge,AR: same month last year,0.0359853081320704
+Monterey,env_only,ridge,Avg Rel Hum (%),0.0692266481268801
+Monterey,env_only,ridge,Avg Soil Temp (F),0.0758339234016566
+Monterey,env_only,ridge,Avg Wind Speed (mph),0.0658499899254464
+Monterey,env_only,ridge,FIRE_Acres_Burned,0.0662941083171619
+Monterey,env_only,ridge,Precipitation,0.0385031434734862
+Monterey,env_only,ridge,Wind Run (miles),0.0606864263308356
+Monterey,env_only,ridge,fungicide_lbs_prd_used,0.0436995021232242
+Monterey,env_only,ridge,rodent_lbs_prd_used,0.0543704809333466
+Monterey,env_only,ridge,windeventcount,0.0766340850661023
+Monterey,env_only,sarimax,AQI_PM10,0.0587726666146434
+Monterey,env_only,sarimax,AQI_PM25,0.2416985190413069
+Monterey,env_only,sarimax,Avg Soil Temp (F),0.1531860408751416
+Monterey,env_only,sarimax,Avg Wind Speed (mph),0.2148615215588305
+Monterey,env_only,sarimax,windeventcount,0.3314812519100776
+Monterey,env_only,xgboost,AQI_PM10,0.0668195123110962
+Monterey,env_only,xgboost,AQI_PM25,0.0605363842707685
+Monterey,env_only,xgboost,AR: recent log-change,0.2042214723362398
+Monterey,env_only,xgboost,AR: same month last year,0.0650634644128106
+Monterey,env_only,xgboost,Avg Rel Hum (%),0.0591523197792472
+Monterey,env_only,xgboost,Avg Soil Temp (F),0.0705384250116372
+Monterey,env_only,xgboost,Avg Wind Speed (mph),0.0612827574394118
+Monterey,env_only,xgboost,FIRE_Acres_Burned,0.0753834518868804
+Monterey,env_only,xgboost,Precipitation,0.0486940557522909
+Monterey,env_only,xgboost,Wind Run (miles),0.0634105572436276
+Monterey,env_only,xgboost,fungicide_lbs_prd_used,0.0719329793866307
+Monterey,env_only,xgboost,rodent_lbs_prd_used,0.080471788455716
+Monterey,env_only,xgboost,windeventcount,0.0724928317136426
+Sacramento,env_only,random_forest,AQI_PM10,0.0499264352056675
+Sacramento,env_only,random_forest,AQI_PM25,0.0548308981314536
+Sacramento,env_only,random_forest,AR: recent log-change,0.4016892934248137
+Sacramento,env_only,random_forest,AR: same month last year,0.0561932855822097
+Sacramento,env_only,random_forest,Avg Rel Hum (%),0.0795384197872441
+Sacramento,env_only,random_forest,Avg Soil Temp (F),0.0480326623747721
+Sacramento,env_only,random_forest,Avg Wind Speed (mph),0.0301659016651525
+Sacramento,env_only,random_forest,FIRE_Acres_Burned,0.0457316949929115
+Sacramento,env_only,random_forest,Precipitation,0.0660646634028036
+Sacramento,env_only,random_forest,Wind Run (miles),0.0392716104062675
+Sacramento,env_only,random_forest,fungicide_lbs_prd_used,0.0473457096273153
+Sacramento,env_only,random_forest,rodent_lbs_prd_used,0.0519703241968929
+Sacramento,env_only,random_forest,windeventcount,0.0292391012024953
+Sacramento,env_only,ridge,AQI_PM10,0.0406254438187511
+Sacramento,env_only,ridge,AQI_PM25,0.0315001065309646
+Sacramento,env_only,ridge,AR: recent log-change,0.3483918742554605
+Sacramento,env_only,ridge,AR: same month last year,0.0992552202254206
+Sacramento,env_only,ridge,Avg Rel Hum (%),0.049485393992703
+Sacramento,env_only,ridge,Avg Soil Temp (F),0.0557581861137119
+Sacramento,env_only,ridge,Avg Wind Speed (mph),0.0351056552316929
+Sacramento,env_only,ridge,FIRE_Acres_Burned,0.0367701040996165
+Sacramento,env_only,ridge,Precipitation,0.091867992800776
+Sacramento,env_only,ridge,Wind Run (miles),0.0543231226809571
+Sacramento,env_only,ridge,fungicide_lbs_prd_used,0.0642816300317252
+Sacramento,env_only,ridge,rodent_lbs_prd_used,0.0450622139842351
+Sacramento,env_only,ridge,windeventcount,0.047573056233985
+Sacramento,env_only,sarimax,Avg Soil Temp (F),0.019624243894583
+Sacramento,env_only,sarimax,Avg Wind Speed (mph),0.4682447951263368
+Sacramento,env_only,sarimax,Precipitation,0.0103054604404317
+Sacramento,env_only,sarimax,Wind Run (miles),0.479927203603015
+Sacramento,env_only,sarimax,windeventcount,0.0218982969356333
+Sacramento,env_only,xgboost,AQI_PM10,0.0634365513751562
+Sacramento,env_only,xgboost,AQI_PM25,0.066281352508778
+Sacramento,env_only,xgboost,AR: recent log-change,0.2321394361600924
+Sacramento,env_only,xgboost,AR: same month last year,0.0616586600710341
+Sacramento,env_only,xgboost,Avg Rel Hum (%),0.0688540683572172
+Sacramento,env_only,xgboost,Avg Soil Temp (F),0.0669320045909385
+Sacramento,env_only,xgboost,Avg Wind Speed (mph),0.0668513040106039
+Sacramento,env_only,xgboost,FIRE_Acres_Burned,0.0603939382935995
+Sacramento,env_only,xgboost,Precipitation,0.0586739177166485
+Sacramento,env_only,xgboost,Wind Run (miles),0.0665747154697841
+Sacramento,env_only,xgboost,fungicide_lbs_prd_used,0.0644354288386464
+Sacramento,env_only,xgboost,rodent_lbs_prd_used,0.0633437674590993
+Sacramento,env_only,xgboost,windeventcount,0.0604248551484013
+San Bernardino,env_only,random_forest,AQI_PM10,0.0646740135322345
+San Bernardino,env_only,random_forest,AQI_PM25,0.0514893443731624
+San Bernardino,env_only,random_forest,AR: recent log-change,0.2232270797571538
+San Bernardino,env_only,random_forest,AR: same month last year,0.066272702482457
+San Bernardino,env_only,random_forest,Avg Rel Hum (%),0.0709016170164248
+San Bernardino,env_only,random_forest,Avg Soil Temp (F),0.064442856068007
+San Bernardino,env_only,random_forest,Avg Wind Speed (mph),0.0647402327504514
+San Bernardino,env_only,random_forest,FIRE_Acres_Burned,0.0764945112832411
+San Bernardino,env_only,random_forest,Precipitation,0.0826110841443199
+San Bernardino,env_only,random_forest,Wind Run (miles),0.0644189847587986
+San Bernardino,env_only,random_forest,fungicide_lbs_prd_used,0.0570927903372637
+San Bernardino,env_only,random_forest,rodent_lbs_prd_used,0.0581722781271951
+San Bernardino,env_only,random_forest,windeventcount,0.0554625053692901
+San Bernardino,env_only,ridge,AQI_PM10,0.0723271768016296
+San Bernardino,env_only,ridge,AQI_PM25,0.0602013198633623
+San Bernardino,env_only,ridge,AR: recent log-change,0.1824271768036373
+San Bernardino,env_only,ridge,AR: same month last year,0.0808045960338229
+San Bernardino,env_only,ridge,Avg Rel Hum (%),0.0828336305789539
+San Bernardino,env_only,ridge,Avg Soil Temp (F),0.0595726959816798
+San Bernardino,env_only,ridge,Avg Wind Speed (mph),0.0716600798974682
+San Bernardino,env_only,ridge,FIRE_Acres_Burned,0.0564865779731317
+San Bernardino,env_only,ridge,Precipitation,0.0809901791722143
+San Bernardino,env_only,ridge,Wind Run (miles),0.0829481317064662
+San Bernardino,env_only,ridge,fungicide_lbs_prd_used,0.0446182508707911
+San Bernardino,env_only,ridge,rodent_lbs_prd_used,0.0480281027035664
+San Bernardino,env_only,ridge,windeventcount,0.0771020816132759
+San Bernardino,env_only,sarimax,AQI_PM25,0.1721494421819124
+San Bernardino,env_only,sarimax,Avg Soil Temp (F),0.2600206605749643
+San Bernardino,env_only,sarimax,Precipitation,0.3518800932954751
+San Bernardino,env_only,sarimax,Wind Run (miles),0.0801852198367564
+San Bernardino,env_only,sarimax,rodent_lbs_prd_used,0.1357645841108916
+San Bernardino,env_only,xgboost,AQI_PM10,0.0685795754662096
+San Bernardino,env_only,xgboost,AQI_PM25,0.0617881502753771
+San Bernardino,env_only,xgboost,AR: recent log-change,0.2065393507381449
+San Bernardino,env_only,xgboost,AR: same month last year,0.0657698165133115
+San Bernardino,env_only,xgboost,Avg Rel Hum (%),0.0695023591093121
+San Bernardino,env_only,xgboost,Avg Soil Temp (F),0.0694233278356686
+San Bernardino,env_only,xgboost,Avg Wind Speed (mph),0.0625096453102917
+San Bernardino,env_only,xgboost,FIRE_Acres_Burned,0.0695019080640458
+San Bernardino,env_only,xgboost,Precipitation,0.0679452552001763
+San Bernardino,env_only,xgboost,Wind Run (miles),0.0692461656429596
+San Bernardino,env_only,xgboost,fungicide_lbs_prd_used,0.0639959438798349
+San Bernardino,env_only,xgboost,rodent_lbs_prd_used,0.0615854935698975
+San Bernardino,env_only,xgboost,windeventcount,0.0636130083947697
+Santa Barbara,env_only,random_forest,AQI_PM10,0.0481053805459001
+Santa Barbara,env_only,random_forest,AQI_PM25,0.0526067249423502
+Santa Barbara,env_only,random_forest,AR: recent log-change,0.2319856587536639
+Santa Barbara,env_only,random_forest,AR: same month last year,0.0822117978913545
+Santa Barbara,env_only,random_forest,Avg Rel Hum (%),0.0660527487601716
+Santa Barbara,env_only,random_forest,Avg Soil Temp (F),0.0698911199911018
+Santa Barbara,env_only,random_forest,Avg Wind Speed (mph),0.0720903350877949
+Santa Barbara,env_only,random_forest,FIRE_Acres_Burned,0.064224997035495
+Santa Barbara,env_only,random_forest,Precipitation,0.075631464763404
+Santa Barbara,env_only,random_forest,Wind Run (miles),0.0649403968672038
+Santa Barbara,env_only,random_forest,fungicide_lbs_prd_used,0.0636985252333711
+Santa Barbara,env_only,random_forest,rodent_lbs_prd_used,0.0706442862012965
+Santa Barbara,env_only,random_forest,windeventcount,0.0379165639268921
+Santa Barbara,env_only,ridge,AQI_PM10,0.0590307261308902
+Santa Barbara,env_only,ridge,AQI_PM25,0.0559639398274236
+Santa Barbara,env_only,ridge,AR: recent log-change,0.3108982550567318
+Santa Barbara,env_only,ridge,AR: same month last year,0.0724207243945955
+Santa Barbara,env_only,ridge,Avg Rel Hum (%),0.075942054053438
+Santa Barbara,env_only,ridge,Avg Soil Temp (F),0.071893178631364
+Santa Barbara,env_only,ridge,Avg Wind Speed (mph),0.0479659097909781
+Santa Barbara,env_only,ridge,FIRE_Acres_Burned,0.0628554452759396
+Santa Barbara,env_only,ridge,Precipitation,0.0392302332547091
+Santa Barbara,env_only,ridge,Wind Run (miles),0.0430399861275528
+Santa Barbara,env_only,ridge,fungicide_lbs_prd_used,0.0464828042976257
+Santa Barbara,env_only,ridge,rodent_lbs_prd_used,0.0428242790493702
+Santa Barbara,env_only,ridge,windeventcount,0.0714524641093811
+Santa Barbara,env_only,sarimax,Avg Wind Speed (mph),0.3321599848151918
+Santa Barbara,env_only,sarimax,FIRE_Acres_Burned,0.1534459920122705
+Santa Barbara,env_only,sarimax,Precipitation,0.1279534832835318
+Santa Barbara,env_only,sarimax,Wind Run (miles),0.2347128366373403
+Santa Barbara,env_only,sarimax,windeventcount,0.1517277032516655
+Santa Barbara,env_only,xgboost,AQI_PM10,0.0562837199164023
+Santa Barbara,env_only,xgboost,AQI_PM25,0.0728106949765983
+Santa Barbara,env_only,xgboost,AR: recent log-change,0.226785283014527
+Santa Barbara,env_only,xgboost,AR: same month last year,0.0712358564819204
+Santa Barbara,env_only,xgboost,Avg Rel Hum (%),0.0547503709466647
+Santa Barbara,env_only,xgboost,Avg Soil Temp (F),0.0650722251032163
+Santa Barbara,env_only,xgboost,Avg Wind Speed (mph),0.0583225406617543
+Santa Barbara,env_only,xgboost,FIRE_Acres_Burned,0.0681035304373354
+Santa Barbara,env_only,xgboost,Precipitation,0.049229436801187
+Santa Barbara,env_only,xgboost,Wind Run (miles),0.0624383720121872
+Santa Barbara,env_only,xgboost,fungicide_lbs_prd_used,0.0727722570559159
+Santa Barbara,env_only,xgboost,rodent_lbs_prd_used,0.0712404677533742
+Santa Barbara,env_only,xgboost,windeventcount,0.0709552448389162
+Santa Clara,env_only,random_forest,AQI_PM10,0.064727082375397
+Santa Clara,env_only,random_forest,AQI_PM25,0.0539599222129927
+Santa Clara,env_only,random_forest,AR: recent log-change,0.3568342186204876
+Santa Clara,env_only,random_forest,AR: same month last year,0.0786452924152057
+Santa Clara,env_only,random_forest,Avg Rel Hum (%),0.0610426682013428
+Santa Clara,env_only,random_forest,Avg Soil Temp (F),0.0848428640654347
+Santa Clara,env_only,random_forest,Avg Wind Speed (mph),0.0471405041511346
+Santa Clara,env_only,random_forest,FIRE_Acres_Burned,0.0613554753389429
+Santa Clara,env_only,random_forest,Precipitation,0.0476280559956447
+Santa Clara,env_only,random_forest,Wind Run (miles),0.0399272415606221
+Santa Clara,env_only,random_forest,fungicide_lbs_prd_used,0.0468673404937878
+Santa Clara,env_only,random_forest,rodent_lbs_prd_used,0.0524227307107873
+Santa Clara,env_only,random_forest,windeventcount,0.0046066038582199
+Santa Clara,env_only,ridge,AQI_PM10,0.0665400126626508
+Santa Clara,env_only,ridge,AQI_PM25,0.0513283281076085
+Santa Clara,env_only,ridge,AR: recent log-change,0.3098700476973202
+Santa Clara,env_only,ridge,AR: same month last year,0.0716416279374564
+Santa Clara,env_only,ridge,Avg Rel Hum (%),0.0709619003787743
+Santa Clara,env_only,ridge,Avg Soil Temp (F),0.0567327676499417
+Santa Clara,env_only,ridge,Avg Wind Speed (mph),0.0447944080895215
+Santa Clara,env_only,ridge,FIRE_Acres_Burned,0.0479770386116812
+Santa Clara,env_only,ridge,Precipitation,0.0735745065033623
+Santa Clara,env_only,ridge,Wind Run (miles),0.0316464016507519
+Santa Clara,env_only,ridge,fungicide_lbs_prd_used,0.0735284040743256
+Santa Clara,env_only,ridge,rodent_lbs_prd_used,0.0598506653449669
+Santa Clara,env_only,ridge,windeventcount,0.041553891291638
+Santa Clara,env_only,sarimax,AQI_PM10,0.0665587574789776
+Santa Clara,env_only,sarimax,Avg Soil Temp (F),0.1244248279922339
+Santa Clara,env_only,sarimax,fungicide_lbs_prd_used,0.3774268852736248
+Santa Clara,env_only,sarimax,rodent_lbs_prd_used,0.282305831939048
+Santa Clara,env_only,sarimax,windeventcount,0.1492836973161156
+Santa Clara,env_only,xgboost,AQI_PM10,0.0701806658678409
+Santa Clara,env_only,xgboost,AQI_PM25,0.068240353844073
+Santa Clara,env_only,xgboost,AR: recent log-change,0.261015324767544
+Santa Clara,env_only,xgboost,AR: same month last year,0.0705134981808751
+Santa Clara,env_only,xgboost,Avg Rel Hum (%),0.055705618880198
+Santa Clara,env_only,xgboost,Avg Soil Temp (F),0.0676490620522703
+Santa Clara,env_only,xgboost,Avg Wind Speed (mph),0.0604302483770586
+Santa Clara,env_only,xgboost,FIRE_Acres_Burned,0.0687794433435081
+Santa Clara,env_only,xgboost,Precipitation,0.0444651658819651
+Santa Clara,env_only,xgboost,Wind Run (miles),0.0608288998897985
+Santa Clara,env_only,xgboost,fungicide_lbs_prd_used,0.0660989509306822
+Santa Clara,env_only,xgboost,rodent_lbs_prd_used,0.0700488967758887
+Santa Clara,env_only,xgboost,windeventcount,0.0360438712082971
+Solano,env_only,random_forest,AQI_PM10,0.0504437146046759
+Solano,env_only,random_forest,AQI_PM25,0.0650721514901179
+Solano,env_only,random_forest,AR: recent log-change,0.2132511360958042
+Solano,env_only,random_forest,AR: same month last year,0.0509181374613814
+Solano,env_only,random_forest,Avg Rel Hum (%),0.0668396428218481
+Solano,env_only,random_forest,Avg Soil Temp (F),0.0701644067794415
+Solano,env_only,random_forest,Avg Wind Speed (mph),0.075137994208996
+Solano,env_only,random_forest,FIRE_Acres_Burned,0.0619295438626326
+Solano,env_only,random_forest,Precipitation,0.0688428676127317
+Solano,env_only,random_forest,Wind Run (miles),0.0723117642169853
+Solano,env_only,random_forest,fungicide_lbs_prd_used,0.070964941645096
+Solano,env_only,random_forest,rodent_lbs_prd_used,0.0839401426341891
+Solano,env_only,random_forest,windeventcount,0.0501835565660998
+Solano,env_only,ridge,AQI_PM10,0.0637705026220117
+Solano,env_only,ridge,AQI_PM25,0.0869035874324584
+Solano,env_only,ridge,AR: recent log-change,0.2883122236183156
+Solano,env_only,ridge,AR: same month last year,0.0817074868652274
+Solano,env_only,ridge,Avg Rel Hum (%),0.0510102752080122
+Solano,env_only,ridge,Avg Soil Temp (F),0.0440400032129443
+Solano,env_only,ridge,Avg Wind Speed (mph),0.0605633726324492
+Solano,env_only,ridge,FIRE_Acres_Burned,0.0572781289585395
+Solano,env_only,ridge,Precipitation,0.0911112308373896
+Solano,env_only,ridge,Wind Run (miles),0.0450258992213723
+Solano,env_only,ridge,fungicide_lbs_prd_used,0.0417830789559609
+Solano,env_only,ridge,rodent_lbs_prd_used,0.049105449176511
+Solano,env_only,ridge,windeventcount,0.0393887612588074
+Solano,env_only,sarimax,AQI_PM10,0.0857894127826554
+Solano,env_only,sarimax,Avg Wind Speed (mph),0.3123823993261655
+Solano,env_only,sarimax,fungicide_lbs_prd_used,0.1673654414996803
+Solano,env_only,sarimax,rodent_lbs_prd_used,0.1722819412920629
+Solano,env_only,sarimax,windeventcount,0.2621808050994357
+Solano,env_only,xgboost,AQI_PM10,0.0575277370237078
+Solano,env_only,xgboost,AQI_PM25,0.0662876306947305
+Solano,env_only,xgboost,AR: recent log-change,0.2184999607410561
+Solano,env_only,xgboost,AR: same month last year,0.05980683088909
+Solano,env_only,xgboost,Avg Rel Hum (%),0.0600988573159862
+Solano,env_only,xgboost,Avg Soil Temp (F),0.0644630717280062
+Solano,env_only,xgboost,Avg Wind Speed (mph),0.0667923428320289
+Solano,env_only,xgboost,FIRE_Acres_Burned,0.0659268048591614
+Solano,env_only,xgboost,Precipitation,0.0604614647494621
+Solano,env_only,xgboost,Wind Run (miles),0.0712507254849198
+Solano,env_only,xgboost,fungicide_lbs_prd_used,0.0668760914464093
+Solano,env_only,xgboost,rodent_lbs_prd_used,0.0758632963961209
+Solano,env_only,xgboost,windeventcount,0.0661451858393203
+Stanislaus,env_only,random_forest,AQI_PM10,0.0435790536765662
+Stanislaus,env_only,random_forest,AQI_PM25,0.0644240336313442
+Stanislaus,env_only,random_forest,AR: recent log-change,0.327300198530269
+Stanislaus,env_only,random_forest,AR: same month last year,0.0596118170903585
+Stanislaus,env_only,random_forest,Avg Rel Hum (%),0.0390114448909805
+Stanislaus,env_only,random_forest,Avg Soil Temp (F),0.0905997301940737
+Stanislaus,env_only,random_forest,Avg Wind Speed (mph),0.0588528635312322
+Stanislaus,env_only,random_forest,FIRE_Acres_Burned,0.0541798697053426
+Stanislaus,env_only,random_forest,Precipitation,0.0477223766100474
+Stanislaus,env_only,random_forest,Wind Run (miles),0.0471583980674195
+Stanislaus,env_only,random_forest,fungicide_lbs_prd_used,0.0610291490942202
+Stanislaus,env_only,random_forest,rodent_lbs_prd_used,0.0721057017126566
+Stanislaus,env_only,random_forest,windeventcount,0.0344253632654887
+Stanislaus,env_only,ridge,AQI_PM10,0.0589483868811021
+Stanislaus,env_only,ridge,AQI_PM25,0.0617605097470886
+Stanislaus,env_only,ridge,AR: recent log-change,0.2361029899690932
+Stanislaus,env_only,ridge,AR: same month last year,0.0379795069704083
+Stanislaus,env_only,ridge,Avg Rel Hum (%),0.0553590635628246
+Stanislaus,env_only,ridge,Avg Soil Temp (F),0.0640090581044111
+Stanislaus,env_only,ridge,Avg Wind Speed (mph),0.0614873426614481
+Stanislaus,env_only,ridge,FIRE_Acres_Burned,0.0385342645999491
+Stanislaus,env_only,ridge,Precipitation,0.0733239352030249
+Stanislaus,env_only,ridge,Wind Run (miles),0.0767357132622073
+Stanislaus,env_only,ridge,fungicide_lbs_prd_used,0.0812656746113434
+Stanislaus,env_only,ridge,rodent_lbs_prd_used,0.0767127380089497
+Stanislaus,env_only,ridge,windeventcount,0.0777808164181487
+Stanislaus,env_only,sarimax,AQI_PM10,0.1207258378440771
+Stanislaus,env_only,sarimax,Avg Wind Speed (mph),0.3464025698840274
+Stanislaus,env_only,sarimax,Wind Run (miles),0.3300769150832159
+Stanislaus,env_only,sarimax,fungicide_lbs_prd_used,0.0319527278580163
+Stanislaus,env_only,sarimax,windeventcount,0.1708419493306631
+Stanislaus,env_only,xgboost,AQI_PM10,0.0621386458950331
+Stanislaus,env_only,xgboost,AQI_PM25,0.0681769733123801
+Stanislaus,env_only,xgboost,AR: recent log-change,0.2181137684135437
+Stanislaus,env_only,xgboost,AR: same month last year,0.0657959126265863
+Stanislaus,env_only,xgboost,Avg Rel Hum (%),0.0530893278015865
+Stanislaus,env_only,xgboost,Avg Soil Temp (F),0.0746397221513568
+Stanislaus,env_only,xgboost,Avg Wind Speed (mph),0.0637315591439595
+Stanislaus,env_only,xgboost,FIRE_Acres_Burned,0.0692104057759152
+Stanislaus,env_only,xgboost,Precipitation,0.0543090600158829
+Stanislaus,env_only,xgboost,Wind Run (miles),0.0646887231495118
+Stanislaus,env_only,xgboost,fungicide_lbs_prd_used,0.0646837207755897
+Stanislaus,env_only,xgboost,rodent_lbs_prd_used,0.0712896212597957
+Stanislaus,env_only,xgboost,windeventcount,0.0701325596788584
