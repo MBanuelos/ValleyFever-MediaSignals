@@ -22,9 +22,12 @@ summary, res   = best_model_and_top_features("Monterey", "data")
 - Rolling 120-month training window, 1-month step, direct 1 to 6 month forecasts (2021-02 to 2024-12).
 - Target: month-to-month change in log1p(rate per 100k). Features are lagged by the forecast step.
 - Feature sets: environment, media, media + environment. All include the county's own recent case changes.
-- Models: seasonal naive, Ridge, Random Forest, XGBoost, SARIMAX, LSTM.
+- Models: Ridge, Random Forest, XGBoost, SARIMAX, LSTM, and two baselines: seasonal naive (repeats last year's change) and no change (repeats last month's value).
   - Ridge, Random Forest and XGBoost are tuned once on the first window (TimeSeriesSplit).
   - SARIMAX uses the five outside predictors most correlated with cases on the first window (lagged 6 months, so future values are known) and an order picked by AIC on that window.
   - The LSTM is written in NumPy (no PyTorch needed): one hidden layer of 24 units, 6-month look-back, predicts all six steps at once. Gradients were checked numerically. Hyperparameters are fixed, not tuned, and each LSTM is a single seeded run.
-- Best model = lowest RMSE averaged over the 1, 3 and 6 month horizons.
-- The seasonal-naive baseline repeats last year's change. A simple "no change from last month" forecast is a stricter baseline, and at 1 month ahead it matches or beats the models in several counties.
+- Target and units: the models predict the month-to-month change in log(1 + cases per 100,000). Forecasts are converted back to rates for the charts and the rate errors.
+- Best model = lowest RMSE averaged over the 1, 3 and 6 month horizons. Baselines are never chosen as the best model.
+- Counties: the 10 with the most cases (2011 to 2024) form the first tab; the rest form the second. San Mateo and Alameda are excluded from every calculation (by request), and any county with more than 50% of its environmental data missing would be too (none other is).
+- `diagnostic_history_only_metrics.csv` holds a check that uses only each county's own case history, with no weather or media.
+
