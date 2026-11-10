@@ -1,0 +1,22 @@
+County,Feature_Set,subsample,reg_lambda,reg_alpha,n_estimators,min_child_weight,max_depth,learning_rate,colsample_bytree
+Alameda,articles,0.7,10,1.0,500,3,3,0.01,0.7
+Contra Costa,articles,0.7,5,0.1,200,5,6,0.01,0.8
+Fresno,articles,0.7,10,1.0,500,3,3,0.01,0.7
+Kern,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Los Angeles,articles,0.7,10,1.0,500,3,3,0.01,0.7
+Merced,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Monterey,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Orange,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Riverside,articles,0.7,5,0.1,200,5,6,0.01,0.8
+Sacramento,articles,0.8,5,1.0,300,7,4,0.01,0.7
+San Bernardino,articles,1.0,1,1.0,300,3,6,0.05,0.8
+San Diego,articles,0.8,5,1.0,300,7,4,0.01,0.7
+San Joaquin,articles,0.8,1,0.1,200,3,3,0.01,0.7
+San Luis Obispo,articles,0.7,5,0.1,200,5,6,0.01,0.8
+San Mateo,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Santa Barbara,articles,0.7,10,1.0,500,3,3,0.01,0.7
+Santa Clara,articles,1.0,1,1.0,300,3,6,0.05,0.8
+Solano,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Stanislaus,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Tulare,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Ventura,articles,0.8,5,1.0,300,7,4,0.01,0.7
