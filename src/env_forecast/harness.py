@@ -5,12 +5,14 @@ from __future__ import annotations
 import warnings
 from typing import Iterable
 
+import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
 
 from .config import HarnessConfig
 from .data import mask_history
 from .features import Design, build_design
+from .importance import importance_groups
 from .models import ForecastModel
 from .tasks import ForecastTask
 
@@ -26,9 +28,9 @@ def evaluation_targets(config: HarnessConfig) -> pd.PeriodIndex:
 
 
 def period_label(target: pd.Period, config: HarnessConfig) -> str:
-    if config.confirmation_start is None:
+    if config.test_start is None:
         return "evaluation"
-    return "confirmation" if target >= pd.Period(config.confirmation_start, "M") else "development"
+    return "test" if target >= pd.Period(config.test_start, "M") else "validation"
 
 
 def training_rows(design: Design, origin: pd.Period, horizon: int, config: HarnessConfig) -> pd.PeriodIndex:
@@ -61,7 +63,13 @@ def make_tasks(county: str, frame: pd.DataFrame, origin: pd.Period, horizon: int
 
 def run_county(county: str, frame: pd.DataFrame, config: HarnessConfig, models: list[ForecastModel]) -> list[dict]:
     """Forecast every target month at every horizon for one county, model and feature set."""
-    records = []
+    return _run_county(county, frame, config, models)[0]
+
+
+def _run_county(county: str, frame: pd.DataFrame, config: HarnessConfig, models: list[ForecastModel]
+                ) -> tuple[list[dict], list[dict]]:
+    """Prediction records and, when config.importance_draws > 0, permutation-importance records."""
+    records, importance = [], []
     env_lag = min(config.env_cutoffs.values(), default=None)
     for horizon in config.horizons:
         for target in evaluation_targets(config):
@@ -84,26 +92,44 @@ def run_county(county: str, frame: pd.DataFrame, config: HarnessConfig, models: 
             for model in models:
                 for task in make_tasks(county, frame, origin, horizon, model, config, history, design, rows):
                     uses_env = task.feature_set in ("E", "RE") and env_lag is not None
+                    if config.importance_draws and hasattr(model, "fit_predict_importance"):
+                        groups = importance_groups(config, task.feature_set)
+                        prediction, perturbed = model.fit_predict_importance(task, groups, config.importance_draws)
+                        actual = base["actual_rate"]
+                        for group, values in perturbed.items():
+                            importance.append({
+                                "county": county, "model": model.name, "feature_set": task.feature_set, "horizon": horizon,
+                                "target_month": str(target), "period": base["period"], "seed": config.seed,
+                                "level": group.level, "group": group.name, "actual_rate": actual,
+                                "predicted_rate": float(prediction), "permuted_mean_prediction": float(np.mean(values)),
+                                "permuted_sq_error": float(np.mean((values - actual) ** 2)),
+                            })
+                    else:
+                        prediction = model.fit_predict(task)
                     records.append({
                         **base, "model": model.name, "feature_set": task.feature_set,
-                        "predicted_rate": float(model.fit_predict(task)),
+                        "predicted_rate": float(prediction),
                         "env_info_cutoff": str(origin - env_lag) if uses_env else "",
                     })
-    return records
+    return records, importance
 
 
-def run_panel(panel: dict[str, pd.DataFrame], config: HarnessConfig, models: list[ForecastModel], n_jobs: int = 1) -> pd.DataFrame:
+def run_panel(panel: dict[str, pd.DataFrame], config: HarnessConfig, models: list[ForecastModel], n_jobs: int = 1,
+              importance: list[dict] | None = None) -> pd.DataFrame:
     """
     Forecast every target month at every horizon for every county, model and feature set.
 
     Counties are independent, so n_jobs > 1 runs them in parallel processes (each gets its own
     copy of the models); results are identical to a serial run. Returns one row per forecast with
     the columns in PREDICTION_COLUMNS, sorted deterministically. Predictions are on the rate scale.
+    If `importance` is a list and config.importance_draws > 0, permutation-importance records are appended to it.
     """
     if n_jobs == 1:
-        per_county = [run_county(county, frame, config, models) for county, frame in panel.items()]
+        per_county = [_run_county(county, frame, config, models) for county, frame in panel.items()]
     else:
-        per_county = Parallel(n_jobs=n_jobs)(delayed(run_county)(county, frame, config, models) for county, frame in panel.items())
-    predictions = pd.DataFrame([record for records in per_county for record in records], columns=PREDICTION_COLUMNS)
+        per_county = Parallel(n_jobs=n_jobs)(delayed(_run_county)(county, frame, config, models) for county, frame in panel.items())
+    if importance is not None:
+        importance.extend(record for _, county_importance in per_county for record in county_importance)
+    predictions = pd.DataFrame([record for records, _ in per_county for record in records], columns=PREDICTION_COLUMNS)
     sort_keys = ["county", "model", "feature_set", "horizon", "target_month"]
     return predictions.sort_values(sort_keys).reset_index(drop=True)

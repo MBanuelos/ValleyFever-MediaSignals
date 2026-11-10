@@ -123,7 +123,7 @@ def test_all_models_horizons_and_feature_sets_share_target_months(config):
     assert list(predictions.columns) == PREDICTION_COLUMNS
     target_sets = predictions.groupby(["county", "model", "feature_set", "horizon"])["target_month"].apply(frozenset)
     assert target_sets.nunique() == 1 and len(target_sets.iloc[0]) == 24
-    assert set(predictions["period"]) == {"development", "confirmation"}
+    assert set(predictions["period"]) == {"validation", "test"}
     assert (predictions["train_end"] == predictions["rate_info_cutoff"]).all()
 
 
@@ -217,7 +217,7 @@ def test_reference_skill_is_zero_for_the_reference(config):
     summary = summarize(predictions, "seasonal_naive")
     reference = summary[summary["model"] == "seasonal_naive"]
     np.testing.assert_allclose(reference["skill_vs_reference"], 0.0)
-    assert set(summary["period"]) == {"development", "confirmation", "all"}
+    assert set(summary["period"]) == {"validation", "test", "all"}
 
 
 def test_diebold_mariano_direction_and_degenerate_case():

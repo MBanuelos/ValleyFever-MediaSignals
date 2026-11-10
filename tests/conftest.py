@@ -48,7 +48,7 @@ FAST_MODEL_PARAMS = {
 def make_config(**overrides) -> HarnessConfig:
     settings = dict(
         name="synthetic", counties=(), target_col="rate", window_months=120, horizons=(1, 3, 6),
-        eval_start="2017-01", eval_end="2018-12", confirmation_start="2018-01",
+        eval_start="2017-01", eval_end="2018-12", test_start="2018-01",
         rate=RateSpec(availability_lag=1, lags=tuple(range(12)), seasonal_lag=True),
         env_families={
             "weather": FeatureBlock(("w1", "w2"), availability_lag=1, lags=(0, 1, 2), rolling_means=(3,)),

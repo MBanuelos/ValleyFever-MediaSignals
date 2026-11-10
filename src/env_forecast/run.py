@@ -2,7 +2,7 @@
 Command-line entry point.
 
     python -m src.env_forecast.run --config configs/env_baseline.json [--counties Fresno Kern]
-                                   [--development-only] [--n-jobs 4] [--models xgboost] [--seed 7]
+                                   [--validation-only] [--n-jobs 4] [--models xgboost] [--seed 7]
 
 Writes results/env/<experiment_id>/ with predictions.csv, metrics.csv, contrasts.csv,
 config.json and provenance.json. The experiment id is the config name plus a hash of the
@@ -63,23 +63,26 @@ def provenance(config: HarnessConfig) -> dict:
     }
 
 
-def development_only(config: HarnessConfig) -> HarnessConfig:
-    """Restrict evaluation to targets before confirmation_start, so confirmation targets are never forecast."""
-    if config.confirmation_start is None:
-        raise ValueError("development_only needs confirmation_start in the config.")
-    last_development = pd.Period(config.confirmation_start, "M") - 1
-    return dataclasses.replace(config, name=f"{config.name}_dev", eval_end=str(last_development))
+def validation_only(config: HarnessConfig) -> HarnessConfig:
+    """Restrict evaluation to targets before test_start, so test targets are never forecast."""
+    if config.test_start is None:
+        raise ValueError("validation_only needs test_start in the config.")
+    last_validation = pd.Period(config.test_start, "M") - 1
+    return dataclasses.replace(config, name=f"{config.name}_val", eval_end=str(last_validation))
 
 
 def run_experiment(config: HarnessConfig, output_root: str | Path | None = None, n_jobs: int = 1) -> Path:
     """Run a configured experiment end to end and save its outputs; returns the output folder."""
     panel = load_panel(config, PROJECT_ROOT)
-    predictions = run_panel(panel, config, build_models(config), n_jobs=n_jobs)
+    importance = []
+    predictions = run_panel(panel, config, build_models(config), n_jobs=n_jobs, importance=importance)
     predictions.insert(0, "experiment_id", config.experiment_id)
 
     output_dir = Path(output_root or PROJECT_ROOT / config.output_dir) / config.experiment_id
     output_dir.mkdir(parents=True, exist_ok=True)
     predictions.to_csv(output_dir / "predictions.csv", index=False)
+    if importance:
+        pd.DataFrame(importance).to_csv(output_dir / "importance.csv", index=False)
     summarize(predictions, config.reference_model).to_csv(output_dir / "metrics.csv", index=False)
     paired_contrasts(predictions, config.contrasts).to_csv(output_dir / "contrasts.csv", index=False)
     (output_dir / "config.json").write_text(json.dumps(config.to_dict(), indent=2, default=str), encoding="utf-8")
@@ -92,7 +95,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--config", required=True, help="JSON experiment configuration.")
     parser.add_argument("--counties", nargs="+", help="Override the configured counties.")
     parser.add_argument("--output-root", help="Override the output folder (default: config output_dir).")
-    parser.add_argument("--development-only", action="store_true", help="Forecast only targets before confirmation_start.")
+    parser.add_argument("--validation-only", action="store_true", help="Forecast only targets before test_start.")
     parser.add_argument("--n-jobs", type=int, default=1, help="Counties run in parallel (-1 = all cores).")
     parser.add_argument("--models", nargs="+", help="Override the configured models.")
     parser.add_argument("--seed", type=int, help="Override the configured seed.")
@@ -109,16 +112,16 @@ def main(argv: list[str] | None = None) -> None:
     if args.case_lag is not None:
         config = dataclasses.replace(config, name=f"{config.name}_caselag{args.case_lag}",
                                      rate=dataclasses.replace(config.rate, availability_lag=args.case_lag))
-    if args.development_only:
-        config = development_only(config)
+    if args.validation_only:
+        config = validation_only(config)
     output_dir = run_experiment(config, args.output_root, args.n_jobs)
 
     metrics = pd.read_csv(output_dir / "metrics.csv")
-    overview = metrics[metrics["period"] == "development"].pivot_table(
+    overview = metrics[metrics["period"] == "validation"].pivot_table(
         index=["model", "feature_set"], columns="horizon", values="skill_vs_reference", aggfunc="median"
     )
     print(f"\nSaved {output_dir}")
-    print(f"Median development skill vs {config.reference_model} across counties:\n{overview.round(3)}")
+    print(f"Median validation skill vs {config.reference_model} across counties:\n{overview.round(3)}")
 
 
 if __name__ == "__main__":

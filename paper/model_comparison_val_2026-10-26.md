@@ -1,7 +1,7 @@
-# Paper Model Set — Development-Period Comparison (2026-10-26)
+# Paper Model Set — Validation-Period Comparison (2026-10-26)
 
 **Setup**
-- Config: `configs/env_main.json`, run with `--development-only`.
+- Config: `configs/env_main.json`, run with `--validation-only`.
 - Targets 2017-01 to 2020-12 (48 per county), 8 counties, case lag 1, no pesticides.
 - XGBoost and LSTM: predictions averaged over seeds 42–44. LR, SARIMA and SARIMAX are deterministic.
 - Reproduce with `scripts/env_model_comparison.py`, which writes `results/env/main_comparison/`.
@@ -14,7 +14,7 @@ Model roles:
 | Test models | XGBoost and LSTM, each with R / E / RE |
 | References | Seasonal naive (skill = 0), climatology |
 
-**These are development numbers. Nothing here is a confirmed finding,** and with 8 counties × 3 horizons and many comparisons, isolated p < 0.05 results are expected by chance.
+**These are validation numbers. Nothing here is a confirmed finding,** and with 8 counties × 3 horizons and many comparisons, isolated p < 0.05 results are expected by chance.
 
 ## 1. Median skill vs seasonal naive
 
@@ -56,26 +56,26 @@ Format: counties where the first model or input set is better (number significan
 
 For XGBoost, all 3 seeds agree on the direction in nearly every county. For the LSTM they often do not: for example, in "LSTM: RE vs E" only 0–1 counties are better with all seeds agreeing.
 
-## 3. What this suggests (hypotheses for confirmation)
+## 3. What this suggests (hypotheses for test)
 
 1. **Case history adds value beyond environment (RE vs E)** for LR and XGBoost at every horizon, most clearly at 1 month.
 2. **Environment adds value beyond case history only in XGBoost** (about −10% to −13%; 6–7 of 8 counties, rarely significant individually). For linear models it adds nothing: LR RE vs R ≈ 0, SARIMAX ≈ SARIMA. If confirmed, the environment signal appears to be **nonlinear or interaction-based**.
 3. **XGBoost RE is the only configuration with positive median skill at all horizons.** At 3–6 months, every linear baseline is at or below seasonal naive.
 4. **The LSTM is currently the weakest model and is unstable across seeds.** This reflects an untuned initial configuration (hidden size 8, about 120 training sequences per fit). It is not yet a fair verdict on LSTMs.
 
-## 4. Before the confirmation run
+## 4. Before the test run
 
-1. ~~Tune the LSTM on the development period.~~ Done (section 5).
-2. ~~Select the SARIMA/SARIMAX orders on the development period.~~ Done (section 5).
-3. **Freeze every configuration (`configs/env_main_tuned.json`), then run the confirmation period (2021–2024) once.**
+1. ~~Tune the LSTM on the validation period.~~ Done (section 5).
+2. ~~Select the SARIMA/SARIMAX orders on the validation period.~~ Done (section 5).
+3. **Freeze every configuration (`configs/env_main_tuned.json`), then run the test period (2021–2024) once.**
 
-## 5. Development tuning (2026-10-27)
+## 5. Validation tuning (2026-10-27)
 
 **SARIMA/SARIMAX orders** are chosen per county by the lowest mean AIC over 36 orders (p, q ∈ {0,1,2}; P, Q ∈ {0,1}; d = D = 0). The AIC is computed on the four training windows ending 2016-12, 2017-12, 2018-12 and 2019-12. AIC uses training data only, so this choice never looks at evaluation targets. SARIMAX reuses SARIMA's order. The chosen orders are in `results/env/tuning/sarima_orders.json`.
 
-**LSTM grid** (`scripts/env_tune_dev.py lstm-grid`, `results/env/tuning/lstm_grid.csv`):
+**LSTM grid** (`scripts/env_tune_val.py lstm-grid`, `results/env/tuning/lstm_grid.csv`):
 
-- **How it was scored.** Development targets thinned to every 3rd month, seed 42. Score = mean log(RMSE_LSTM / RMSE_seasonal naive) over counties × horizons × feature sets.
+- **How it was scored.** Validation targets thinned to every 3rd month, seed 42. Score = mean log(RMSE_LSTM / RMSE_seasonal naive) over counties × horizons × feature sets.
 - **Search.** Stage 1 tried lookback {6, 12, 24} × hidden {8, 32} × dropout {0.1, 0.3} at lr 1e-3. Stage 2 reran the top 3 at lr 3e-3.
 - **Results.**
 
@@ -86,12 +86,12 @@ For XGBoost, all 3 seeds agree on the direction in nearly every county. For the 
   | **Chosen: lookback 24, hidden 32, dropout 0.3, lr 3e-3** | **−0.016** |
 
 - **Dropout 0.1 vs 0.3** differed by 0.002, below seed noise. The small network was underfitting.
-- **Caveat.** The grid's targets are a subset of the development targets, so the tuned LSTM's development skill below is mildly optimistic. The confirmation period is the unbiased test.
+- **Caveat.** The grid's targets are a subset of the validation targets, so the tuned LSTM's validation skill below is mildly optimistic. The test period is the unbiased test.
 
 **Tuned comparison.**
 
-- **Setup.** LR, XGBoost and climatology are unchanged from `env_main_dev`. SARIMA, SARIMAX and the LSTM come from `env_main_tuned_dev`. XGBoost and LSTM are averaged over seeds 42–44.
-- **Command.** `python scripts/env_model_comparison.py . env_main_dev env_main_tuned_dev`, with output in `results/env/main_comparison_env_main_dev+env_main_tuned_dev/`.
+- **Setup.** LR, XGBoost and climatology are unchanged from `env_main_val`. SARIMA, SARIMAX and the LSTM come from `env_main_tuned_val`. XGBoost and LSTM are averaged over seeds 42–44.
+- **Command.** `python scripts/env_model_comparison.py . env_main_val env_main_tuned_val`, with output in `results/env/main_comparison_env_main_val+env_main_tuned_val/`.
 - **Median skill vs seasonal naive** (number of counties out of 8 with positive skill in parentheses):
 
 | Model | h = 1 | h = 3 | h = 6 |

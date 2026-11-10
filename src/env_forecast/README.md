@@ -43,6 +43,7 @@ panel ──mask_history(t)──▶ history ──build_design(h)──▶ Desi
 | `models.py` | `ForecastModel` protocol; baselines (`seasonal_naive`, `persistence`, `climatology`); `TabularModel`; `Sarima` / `Sarimax`; the `MODEL_BUILDERS` registry (`linear`, `ridge`, `lr`, `sarima`, `sarimax`, `xgboost`, `lstm`). |
 | `lstm.py` | `LSTMModel`: a direct network for each horizon. Inputs are monthly rows, each variable shifted by its own publication delay; scaling comes from training data only; early stopping, then a refit on all training sequences. Torch is imported only when an LSTM is requested. |
 | `imputation.py` | Origin-consistent Holt–Winters forward fill for late-published families (`forecast_fill: "ets"`). |
+| `importance.py` | Permutation importance inside the loop (`importance_draws > 0`). After each fit, each group or variable in the forecast inputs is replaced by values from random *training* rows, and the model predicts again without refitting. Supported by the tabular models (LR, XGBoost) and the LSTM; forecasts are unchanged. |
 | `harness.py` | `run_county` / `run_panel`: the loop over county × horizon × target × model × feature set. `n_jobs` runs counties in parallel with results identical to a serial run. |
 | `metrics.py` | `summarize` (RMSE/MAE/bias, skill vs the reference on paired targets), `paired_contrasts` (feature set A vs B per model, Diebold–Mariano with HLN correction and Newey–West h−1 lags), `diebold_mariano`. |
 | `run.py` | CLI. Writes `results/env/<experiment_id>/`. |
@@ -101,9 +102,12 @@ Whatever a model does internally, it cannot see beyond the task, so the invarian
 | File | Contents |
 |---|---|
 | `predictions.csv` | One row per forecast: `experiment_id, county, model, feature_set, horizon, forecast_origin, target_month, period, seed, actual_rate, predicted_rate, train_start, train_end, n_train, rate_info_cutoff, env_info_cutoff` |
-| `metrics.csv` | Per county × model × feature set × horizon × period (`development`, `confirmation`, `all`): `n, rmse, mae, bias, rmse_reference, skill_vs_reference` |
+| `metrics.csv` | Per county × model × feature set × horizon × period (`validation`, `test`, `all`): `n, rmse, mae, bias, rmse_reference, skill_vs_reference` |
+
+**Periods.** Targets before `test_start` (2021-01) are the **validation** period, used for all model, feature and hyperparameter choices; targets from `test_start` on are the **test** period, run once with frozen settings (`results/env/test_freeze.json`). These are evaluation periods, not data splits: every forecast still trains on its own rolling 120-month window. The LSTM's `validation_fraction` is a different thing, an early-stopping split taken from the end of each training window. Runs saved before the rename used `development`/`confirmation` and `confirmation_start`; configs with the old key still load and hash to the same experiment ids.
 | `contrasts.csv` | Per model × contrast × county × horizon × period: `rmse_a, rmse_b, relative_rmse_change, dm_statistic, dm_p_value` |
 | `config.json`, `provenance.json` | Full settings; data SHA-256, git commit, dirty flag, package versions |
+| `importance.csv` (only with `importance_draws > 0`) | One row per forecast × group or variable: `level` (group/variable), `group`, `predicted_rate`, `permuted_mean_prediction`, `permuted_sq_error` (mean over draws) |
 
 `experiment_id = <name>_<config hash>`, so an unchanged config always writes to the same folder.
 
@@ -126,11 +130,11 @@ From the project root, in the project venv (`.venv313`):
 # tests (requires: pip install pytest; about 4 minutes)
 .venv313/Scripts/python.exe -m pytest tests -q
 
-# development period only (targets before confirmation_start); confirmation targets are never forecast
+# validation period only (targets before test_start); test targets are never forecast
 # about 8 minutes for 8 counties with all models and --n-jobs 8
-.venv313/Scripts/python.exe -m src.env_forecast.run --config configs/env_baseline.json --development-only --n-jobs 8
+.venv313/Scripts/python.exe -m src.env_forecast.run --config configs/env_baseline.json --validation-only --n-jobs 8
 
-# full run, including the confirmation period: only once configurations are frozen
+# full run, including the test period: only once configurations are frozen
 .venv313/Scripts/python.exe -m src.env_forecast.run --config configs/env_baseline.json --n-jobs 8
 
 # subset of counties
@@ -179,14 +183,17 @@ Analysis scripts (run after the matching harness runs; each writes under `result
 | `scripts/env_case_lag_check.py` | Case-lag sensitivity |
 | `scripts/env_seed_check.py` | XGBoost seed stability |
 | `scripts/env_pesticide_check.py` | Pesticide variants |
+| `scripts/env_pooled_significance.py` | All-county significance: geometric-mean RMSE change with a moving-block bootstrap CI (same months for every county), Holm-adjusted p-values, sign test |
+| `scripts/env_importance_analysis.py` | Group ablation (`configs/ablation/`), permutation importance (`configs/importance/`) and case-delay sensitivity, pooled with bootstrap CIs; writes tables and figures to `results/env/importance/` |
+| `scripts/env_plots.py` | Figures from saved predictions (no refitting): forecasts vs actual per county, skill by horizon, RE vs E by county. `python scripts/env_plots.py . --name env_main_tuned` writes PNGs plus their data tables to `results/env/figures/` |
 
 ## Known limitations
 
 - Rolling means are computed from each window's own values (`features.window_mean`). pandas' running-sum rolling mean let rounding from older months reach later values, which moved SARIMAX fits.
 - The LSTM uses raw shifted columns for every family. It does not use `forecast_fill`.
-- Development-tuned settings are in `configs/env_main_tuned.json`: SARIMA(X) orders per county chosen by AIC, and LSTM settings chosen from a small grid (`scripts/env_tune_dev.py`; results in `paper/model_comparison_dev_2026-10-26.md` §5). Orders are fixed per county, not re-selected at each origin.
+- Validation-tuned settings are in `configs/env_main_tuned.json`: SARIMA(X) orders per county chosen by AIC, and LSTM settings chosen from a small grid (`scripts/env_tune_val.py`; results in `paper/model_comparison_val_2026-10-26.md` §5). Orders are fixed per county, not re-selected at each origin.
 
 - Values are the *current vintage*. Revisions to past case counts are not modelled; availability lags approximate reporting delay only.
 - Availability lags in `configs/env_baseline.json` are assumptions to verify (audit section D2).
 - `expm1` back-transform with `log_target` gives a median-type forecast (biased low for skewed rates).
-- No hyperparameter search yet. Tune only on `development` targets.
+- No hyperparameter search yet. Tune only on `validation` targets.

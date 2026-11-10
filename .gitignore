@@ -21,3 +21,7 @@ results/*
 .claude/todos/
 .claude/scheduled_tasks.*
 .claude/worktrees/
+# personal Claude instructions
+CLAUDE.local.md
+
+.claude/memory

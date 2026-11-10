@@ -30,6 +30,7 @@ from xgboost import XGBRegressor
 
 from .config import HarnessConfig
 from .features import window_mean
+from .importance import ImportanceGroup, design_columns, draw_rng
 from .tasks import ForecastTask
 
 
@@ -95,13 +96,36 @@ class TabularModel:
     columns_for: Callable[[ForecastTask], list[str]] | None = None
 
     def fit_predict(self, task: ForecastTask) -> float:
+        estimator, columns = self._fit(task)
+        return float(self._predict(estimator, task.X_forecast[columns])[0])
+
+    def fit_predict_importance(self, task: ForecastTask, groups: list[ImportanceGroup], draws: int
+                               ) -> tuple[float, dict[ImportanceGroup, np.ndarray]]:
+        """Prediction plus `draws` permuted predictions per group (see importance.py); one fit."""
+        estimator, columns = self._fit(task)
+        X_forecast = task.X_forecast[columns]
+        perturbed = {}
+        for group in groups:
+            replaced = design_columns(columns, group.sources)
+            if not replaced:
+                continue
+            rows = draw_rng(task, group).integers(0, len(task.X_train), size=draws)
+            X = X_forecast.loc[X_forecast.index.repeat(draws)].copy()
+            X[replaced] = task.X_train[replaced].iloc[rows].to_numpy()
+            perturbed[group] = self._predict(estimator, X)
+        return float(self._predict(estimator, X_forecast)[0]), perturbed
+
+    def _fit(self, task: ForecastTask) -> tuple[Any, list[str]]:
         columns = self.columns_for(task) if self.columns_for else list(task.X_train.columns)
         estimator = self.factory(task.seed)
         if self.log_target:
             estimator = TransformedTargetRegressor(regressor=estimator, func=np.log1p, inverse_func=np.expm1, check_inverse=False)
         estimator.fit(task.X_train[columns], task.y_train)
-        prediction = float(estimator.predict(task.X_forecast[columns])[0])
-        return max(prediction, self.clip_min) if self.clip_min is not None else prediction
+        return estimator, columns
+
+    def _predict(self, estimator: Any, X: pd.DataFrame) -> np.ndarray:
+        prediction = np.asarray(estimator.predict(X), float)
+        return np.maximum(prediction, self.clip_min) if self.clip_min is not None else prediction
 
 
 def ar_columns(task: ForecastTask) -> list[str]:
@@ -142,7 +166,7 @@ class Sarima:
     _cache: dict = field(default_factory=dict, repr=False)
 
     def orders(self, county: str) -> tuple[tuple[int, ...], tuple[int, ...]]:
-        """County-specific (order, seasonal_order) if selected on the development period, else the defaults."""
+        """County-specific (order, seasonal_order) if selected on the validation period, else the defaults."""
         chosen = self.county_orders.get(county, {})
         return tuple(chosen.get("order", self.order)), tuple(chosen.get("seasonal_order", self.seasonal_order))
 

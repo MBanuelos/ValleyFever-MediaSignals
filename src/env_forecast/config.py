@@ -51,8 +51,9 @@ class HarnessConfig:
 
     Evaluation is target-based: each month in [eval_start, eval_end] is forecast at every
     horizon h from origin = target - h, so all horizons, models and feature sets are scored
-    on identical target months. Targets on or after `confirmation_start` are labelled
-    "confirmation" and must not be used for model or feature selection.
+    on identical target months. Targets before `test_start` are the "validation" period (used
+    for model and feature selection); targets on or after it are the "test" period and must
+    not be used for any selection.
     """
 
     name: str = "env_experiment"
@@ -69,7 +70,7 @@ class HarnessConfig:
     eval_start: str = "2017-01"
     eval_end: str = "2024-12"
     eval_step: int = 1
-    confirmation_start: str | None = "2021-01"
+    test_start: str | None = "2021-01"
     rate: RateSpec = RateSpec()
     env_families: dict[str, FeatureBlock] = field(default_factory=dict)
     calendar: bool = True
@@ -81,10 +82,13 @@ class HarnessConfig:
     contrasts: tuple[tuple[str, str], ...] = (("RE", "E"), ("RE", "R"))
     seed: int = 42
     output_dir: str = "results/env"
+    importance_draws: int = 0  # > 0: permutation importance with this many draws per forecast (importance.py)
 
     def __post_init__(self) -> None:
         if self.window_months < 1 or any(h < 1 for h in self.horizons) or self.eval_step < 1:
             raise ValueError("window_months, eval_step and every horizon must be positive.")
+        if self.importance_draws < 0:
+            raise ValueError("importance_draws must be >= 0.")
         if self.rate.availability_lag < 0 or any(k < 0 for k in self.rate.lags):
             raise ValueError("Rate availability lag and lags must be non-negative.")
         unknown = set(self.feature_sets) - set(FEATURE_SETS)
@@ -119,6 +123,10 @@ class HarnessConfig:
         settings = self.to_dict()
         if settings["eval_step"] == 1:
             del settings["eval_step"]  # keeps ids of configs written before eval_step existed
+        if settings["importance_draws"] == 0:
+            del settings["importance_draws"]  # likewise for importance_draws
+        # hashed under its pre-rename key, so ids of earlier runs (including the frozen test run) still match
+        settings["confirmation_start"] = settings.pop("test_start")
         payload = json.dumps(settings, sort_keys=True, default=str)
         return hashlib.sha256(payload.encode()).hexdigest()[:8]
 
@@ -130,6 +138,8 @@ class HarnessConfig:
     def from_dict(cls, raw: dict[str, Any]) -> "HarnessConfig":
         raw = dict(raw)
         raw.pop("_comment", None)
+        if "confirmation_start" in raw:  # pre-rename name of test_start
+            raw["test_start"] = raw.pop("confirmation_start")
         if "rate" in raw:
             rate = dict(raw["rate"])
             rate["lags"] = tuple(rate.get("lags", RateSpec.lags))

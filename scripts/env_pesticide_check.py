@@ -1,12 +1,12 @@
 """
-Does adding fungicide/rodenticide features improve development-period forecasts?
+Does adding fungicide/rodenticide features improve validation-period forecasts?
 
 Compares each pesticide variant (stale36, ets_fill, oracle1) against the no-pesticide run on identical
 targets: seed-averaged RMSE change and Diebold-Mariano test per model x feature set x county x horizon,
 plus whether every individual seed agrees on the direction.
 
 Usage: python scripts/env_pesticide_check.py <project_root>
-(after running configs/pesticide/*.json with --development-only for seeds 42-46)
+(after running configs/pesticide/*.json with --validation-only for seeds 42-46)
 """
 import json
 import sys
@@ -21,9 +21,9 @@ from src.env_forecast.metrics import diebold_mariano  # noqa: E402
 
 KEYS = ["model", "feature_set", "county", "horizon", "target_month"]
 frames = []
-for folder in (root / "results" / "env").glob("pest_*_dev_*"):
+for folder in (root / "results" / "env").glob("pest_*_val_*"):
     config = json.loads((folder / "config.json").read_text())
-    variant = config["name"].removeprefix("pest_").removesuffix("_dev")
+    variant = config["name"].removeprefix("pest_").removesuffix("_val")
     frames.append(pd.read_csv(folder / "predictions.csv").assign(variant=variant, seed=config["seed"]))
 p = pd.concat(frames, ignore_index=True)
 p = p[p["model"].isin(["ridge", "xgboost"]) & p["feature_set"].isin(["E", "RE"])]

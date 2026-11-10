@@ -1,4 +1,4 @@
-"""Compare XGBoost RE-vs-E and RE-vs-R differences against seed-to-seed variation (development period).
+"""Compare XGBoost RE-vs-E and RE-vs-R differences against seed-to-seed variation (validation period).
 
 Usage: python scripts/env_seed_check.py <project_root>  (after running the harness with --models seasonal_naive xgboost --seed N)
 """
@@ -15,7 +15,7 @@ sys.path.insert(0, str(root))
 from src.env_forecast.metrics import diebold_mariano  # noqa: E402
 
 runs = []
-for folder in (root / "results" / "env").glob("env_baseline_dev_*"):
+for folder in (root / "results" / "env").glob("env_baseline_val_*"):
     config = json.loads((folder / "config.json").read_text())
     if config["models"] == ["seasonal_naive", "xgboost"]:
         frame = pd.read_csv(folder / "predictions.csv")

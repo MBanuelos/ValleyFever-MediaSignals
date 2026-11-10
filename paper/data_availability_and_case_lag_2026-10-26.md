@@ -3,7 +3,7 @@
 This note covers two things for the environmental forecasting component:
 
 - What is known about when each input becomes available to a forecaster.
-- How the development-period (2017–2020) results change when the case-rate availability lag varies.
+- How the validation-period (2017–2020) results change when the case-rate availability lag varies.
 
 Evidence labels: **[V]** verified from a source or run; **[R]** reported by a source but not checked against our data; **[H]** hypothesis.
 
@@ -65,12 +65,12 @@ Sources:
 - [ValleyCast](https://github.com/MBanuelos/ValleyCast)
 - [valleyfevercasedata](https://github.com/valleyfever/valleyfevercasedata)
 
-## 2. Case-lag sensitivity (development period, 8 counties, seed 42)
+## 2. Case-lag sensitivity (validation period, 8 counties, seed 42)
 
-**Setup:** `configs/env_baseline.json`, run with `--development-only --case-lag {0, 1, 3}`. Targets 2017-01 to 2020-12 (48 per county). The case lag controls two things: when rate features become available, *and* which training labels are usable. So E models are affected too, through their training window.
+**Setup:** `configs/env_baseline.json`, run with `--validation-only --case-lag {0, 1, 3}`. Targets 2017-01 to 2020-12 (48 per county). The case lag controls two things: when rate features become available, *and* which training labels are usable. So E models are affected too, through their training window.
 
 **Reproduce:**
-- Runs: `results/env/env_baseline_caselag0_dev_51db30fa`, `env_baseline_dev_8b589bf2` (lag 1), `env_baseline_caselag3_dev_2981c37d`.
+- Runs: `results/env/env_baseline_caselag0_val_51db30fa`, `env_baseline_val_8b589bf2` (lag 1), `env_baseline_caselag3_val_2981c37d`.
 - Analysis: `scripts/env_case_lag_check.py` writes to `results/env/case_lag_sensitivity/`.
 
 The seasonal-naive reference produces identical forecasts at all three lags [V], because last year's rate is always published when h + lag ≤ 12. Skill values are therefore comparable across lags.
@@ -105,7 +105,7 @@ For Ridge, RE beats R in only 1–5 of 8 counties at any horizon or lag. The lin
 
 Neither uses recent case data at forecast time. XGBoost E has lower RMSE than training-window climatology in 7–8 of 8 counties at every horizon and lag. The median RMSE ratio is 0.71–0.88.
 
-## 3. What these runs support (development evidence only; not confirmed)
+## 3. What these runs support (validation evidence only; not confirmed)
 
 1. **Case-history models depend strongly on data timeliness at short horizons.** Going from lag 0 to lag 3 removes most of the 1-month skill of persistence, SARIMA and XGBoost R. At 6 months the lag barely matters.
 2. **XGBoost RE is the most lag-robust configuration.** It keeps positive median skill at every horizon and lag, and positive skill in 6–7 of 8 counties in every cell.

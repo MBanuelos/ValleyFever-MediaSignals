@@ -1,15 +1,17 @@
 """
-Development-period comparison of the paper model set (configs/env_main.json).
+Validation-period comparison of the paper model set (configs/env_main.json).
 
 Seed-dependent models (XGBoost, LSTM) are averaged over seeds; deterministic ones are taken as is.
 Reports: (1) skill vs seasonal naive, (2) within-family input contrasts (RE vs E, RE vs R; SARIMAX vs
 SARIMA), (3) nonlinear test models vs linear baselines on the same inputs. All comparisons are paired
 on identical target months with a Diebold-Mariano test; seed agreement is checked for XGBoost/LSTM.
 
-Usage: python scripts/env_model_comparison.py <project_root> [config_name ...]   (default: env_main_dev)
+Usage: python scripts/env_model_comparison.py <project_root> [config_name ...] [--period validation|test]
+(default config: env_main_val; default period: all targets in the runs)
 With several config names, a model's rows from a later name replace that model's rows from earlier names
-(e.g. `env_main_dev env_main_tuned_dev` keeps LR/XGBoost from env_main and tuned SARIMA(X)/LSTM).
+(e.g. `env_main_val env_main_tuned_val` keeps LR/XGBoost from env_main and tuned SARIMA(X)/LSTM).
 """
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -17,8 +19,12 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-root = Path(sys.argv[1])
-names = sys.argv[2:] or ["env_main_dev"]
+parser = argparse.ArgumentParser()
+parser.add_argument("root", type=Path)
+parser.add_argument("names", nargs="*", default=["env_main_val"])
+parser.add_argument("--period", choices=["validation", "test"])
+args = parser.parse_args()
+root, names = args.root, args.names
 sys.path.insert(0, str(root))
 from src.env_forecast.metrics import diebold_mariano  # noqa: E402
 
@@ -33,7 +39,10 @@ for name in names:
         sys.exit(f"no runs named {name}")
     new = pd.concat(frames, ignore_index=True)
     p = pd.concat([p[~p["model"].isin(new["model"].unique())] if len(p) else p, new], ignore_index=True)
-print("source per model:", p.groupby("model")["source"].first().to_dict())
+if args.period:
+    p = p[p["period"] == args.period]
+print("source per model:", p.groupby("model")["source"].first().to_dict(), "| period:", args.period or "all",
+      "| targets:", p.target_month.min(), "..", p.target_month.max())
 SEEDED = {"xgboost", "lstm"}
 p = p[p["model"].isin(SEEDED) | (p["seed"] == p["seed"].min())]
 print("seeds per model:", p.groupby("model")["seed"].unique().apply(sorted).to_dict())
@@ -86,7 +95,8 @@ def summarize(table):
     }), include_groups=False)
 
 
-out = root / "results" / "env" / ("main_comparison" if names == ["env_main_dev"] else "main_comparison_" + "+".join(names))
+out = root / "results" / "env" / ("main_comparison" if names == ["env_main_val"] else "main_comparison_" + "+".join(names))
+out = out.with_name(out.name + f"_{args.period}") if args.period else out
 out.mkdir(parents=True, exist_ok=True)
 pd.set_option("display.width", 220)
 

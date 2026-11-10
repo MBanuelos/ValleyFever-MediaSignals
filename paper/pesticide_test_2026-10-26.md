@@ -1,9 +1,9 @@
 # Pesticide (Fungicide / Rodenticide) Feature Test — 2026-10-26
 
-**Question:** do fungicide and rodenticide use (CalPIP/PUR) improve development-period forecasts when used only as they would actually be available?
+**Question:** do fungicide and rodenticide use (CalPIP/PUR) improve validation-period forecasts when used only as they would actually be available?
 
 **Setup**
-- Development period: targets 2017-01 to 2020-12 (48 per county), 8 counties.
+- Validation period: targets 2017-01 to 2020-12 (48 per county), 8 counties.
 - Case lag 1. Ridge, plus XGBoost with seeds 42–44 (predictions averaged over seeds).
 - Configs: `configs/pesticide/*.json`. Analysis: `scripts/env_pesticide_check.py`, which writes `results/env/pesticide_check/`.
 
@@ -47,7 +47,7 @@ For XGBoost, the improvements are consistent across seeds: "better" and "better 
    - [H2] 3-year-old agricultural activity proxies **multi-year antecedent conditions**, such as the 2012–2016 drought, which the current precipitation features cannot see (they reach back at most 12 months).
 4. **This is predictive, not causal.** Do not report it as evidence that pesticide use affects Valley fever incidence.
 
-## Recommended follow-up (development period only)
+## Recommended follow-up (validation period only)
 
 Rerun XGBoost/Ridge E with:
 

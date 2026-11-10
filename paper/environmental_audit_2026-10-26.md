@@ -100,7 +100,7 @@ Severity: 🔴 invalidates results · 🟠 biases results or makes them non-oper
 - Same problem in the summer work:
   - day10–13 uses lags/features "selected from day 12".
   - day12 screened using everything except the last 12 months (through 2023-12, `test_months = 12`, cell 49).
-  - day10–13 then tested on the last 20% of 2006-08..2023-12 (about 2020-06..2023-12), which is **inside** the day-12 development data.
+  - day10–13 then tested on the last 20% of 2006-08..2023-12 (about 2020-06..2023-12), which is **inside** the day-12 validation data.
 - That is the leakage the notebook title suspected. It is real, though it comes from feature selection, not from the features themselves.
 
 **B4 🟠 No baselines, and no rate-only vs environment-only vs combined comparison on equal terms.**
@@ -162,7 +162,7 @@ Severity: 🔴 invalidates results · 🟠 biases results or makes them non-oper
 
 **B14 🟡 SARIMAX `auto_arima` runs stepwise AIC selection at every origin.**
 - Under rolling origins this costs about 30 s × origins × counties, and the selected orders will change from window to window (instability that should be reported).
-- Option: select the order once per county on the development period only, then refit only the coefficients.
+- Option: select the order once per county on the validation period only, then refit only the coefficients.
 
 ### Data
 
@@ -196,7 +196,7 @@ Low-incidence counties (Sacramento, Santa Clara, San Mateo, Solano, Alameda) hav
 | `process_data()` validation checks | Reusable. Imputation must move inside each training window. |
 | All 2024-06 single-origin metrics (AR, SARIMAX, XGBoost, LSTM) | **Not publishable; re-evaluate.** Treat them as smoke tests. |
 | The "best LSTM configuration" | **Not a finding.** It was selected on test data (B3). Use it only as a starting point for the grid. |
-| Summer feature/lag rankings and PFI (day12, day15, day17) | **Not publishable.** Selection leakage, a single split, irreproducible inputs. Useful only to suggest candidate lags (e.g., precipitation 3–8 months, soil temperature) for development-period screening. |
+| Summer feature/lag rankings and PFI (day12, day15, day17) | **Not publishable.** Selection leakage, a single split, irreproducible inputs. Useful only to suggest candidate lags (e.g., precipitation 3–8 months, soil temperature) for validation-period screening. |
 | XGBoost gain importances | Not evidence. Replace with grouped PFI or ablation on held-out origins. |
 | ETS pesticide imputation study (day11) | Methodologically fine as a sensitivity piece, but likely moot if pesticides go in at lag ≥ 24 (B7). |
 
@@ -218,8 +218,8 @@ Low-incidence counties (Sacramento, Santa Clara, San Mateo, Solano, Alameda) hav
 - **Panel:** county × month, 2006-08..2024-12 (bounded by fire data). This gives 221 months for the 8 core counties.
 - **Common target months:** 2017-01..2024-12 (96 per county). The origin is t = target − h, and the first origin needs 120 months of history, so the earliest is 2016-07. Every model, configuration and horizon is scored on **the same 96 target months**, which makes horizons comparable too.
 - **Two periods:**
-  - **Development** (targets 2017-01..2020-12): choose lags, hyperparameters, feature families and "best model" here.
-  - **Confirmation** (targets 2021-01..2024-12): run once with frozen configurations; these are the numbers reported in the paper.
+  - **Validation** (targets 2017-01..2020-12): choose lags, hyperparameters, feature families and "best model" here.
+  - **Test** (targets 2021-01..2024-12): run once with frozen configurations; these are the numbers reported in the paper.
   - This is the cheapest defensible guard against B3. An alternative is nested selection inside each window (last 24 months as validation), which is more expensive and not obviously better at this sample size.
 - **Training window:** rolling, 120 target months ending at the origin, i.e. rows with s+h ∈ (t−120, t]. An expanding window is run once as a labelled sensitivity analysis.
 
@@ -243,7 +243,7 @@ Each prediction is stored with an `info_cutoff` field per family so tests can as
 - **R**: rate history only (lags L_y..L_y+11, plus the same month last year).
 - **E**: environmental features + calendar only, no rate history. Tests whether the environment alone carries signal.
 - **R+E**: combined. **The key contrast is R+E vs R.**
-- Environmental lags: a small, theory-guided set per family. For example, precipitation sums over 3–6, 7–12 and 13–24 months back; soil temperature and wind lags 1–3. Fixed in development, not searched in confirmation.
+- Environmental lags: a small, theory-guided set per family. For example, precipitation sums over 3–6, 7–12 and 13–24 months back; soil temperature and wind lags 1–3. Fixed in validation, not searched in test.
 
 ### D4. Models (manageable set)
 
@@ -252,7 +252,7 @@ Each prediction is stored with an `info_cutoff` field per family so tests can as
 | Persistence | — | ŷ(t+h) = y(t−L_y) |
 | Seasonal naive | — | ŷ(t+h) = y(t+h−12) |
 | Climatology | — | Mean of that calendar month over the training window. The natural baseline for configuration E. |
-| AR / Ridge | Direct, one model per h | R, E, R+E. Ridge alpha chosen in development. |
+| AR / Ridge | Direct, one model per h | R, E, R+E. Ridge alpha chosen in validation. |
 | SARIMA (no environmental inputs) | Recursive (state-space) | Statistical reference. A direct SARIMAX with lagged environmental inputs is optional. |
 | XGBoost | Direct, one model per h | Shallow trees, early stopping on the last 24 months of the training window. |
 | LSTM | Direct, shared multi-output model or one per h (document which) | Early stopping on a within-window validation split; 5 seeds, averaged. |
@@ -272,7 +272,7 @@ Each prediction is stored with an `info_cutoff` field per family so tests can as
 - log1p is stateless, so it is fine anywhere.
 - Imputation: forward-fill within the window, or a window-fitted ETS for pesticides. Never interpolate across the origin.
 - Scaling: fit on the training rows of the window only.
-- Feature selection and hyperparameters: development period only.
+- Feature selection and hyperparameters: validation period only.
 - Back-transform: smearing correction, or a raw-scale loss. Document which.
 
 ### D7. Output schema
@@ -281,7 +281,7 @@ Each prediction is stored with an `info_cutoff` field per family so tests can as
 
 ```
 experiment_id, county, model, config (R|E|R+E|...), horizon, forecast_origin, target_month,
-period (development|confirmation), seed, actual_rate, predicted_rate, train_start, train_end,
+period (validation|test), seed, actual_rate, predicted_rate, train_start, train_end,
 n_train, case_lag, env_lags_json
 ```
 
@@ -316,14 +316,14 @@ Suggested modules, all new files owned by you:
 |---|---|---|---|---|---|
 | 1 | Verify data availability lags (PUR, CAL FIRE, AQI, CDPH case timing/revisions); resolve the Merced NaN = 0 question; record ValleyCast version | P1 | S (reading and emails) | — | Essential |
 | 2 | Build `src/env` rolling-origin harness + alignment tests + output schema | P1 | M (2–4 days) | 1 (lags can start as config defaults) | Essential |
-| 3 | Baselines (persistence, seasonal naive, climatology) + AR/Ridge in R/E/R+E across the 8 counties, development period | P2 | S | 2 | Essential |
+| 3 | Baselines (persistence, seasonal naive, climatology) + AR/Ridge in R/E/R+E across the 8 counties, validation period | P2 | S | 2 | Essential |
 | 4 | Add SARIMA, XGBoost, LSTM (5 seeds) to the harness | P2 | M | 3 | Essential |
-| 5 | Freeze configurations in development, then run confirmation once; DM tests and bootstrap CIs | P2 | S | 4 | Essential |
+| 5 | Freeze configurations in validation, then run test once; DM tests and bootstrap CIs | P2 | S | 4 | Essential |
 | 6 | Expand to eligible counties (B15 table); apply the low-incidence handling | P2 | S (compute) | 5 | Essential |
 | 7 | Grouped permutation importance and family-ablation (drop weather / AQI / fire / chemicals) across origins and seeds | P3 | M | 5 | Essential (Q4, Q5) |
 | 8 | Sensitivity: expanding window, case lag 0/1/3, pesticide L=1 retrospective config, imputation variant | P3 | S each | 5 | Essential (Q8), keep small |
 | 9 | Error analysis: high-incidence months, inland vs coastal and high- vs low-incidence groups | P3 | S | 6 | Essential |
-| 10 | Targeted tuning of the one or two best models in development (LSTM early stopping, Huber loss, gradient clipping) | P4 | M | 5 | Optional |
+| 10 | Targeted tuning of the one or two best models in validation (LSTM early stopping, Huber loss, gradient clipping) | P4 | M | 5 | Optional |
 | 11 | Pooled/global model across counties (shared tree model with county features) | P4 | M | 6 | Optional, scientifically interesting (Section F) |
 | 12 | Figures, tables, methods/results/limitations text | P5 | M | 5–9 | Essential |
 
@@ -335,8 +335,8 @@ Deprioritised: more LSTM grid search, LightGBM in addition to XGBoost, Yeo-Johns
 
 **F1. Environmental features add little skill beyond incidence history at 1 month, but more at 3–6 months.**
 - Rationale [H]: at short horizons, autocorrelation dominates. At longer horizons, the antecedent precipitation → growth → dry/wind dispersal pathway (the "grow and blow" hypothesis) may add information.
-- Evidence needed: skill(R+E) − skill(R) per county × horizon in confirmation, with DM/bootstrap CIs. A horizon-interaction pattern (gain increasing with h) across most endemic counties.
-- Rejected if: gains are null or negative at all horizons, or if they appear only in development.
+- Evidence needed: skill(R+E) − skill(R) per county × horizon in test, with DM/bootstrap CIs. A horizon-interaction pattern (gain increasing with h) across most endemic counties.
+- Rejected if: gains are null or negative at all horizons, or if they appear only in validation.
 
 **F2. The predictive value of the environment depends on geography: it is concentrated in the endemic San Joaquin Valley and Central Coast counties (Kern, Tulare, Fresno, SLO) and absent in coastal/low-incidence counties.**
 - Evidence needed: skill gain by county group, plus family-ablation by group.
@@ -359,4 +359,4 @@ Deprioritised: more LSTM grid search, LightGBM in addition to XGBoost, Yeo-Johns
 
 1. **Build the rolling-origin harness with the synthetic alignment tests first** (roadmap 2). Every later result depends on it. Start with persistence, seasonal naive, climatology and Ridge in R/E/R+E: cheap models that are enough to show the pipeline works.
 2. **Pin down the information-availability assumptions** (roadmap 1). Above all: PUR release lag, CDPH case dating and revisions, and the Merced missing-rate question. Put the answers in `configs/env_baseline.yaml` and `data/manifests/`.
-3. **Run the development-period baseline comparison on the 8 counties and look at it before adding XGBoost or LSTM.** If R+E does not beat R with Ridge, that changes the paper's emphasis (toward F2/F4) before compute is spent on tuning neural networks.
+3. **Run the validation-period baseline comparison on the 8 counties and look at it before adding XGBoost or LSTM.** If R+E does not beat R with Ridge, that changes the paper's emphasis (toward F2/F4) before compute is spent on tuning neural networks.

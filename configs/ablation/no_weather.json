@@ -1,0 +1,9 @@
+{
+  "_comment": "Group ablation: env_main_tuned without the weather group. XGBoost and LSTM, E and RE only (R does not use environmental features). Compare with the env_main_tuned run of the same seed.",
+  "extends": "../env_main_tuned.json",
+  "name": "ablate_no_weather",
+  "env_families": {"weather": null},
+  "models": ["seasonal_naive", "xgboost", "lstm"],
+  "feature_sets": ["E", "RE"],
+  "contrasts": [["RE", "E"]]
+}

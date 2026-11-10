@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import copy
 from dataclasses import dataclass
+from typing import Callable
 
 import numpy as np
 import pandas as pd
 import torch
 from torch import nn
 
+from .importance import RATE, ImportanceGroup, draw_rng
 from .tasks import ForecastTask
 
 
@@ -47,6 +49,16 @@ def monthly_inputs(task: ForecastTask) -> pd.DataFrame:
 
 
 @dataclass
+class _Fitted:
+    """A trained network with its training-only scaling: predict(sequences) on the rate scale."""
+
+    predict: Callable[[np.ndarray], np.ndarray]
+    sequence: Callable[[pd.Period], np.ndarray]
+    rows: list[pd.Period]
+    columns: list[str]
+
+
+@dataclass
 class LSTMModel:
     """
     Direct LSTM: sequences of `lookback` monthly input rows ending at each pseudo-origin s predict y[s + h].
@@ -74,11 +86,34 @@ class LSTMModel:
     uses_features: bool = True
 
     def fit_predict(self, task: ForecastTask) -> float:
+        fitted = self._fit(task)
+        return np.nan if fitted is None else float(fitted.predict(fitted.sequence(task.origin)[None])[0])
+
+    def fit_predict_importance(self, task: ForecastTask, groups: list[ImportanceGroup], draws: int
+                               ) -> tuple[float, dict[ImportanceGroup, np.ndarray]]:
+        """Prediction plus permuted predictions: a group's lookback sequence is swapped for a training sequence's."""
+        fitted = self._fit(task)
+        if fitted is None:
+            return np.nan, {}
+        forecast = fitted.sequence(task.origin)
+        perturbed = {}
+        for group in groups:
+            columns = [i for i, c in enumerate(fitted.columns) if (c == "rate" and RATE in group.sources) or c in group.sources]
+            if not columns:
+                continue
+            donors = draw_rng(task, group).integers(0, len(fitted.rows), size=draws)
+            X = np.repeat(forecast[None], draws, axis=0)
+            for k, donor in enumerate(donors):
+                X[k][:, columns] = fitted.sequence(fitted.rows[donor])[:, columns]
+            perturbed[group] = fitted.predict(X)
+        return float(fitted.predict(forecast[None])[0]), perturbed
+
+    def _fit(self, task: ForecastTask) -> "_Fitted | None":
         inputs = monthly_inputs(task)
         position = {month: i for i, month in enumerate(inputs.index)}
         rows = [s for s in task.X_train.index if position[s] >= self.lookback - 1]
         if len(rows) < 10:
-            return np.nan
+            return None
         last_train_row = position[max(rows)]
         scale_rows = inputs.iloc[position[min(rows)] - self.lookback + 1:last_train_row + 1]
         mean, std = scale_rows.mean(), scale_rows.std().replace(0, 1).fillna(1)
@@ -100,11 +135,15 @@ class LSTMModel:
         if self.refit_full:
             network, _ = self._train(X, y, None, None, task.seed, fixed_epochs=epochs)
         network.eval()
-        with torch.no_grad():
-            prediction = network(torch.from_numpy(sequence(task.origin)[None].copy())).item()
-        prediction = prediction * y_std + y_mean
-        prediction = np.expm1(prediction) if self.log_target else prediction
-        return float(max(prediction, 0.0))
+
+        def predict(X: np.ndarray) -> np.ndarray:
+            with torch.no_grad():
+                prediction = network(torch.from_numpy(np.ascontiguousarray(X, dtype=np.float32))).numpy().astype(float)
+            prediction = prediction * y_std + y_mean
+            prediction = np.expm1(prediction) if self.log_target else prediction
+            return np.maximum(prediction, 0.0)
+
+        return _Fitted(predict=predict, sequence=sequence, rows=rows, columns=list(inputs.columns))
 
     def _train(self, X, y, X_val, y_val, seed: int, fixed_epochs: int | None = None):
         torch.manual_seed(seed)

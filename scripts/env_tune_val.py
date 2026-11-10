@@ -1,15 +1,15 @@
 """
-Development-period tuning for the paper model set. Never touches confirmation targets.
+Validation-period tuning for the paper model set. Never touches test targets.
 
   sarima-orders : choose SARIMA orders per county by mean AIC over training windows that end at
-                  development-period origins (AIC uses training data only, no evaluation targets).
-  lstm-grid     : screen LSTM settings on thinned development targets (every `--step`th month, one seed);
+                  validation-period origins (AIC uses training data only, no evaluation targets).
+  lstm-grid     : screen LSTM settings on thinned validation targets (every `--step`th month, one seed);
                   score = mean log(RMSE_lstm / RMSE_seasonal_naive) over counties x horizons x feature sets.
 
 Usage:
-  python scripts/env_tune_dev.py sarima-orders --config configs/env_main.json
-  python scripts/env_tune_dev.py lstm-grid --config configs/env_main.json --stage 1
-  python scripts/env_tune_dev.py lstm-grid --config configs/env_main.json --stage 2
+  python scripts/env_tune_val.py sarima-orders --config configs/env_main.json
+  python scripts/env_tune_val.py lstm-grid --config configs/env_main.json --stage 1
+  python scripts/env_tune_val.py lstm-grid --config configs/env_main.json --stage 2
 """
 import argparse
 import dataclasses
@@ -30,7 +30,7 @@ sys.path.insert(0, str(ROOT))
 from statsmodels.tsa.statespace.sarimax import SARIMAX  # noqa: E402
 
 from src.env_forecast import HarnessConfig, build_models, load_panel, mask_history, run_panel  # noqa: E402
-from src.env_forecast.run import development_only  # noqa: E402
+from src.env_forecast.run import validation_only  # noqa: E402
 
 TUNING_DIR = ROOT / "results" / "env" / "tuning"
 ORDER_GRID = [((p, 0, q), (P, 0, Q, 12)) for p, q, P, Q in itertools.product((0, 1, 2), (0, 1, 2), (0, 1), (0, 1))]
@@ -88,7 +88,7 @@ def score(predictions):
 
 
 def lstm_grid(config, stage, step, seed):
-    base = dataclasses.replace(development_only(config), models=("seasonal_naive", "lstm"), eval_step=step, seed=seed)
+    base = dataclasses.replace(validation_only(config), models=("seasonal_naive", "lstm"), eval_step=step, seed=seed)
     current = dict(config.model_params.get("lstm", {}))
     summary_path = TUNING_DIR / "lstm_grid.csv"
     done = pd.read_csv(summary_path) if summary_path.exists() else pd.DataFrame()
