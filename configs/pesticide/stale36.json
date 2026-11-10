@@ -1,0 +1,7 @@
+{
+  "_comment": "Pesticide test: newest value available after a conservative 36-month delay, plus its 12-month mean.",
+  "extends": "../env_baseline.json",
+  "name": "pest_stale36",
+  "models": ["seasonal_naive", "ridge", "xgboost"],
+  "env_families": {"ag_chemicals": {"columns": ["fungicide_lbs_prd_used", "rodent_lbs_prd_used"], "availability_lag": 36, "lags": [0], "rolling_means": [12]}}
+}

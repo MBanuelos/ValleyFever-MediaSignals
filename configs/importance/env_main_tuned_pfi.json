@@ -1,0 +1,9 @@
+{
+  "_comment": "Permutation importance for the frozen env_main_tuned models (src/env_forecast/importance.py). Forecasts are identical to env_main_tuned; importance.csv adds, per forecast, the error after replacing each group/variable with values from 20 random training rows. E and RE only.",
+  "extends": "../env_main_tuned.json",
+  "name": "env_main_tuned_pfi",
+  "importance_draws": 20,
+  "models": ["seasonal_naive", "lr", "xgboost", "lstm"],
+  "feature_sets": ["E", "RE"],
+  "contrasts": [["RE", "E"]]
+}
