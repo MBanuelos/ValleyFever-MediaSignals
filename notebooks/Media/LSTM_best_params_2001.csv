@@ -1,0 +1,22 @@
+County,Feature_Set,lookback,hidden_size,num_layers,learning_rate,batch_size,epochs
+Alameda,articles,3,16,1,0.0001,16,28
+Contra Costa,articles,3,64,1,0.001,16,28
+Fresno,articles,12,16,1,0.001,16,28
+Kern,articles,6,16,1,0.0001,8,28
+Los Angeles,articles,6,16,1,0.0001,8,28
+Merced,articles,12,32,1,0.0001,8,28
+Monterey,articles,12,32,2,0.001,8,28
+Orange,articles,3,32,2,0.001,16,28
+Riverside,articles,12,16,2,0.0001,8,28
+Sacramento,articles,3,16,1,0.0001,16,28
+San Bernardino,articles,6,64,1,0.001,8,28
+San Diego,articles,12,32,1,0.0001,8,28
+San Joaquin,articles,6,32,1,0.0001,8,28
+San Luis Obispo,articles,12,16,2,0.001,16,28
+San Mateo,articles,6,32,1,0.0001,8,28
+Santa Barbara,articles,3,64,1,0.001,8,28
+Santa Clara,articles,6,16,1,0.0001,8,28
+Solano,articles,12,64,2,0.001,8,28
+Stanislaus,articles,12,32,1,0.0001,8,28
+Tulare,articles,6,16,1,0.001,8,28
+Ventura,articles,6,16,2,0.001,8,28

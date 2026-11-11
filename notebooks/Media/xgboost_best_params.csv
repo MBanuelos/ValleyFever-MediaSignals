@@ -1,0 +1,64 @@
+County,Feature_Set,subsample,reg_lambda,reg_alpha,n_estimators,min_child_weight,max_depth,learning_rate,colsample_bytree
+Alameda,all_media,0.7,10,1.0,500,3,3,0.01,0.7
+Alameda,articles,0.7,10,1.0,500,3,3,0.01,0.7
+Alameda,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Contra Costa,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+Contra Costa,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Contra Costa,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Fresno,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+Fresno,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Fresno,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Kern,all_media,0.7,5,0.1,200,5,6,0.01,0.8
+Kern,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Kern,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Los Angeles,all_media,1.0,1,1.0,300,3,6,0.05,0.8
+Los Angeles,articles,0.7,10,1.0,500,3,3,0.01,0.7
+Los Angeles,twitter,0.7,10,1.0,500,3,3,0.01,0.7
+Merced,all_media,0.7,5,0.1,200,5,6,0.01,0.8
+Merced,articles,0.7,5,0.1,200,5,6,0.01,0.8
+Merced,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Monterey,all_media,0.7,5,0.1,200,5,6,0.01,0.8
+Monterey,articles,0.8,1,0.1,200,3,3,0.01,0.7
+Monterey,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Orange,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+Orange,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Orange,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Riverside,all_media,1.0,1,1.0,300,3,6,0.05,0.8
+Riverside,articles,1.0,1,1.0,300,3,6,0.05,0.8
+Riverside,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Sacramento,all_media,0.7,10,1.0,500,3,3,0.01,0.7
+Sacramento,articles,1.0,1,1.0,300,3,6,0.05,0.8
+Sacramento,twitter,0.7,10,1.0,500,3,3,0.01,0.7
+San Bernardino,all_media,1.0,1,1.0,300,3,6,0.05,0.8
+San Bernardino,articles,0.7,10,1.0,500,3,3,0.01,0.7
+San Bernardino,twitter,1.0,1,1.0,300,3,6,0.05,0.8
+San Diego,all_media,1.0,1,1.0,300,3,6,0.05,0.8
+San Diego,articles,1.0,1,1.0,300,3,6,0.05,0.8
+San Diego,twitter,1.0,1,1.0,300,3,6,0.05,0.8
+San Joaquin,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+San Joaquin,articles,0.8,5,1.0,300,7,4,0.01,0.7
+San Joaquin,twitter,0.7,10,1.0,500,3,3,0.01,0.7
+San Luis Obispo,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+San Luis Obispo,articles,0.7,10,1.0,500,3,3,0.01,0.7
+San Luis Obispo,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+San Mateo,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+San Mateo,articles,1.0,1,1.0,300,3,6,0.05,0.8
+San Mateo,twitter,1.0,1,1.0,300,3,6,0.05,0.8
+Santa Barbara,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+Santa Barbara,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Santa Barbara,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Santa Clara,all_media,0.7,10,1.0,500,3,3,0.01,0.7
+Santa Clara,articles,0.7,10,1.0,500,3,3,0.01,0.7
+Santa Clara,twitter,0.7,10,1.0,500,3,3,0.01,0.7
+Solano,all_media,0.7,10,1.0,500,3,3,0.01,0.7
+Solano,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Solano,twitter,1.0,1,1.0,300,3,6,0.05,0.8
+Stanislaus,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+Stanislaus,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Stanislaus,twitter,0.8,5,1.0,300,7,4,0.01,0.7
+Tulare,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+Tulare,articles,0.8,5,1.0,300,7,4,0.01,0.7
+Tulare,twitter,0.7,10,1.0,500,3,3,0.01,0.7
+Ventura,all_media,0.8,5,1.0,300,7,4,0.01,0.7
+Ventura,articles,0.7,5,0.1,200,5,6,0.01,0.8
+Ventura,twitter,0.8,5,1.0,300,7,4,0.01,0.7
