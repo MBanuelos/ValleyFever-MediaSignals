@@ -1,0 +1,18 @@
+{
+  "_comment": "Permutation importance with the weather group split into humidity, wind (speed + run), wind events and soil temperature. Same variables, lags and column order as env_main_tuned, so forecasts should match the frozen run exactly; only the importance groups change. E and RE only.",
+  "extends": "_weather_split_base.json",
+  "name": "pfi_weather_split",
+  "env_families": {
+    "precipitation": {"columns": ["Precipitation"], "availability_lag": 1, "lags": [0, 1, 2], "rolling_means": [6, 12]},
+    "humidity": {"columns": ["Avg Rel Hum (%)"], "availability_lag": 1, "lags": [0, 1, 2]},
+    "wind": {"columns": ["Avg Wind Speed (mph)", "Wind Run (miles)"], "availability_lag": 1, "lags": [0, 1, 2]},
+    "wind_events": {"columns": ["windeventcount"], "availability_lag": 1, "lags": [0, 1, 2]},
+    "soil_temp": {"columns": ["Avg Soil Temp (F)"], "availability_lag": 1, "lags": [0, 1, 2]},
+    "air_quality": {"columns": ["AQI_PM25", "AQI_PM10"], "availability_lag": 1, "lags": [0, 1, 2]},
+    "wildfire": {"columns": ["FIRE_Acres_Burned"], "availability_lag": 2, "lags": [0, 1, 2]}
+  },
+  "importance_draws": 20,
+  "models": ["seasonal_naive", "lr", "xgboost", "lstm"],
+  "feature_sets": ["E", "RE"],
+  "contrasts": [["RE", "E"]]
+}
