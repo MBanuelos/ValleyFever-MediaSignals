@@ -54,6 +54,8 @@ UChicago DSI Valley Fever project. This repo holds two strands: the **media-sign
 | air_quality | `AQI_PM25`, `AQI_PM10` | 1 | lags 0–2 |
 | wildfire | `FIRE_Acres_Burned` | 2 | lags 0–2 |
 
+`windeventcount` was created by the PI. It counts months with wind events (roughly, high wind speed and wind run), but the exact definition is not recorded in this repo; `src/county_env_data_processing.py` only reads it in. It is zero in 81–95% of months in Orange, San Diego, San Luis Obispo and Tulare. Confirm the definition with the PI before describing it in the paper.
+
 Pesticide (fungicide/rodenticide, CDPR PUR) data is excluded from the main model. It is released 24–35 months late and adds nothing to RE; see `paper/pesticide_test_2026-10-26.md`.
 
 ## Terminology
@@ -75,6 +77,7 @@ Use the `.venv313` environment.
 .venv313/Scripts/python.exe scripts/env_pooled_significance.py .                             # pooled bootstrap + Holm
 .venv313/Scripts/python.exe scripts/env_importance_analysis.py .                             # ablation, PFI, case delay; figs 4-6
 .venv313/Scripts/python.exe scripts/env_plots.py .                                           # figs 1-3
+.venv313/Scripts/python.exe scripts/env_weather_split_analysis.py .                          # weather subgroup ablation + PFI
 ```
 
 - Each run writes `results/env/<name>_<hash>/`, containing:
@@ -90,26 +93,28 @@ Use the `.venv313` environment.
   - `config.py`, `harness.py` (rolling loop), `features.py`, `models.py`, `lstm.py`, `importance.py` (permutation importance), `run.py` (CLI)
 - `configs/`:
   - `env_main.json` → `env_main_tuned.json` (frozen)
-  - `ablation/no_<group>.json`
-  - `importance/env_main_tuned_pfi.json`
+  - `ablation/no_<group>.json` (groups and weather subgroups: `no_humidity`, `no_wind`, `no_wind_events`, `no_soil_temp`)
+  - `importance/env_main_tuned_pfi.json`, `importance/pfi_weather_split.json` (extends the helper `_weather_split_base.json`, which is not run on its own)
   - `pesticide/`
 - Figures:
   - `results/env/figures/` (figs 1–3)
   - `results/env/importance/` (figs 4–6 and tables)
+  - `results/env/importance/weather_split/` (weather subgroup tables and figures)
   - `results/env/pooled_significance/`
-- `paper/`: dated result notes. The latest are `test_results_2026-10-27.md` and `importance_and_case_delay_2026-10-27.md`.
+- `paper/`: dated result notes. The latest are `test_results_2026-10-27.md`, `importance_and_case_delay_2026-10-27.md` and `weather_split_2026-11-10.md`.
 
-## Current findings (2026-10-27)
+## Current findings (updated 2026-11-10)
 
 - **RE beats E** for XGBoost by about 20% pooled at every horizon in both periods (Holm-significant). It holds at case delays of 0, 1 and 3 months.
 - **XGBoost RE** is the only model with positive median skill at every horizon in both periods (test: 0.22 / 0.14 / 0.19). Its edge over AR(12) and SARIMAX is not significant in the test period.
 - **Environment helps mainly at 6 months.** Precipitation is the only group clearly important under both ablation (+12% error without it at h=6) and permutation importance.
 - **Importance varies by county:** precipitation is strong in Fresno, San Diego, San Luis Obispo and Tulare, and near zero in Kern, Los Angeles and Orange. This is descriptive only; do not choose per-county features from test-period results.
+- **Weather split (2026-11-10):** the LSTM's reliance on weather comes from wind (speed and run) and humidity; wind events and soil temperature are barely used. No single subgroup is needed (each changes error by less than about 5% when removed). The earlier gain from dropping all of weather for LSTM RE at h=6 appears only when all five are removed together, which suggests the LSTM overfits weather as a block. Main conclusions unchanged.
 - Everything is predictive, not causal.
 
 ## Open follow-ups
 
-- Split the weather group into soil temperature, wind (speed, run, event count) and humidity, and rerun the ablation and PFI. This takes about 2.5 hours.
+- Confirm the definition of `windeventcount` with the PI.
 - Test a trend proxy and 24- and 36-month precipitation means to explain the pesticide effect (validation period only).
 - Run the LSTM in the case-delay analysis.
 - Reproducibility note: on 2026-10-27 the frozen run's `predictions.csv` was rewritten during a period relabel. About 17% of values changed by roughly 1e-15, from CSV rounding. Regenerate from the frozen config if byte-exact files are needed.
