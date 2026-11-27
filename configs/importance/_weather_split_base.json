@@ -1,0 +1,5 @@
+{
+  "_comment": "Helper for pfi_weather_split.json: env_main_tuned with its environmental groups removed, so the child config can redefine them in order. Not meant to be run on its own.",
+  "extends": "../env_main_tuned.json",
+  "env_families": null
+}

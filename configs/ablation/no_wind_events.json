@@ -1,0 +1,9 @@
+{
+  "_comment": "Weather-split ablation: env_main_tuned without wind event count (windeventcount). The remaining weather variables keep their original order. XGBoost and LSTM, E and RE only. Compare with the env_main_tuned run of the same seed.",
+  "extends": "../env_main_tuned.json",
+  "name": "ablate_no_wind_events",
+  "env_families": {"weather": {"columns": ["Avg Rel Hum (%)", "Avg Wind Speed (mph)", "Wind Run (miles)", "Avg Soil Temp (F)"]}},
+  "models": ["seasonal_naive", "xgboost", "lstm"],
+  "feature_sets": ["E", "RE"],
+  "contrasts": [["RE", "E"]]
+}
