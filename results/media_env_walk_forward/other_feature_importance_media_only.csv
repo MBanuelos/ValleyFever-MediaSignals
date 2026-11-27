@@ -1,0 +1,343 @@
+county,feature_set,model,feature,importance
+Contra Costa,media_only,random_forest,AR: recent log-change,0.2606266263835466
+Contra Costa,media_only,random_forest,AR: same month last year,0.0889911828938756
+Contra Costa,media_only,random_forest,article_count,0.0548348488662035
+Contra Costa,media_only,random_forest,avg_likes,0.0735451120946078
+Contra Costa,media_only,random_forest,avg_risk,0.073554124875539
+Contra Costa,media_only,random_forest,avg_sentiment,0.0733269741968563
+Contra Costa,media_only,random_forest,mean_body_risk,0.0856502836592548
+Contra Costa,media_only,random_forest,mean_body_sentiment,0.0873707783368519
+Contra Costa,media_only,random_forest,mean_title_risk,0.0457738103410792
+Contra Costa,media_only,random_forest,mean_title_sentiment,0.0844514581543349
+Contra Costa,media_only,random_forest,tweet_count,0.0718748001978497
+Contra Costa,media_only,ridge,AR: recent log-change,0.2488114209815479
+Contra Costa,media_only,ridge,AR: same month last year,0.1155618895044376
+Contra Costa,media_only,ridge,article_count,0.071741294134459
+Contra Costa,media_only,ridge,avg_likes,0.0597368976690542
+Contra Costa,media_only,ridge,avg_risk,0.0498509678383143
+Contra Costa,media_only,ridge,avg_sentiment,0.0517552069784058
+Contra Costa,media_only,ridge,mean_body_risk,0.1165197971877685
+Contra Costa,media_only,ridge,mean_body_sentiment,0.0826493338837538
+Contra Costa,media_only,ridge,mean_title_risk,0.0300728495147724
+Contra Costa,media_only,ridge,mean_title_sentiment,0.103705626149698
+Contra Costa,media_only,ridge,tweet_count,0.0695947161577885
+Contra Costa,media_only,sarimax,avg_risk,0.1630741658573408
+Contra Costa,media_only,sarimax,avg_sentiment,0.1205505451650614
+Contra Costa,media_only,sarimax,mean_body_sentiment,0.4986730451513545
+Contra Costa,media_only,sarimax,mean_title_risk,0.1061141218650753
+Contra Costa,media_only,sarimax,mean_title_sentiment,0.1115881219611677
+Contra Costa,media_only,xgboost,AR: recent log-change,0.2464215098185261
+Contra Costa,media_only,xgboost,AR: same month last year,0.087206978754824
+Contra Costa,media_only,xgboost,article_count,0.0730914650008538
+Contra Costa,media_only,xgboost,avg_likes,0.0760167045543542
+Contra Costa,media_only,xgboost,avg_risk,0.0713772065671518
+Contra Costa,media_only,xgboost,avg_sentiment,0.0702840766468828
+Contra Costa,media_only,xgboost,mean_body_risk,0.0754516633171331
+Contra Costa,media_only,xgboost,mean_body_sentiment,0.0787791438267038
+Contra Costa,media_only,xgboost,mean_title_risk,0.0696856244538009
+Contra Costa,media_only,xgboost,mean_title_sentiment,0.0706305867426486
+Contra Costa,media_only,xgboost,tweet_count,0.0810550403171205
+Merced,media_only,random_forest,AR: recent log-change,0.4190479360384367
+Merced,media_only,random_forest,AR: same month last year,0.0538772420688853
+Merced,media_only,random_forest,article_count,0.0172121235751387
+Merced,media_only,random_forest,avg_likes,0.0571907308478007
+Merced,media_only,random_forest,avg_risk,0.0611863735047967
+Merced,media_only,random_forest,avg_sentiment,0.0909243502066337
+Merced,media_only,random_forest,mean_body_risk,0.082148267543717
+Merced,media_only,random_forest,mean_body_sentiment,0.076381806526847
+Merced,media_only,random_forest,mean_title_risk,0.0388576271000828
+Merced,media_only,random_forest,mean_title_sentiment,0.069573690911418
+Merced,media_only,random_forest,tweet_count,0.0335998516762431
+Merced,media_only,ridge,AR: recent log-change,0.3690017712592757
+Merced,media_only,ridge,AR: same month last year,0.0487234808664924
+Merced,media_only,ridge,article_count,0.0456328712815442
+Merced,media_only,ridge,avg_likes,0.0640134344649829
+Merced,media_only,ridge,avg_risk,0.0592602180586069
+Merced,media_only,ridge,avg_sentiment,0.0630482717570589
+Merced,media_only,ridge,mean_body_risk,0.069828143423109
+Merced,media_only,ridge,mean_body_sentiment,0.0907356814536703
+Merced,media_only,ridge,mean_title_risk,0.0823529751577181
+Merced,media_only,ridge,mean_title_sentiment,0.072956943867056
+Merced,media_only,ridge,tweet_count,0.0344462084104853
+Merced,media_only,sarimax,avg_likes,0.1348546919545434
+Merced,media_only,sarimax,avg_risk,0.2575676320645673
+Merced,media_only,sarimax,mean_body_risk,0.1380796110630232
+Merced,media_only,sarimax,mean_body_sentiment,0.0860184636231851
+Merced,media_only,sarimax,mean_title_risk,0.3834796012946806
+Merced,media_only,xgboost,AR: recent log-change,0.275991824981519
+Merced,media_only,xgboost,AR: same month last year,0.076400427515172
+Merced,media_only,xgboost,article_count,0.0560346910888416
+Merced,media_only,xgboost,avg_likes,0.0735009233820368
+Merced,media_only,xgboost,avg_risk,0.0785601060834344
+Merced,media_only,xgboost,avg_sentiment,0.0820339984180357
+Merced,media_only,xgboost,mean_body_risk,0.0759071232073716
+Merced,media_only,xgboost,mean_body_sentiment,0.07331811452234
+Merced,media_only,xgboost,mean_title_risk,0.0720329324146965
+Merced,media_only,xgboost,mean_title_sentiment,0.0716797691448345
+Merced,media_only,xgboost,tweet_count,0.0645400892417174
+Monterey,media_only,random_forest,AR: recent log-change,0.2909297826120407
+Monterey,media_only,random_forest,AR: same month last year,0.1120415704502039
+Monterey,media_only,random_forest,article_count,0.0400195120983119
+Monterey,media_only,random_forest,avg_likes,0.0548025510344302
+Monterey,media_only,random_forest,avg_risk,0.0714664134764044
+Monterey,media_only,random_forest,avg_sentiment,0.0715026925633153
+Monterey,media_only,random_forest,mean_body_risk,0.087238594234787
+Monterey,media_only,random_forest,mean_body_sentiment,0.0722700245595947
+Monterey,media_only,random_forest,mean_title_risk,0.0404175734530106
+Monterey,media_only,random_forest,mean_title_sentiment,0.0858456882615232
+Monterey,media_only,random_forest,tweet_count,0.0734655972563781
+Monterey,media_only,ridge,AR: recent log-change,0.2879768328823165
+Monterey,media_only,ridge,AR: same month last year,0.0878896379724395
+Monterey,media_only,ridge,article_count,0.0809939236451778
+Monterey,media_only,ridge,avg_likes,0.0409653196589233
+Monterey,media_only,ridge,avg_risk,0.0493016788610346
+Monterey,media_only,ridge,avg_sentiment,0.0629897576743109
+Monterey,media_only,ridge,mean_body_risk,0.1181479263853767
+Monterey,media_only,ridge,mean_body_sentiment,0.0818224849029176
+Monterey,media_only,ridge,mean_title_risk,0.0362319215115106
+Monterey,media_only,ridge,mean_title_sentiment,0.1003700215309057
+Monterey,media_only,ridge,tweet_count,0.0533104949750863
+Monterey,media_only,sarimax,article_count,0.1729799822310689
+Monterey,media_only,sarimax,avg_sentiment,0.2008289597714735
+Monterey,media_only,sarimax,mean_body_risk,0.351735189780824
+Monterey,media_only,sarimax,mean_body_sentiment,0.1907733928752499
+Monterey,media_only,sarimax,mean_title_sentiment,0.0836824753413835
+Monterey,media_only,xgboost,AR: recent log-change,0.2572992660921041
+Monterey,media_only,xgboost,AR: same month last year,0.0882142266348876
+Monterey,media_only,xgboost,article_count,0.0612242381392984
+Monterey,media_only,xgboost,avg_likes,0.0674672425737212
+Monterey,media_only,xgboost,avg_risk,0.0770763363316868
+Monterey,media_only,xgboost,avg_sentiment,0.073657515009358
+Monterey,media_only,xgboost,mean_body_risk,0.0765626878495049
+Monterey,media_only,xgboost,mean_body_sentiment,0.0746659959718252
+Monterey,media_only,xgboost,mean_title_risk,0.0663594156094623
+Monterey,media_only,xgboost,mean_title_sentiment,0.0762933670009604
+Monterey,media_only,xgboost,tweet_count,0.081179708787191
+Sacramento,media_only,random_forest,AR: recent log-change,0.3508454961363746
+Sacramento,media_only,random_forest,AR: same month last year,0.046856812157145
+Sacramento,media_only,random_forest,article_count,0.0377326410443193
+Sacramento,media_only,random_forest,avg_likes,0.0725459506937373
+Sacramento,media_only,random_forest,avg_risk,0.059424199752379
+Sacramento,media_only,random_forest,avg_sentiment,0.0866667836007284
+Sacramento,media_only,random_forest,mean_body_risk,0.0537478899820453
+Sacramento,media_only,random_forest,mean_body_sentiment,0.0665517315997913
+Sacramento,media_only,random_forest,mean_title_risk,0.0598726591180621
+Sacramento,media_only,random_forest,mean_title_sentiment,0.0940148176825244
+Sacramento,media_only,random_forest,tweet_count,0.0717410182328928
+Sacramento,media_only,ridge,AR: recent log-change,0.3700798820691643
+Sacramento,media_only,ridge,AR: same month last year,0.0950538833435712
+Sacramento,media_only,ridge,article_count,0.0513570450675799
+Sacramento,media_only,ridge,avg_likes,0.0324818350594203
+Sacramento,media_only,ridge,avg_risk,0.0530122129812852
+Sacramento,media_only,ridge,avg_sentiment,0.0634665555881058
+Sacramento,media_only,ridge,mean_body_risk,0.0524226615776208
+Sacramento,media_only,ridge,mean_body_sentiment,0.1051205832843842
+Sacramento,media_only,ridge,mean_title_risk,0.0415839327632511
+Sacramento,media_only,ridge,mean_title_sentiment,0.0787500289608068
+Sacramento,media_only,ridge,tweet_count,0.05667137930481
+Sacramento,media_only,sarimax,avg_risk,0.3021555034971016
+Sacramento,media_only,sarimax,avg_sentiment,0.0479489919131432
+Sacramento,media_only,sarimax,mean_body_risk,0.3945977615897401
+Sacramento,media_only,sarimax,mean_title_risk,0.1906138205307451
+Sacramento,media_only,sarimax,mean_title_sentiment,0.0646839224692699
+Sacramento,media_only,xgboost,AR: recent log-change,0.2596174053958485
+Sacramento,media_only,xgboost,AR: same month last year,0.0692343744704662
+Sacramento,media_only,xgboost,article_count,0.0590663149225867
+Sacramento,media_only,xgboost,avg_likes,0.0762070144291451
+Sacramento,media_only,xgboost,avg_risk,0.0760233373820254
+Sacramento,media_only,xgboost,avg_sentiment,0.0828071940648912
+Sacramento,media_only,xgboost,mean_body_risk,0.0685044815155717
+Sacramento,media_only,xgboost,mean_body_sentiment,0.0765623249336839
+Sacramento,media_only,xgboost,mean_title_risk,0.0789497238209987
+Sacramento,media_only,xgboost,mean_title_sentiment,0.0737235254008216
+Sacramento,media_only,xgboost,tweet_count,0.0793043036639606
+San Bernardino,media_only,random_forest,AR: recent log-change,0.2651006345167814
+San Bernardino,media_only,random_forest,AR: same month last year,0.0809909692029931
+San Bernardino,media_only,random_forest,article_count,0.0564549005271667
+San Bernardino,media_only,random_forest,avg_likes,0.0854124849763651
+San Bernardino,media_only,random_forest,avg_risk,0.0740036102846355
+San Bernardino,media_only,random_forest,avg_sentiment,0.0726315148249606
+San Bernardino,media_only,random_forest,mean_body_risk,0.0811613019705436
+San Bernardino,media_only,random_forest,mean_body_sentiment,0.0793922780899719
+San Bernardino,media_only,random_forest,mean_title_risk,0.0508416611062086
+San Bernardino,media_only,random_forest,mean_title_sentiment,0.0775737519132635
+San Bernardino,media_only,random_forest,tweet_count,0.0764368925871095
+San Bernardino,media_only,ridge,AR: recent log-change,0.1955489867418908
+San Bernardino,media_only,ridge,AR: same month last year,0.1087389386157051
+San Bernardino,media_only,ridge,article_count,0.0947081223000854
+San Bernardino,media_only,ridge,avg_likes,0.0521733651213827
+San Bernardino,media_only,ridge,avg_risk,0.0782648091388792
+San Bernardino,media_only,ridge,avg_sentiment,0.0531922646226767
+San Bernardino,media_only,ridge,mean_body_risk,0.0853798913964925
+San Bernardino,media_only,ridge,mean_body_sentiment,0.1028127108157251
+San Bernardino,media_only,ridge,mean_title_risk,0.0887640092930836
+San Bernardino,media_only,ridge,mean_title_sentiment,0.0638588026142952
+San Bernardino,media_only,ridge,tweet_count,0.0765580993397829
+San Bernardino,media_only,sarimax,article_count,0.1338369823551028
+San Bernardino,media_only,sarimax,avg_likes,0.1159604430219877
+San Bernardino,media_only,sarimax,avg_risk,0.3286391934226033
+San Bernardino,media_only,sarimax,mean_title_risk,0.2609599514997037
+San Bernardino,media_only,sarimax,mean_title_sentiment,0.1606034297006024
+San Bernardino,media_only,xgboost,AR: recent log-change,0.2458604375136688
+San Bernardino,media_only,xgboost,AR: same month last year,0.0836084171269642
+San Bernardino,media_only,xgboost,article_count,0.0600276391332349
+San Bernardino,media_only,xgboost,avg_likes,0.0852655769941853
+San Bernardino,media_only,xgboost,avg_risk,0.0749840846870102
+San Bernardino,media_only,xgboost,avg_sentiment,0.0730952192220668
+San Bernardino,media_only,xgboost,mean_body_risk,0.0760495071086164
+San Bernardino,media_only,xgboost,mean_body_sentiment,0.0815575002870487
+San Bernardino,media_only,xgboost,mean_title_risk,0.0702993316191313
+San Bernardino,media_only,xgboost,mean_title_sentiment,0.0661920077261429
+San Bernardino,media_only,xgboost,tweet_count,0.08306027858193
+Santa Barbara,media_only,random_forest,AR: recent log-change,0.2837107136724432
+Santa Barbara,media_only,random_forest,AR: same month last year,0.1123244721131868
+Santa Barbara,media_only,random_forest,article_count,0.0468421535275546
+Santa Barbara,media_only,random_forest,avg_likes,0.060600652820842
+Santa Barbara,media_only,random_forest,avg_risk,0.0620456892245366
+Santa Barbara,media_only,random_forest,avg_sentiment,0.069697836089199
+Santa Barbara,media_only,random_forest,mean_body_risk,0.0998778352688736
+Santa Barbara,media_only,random_forest,mean_body_sentiment,0.0887982224863973
+Santa Barbara,media_only,random_forest,mean_title_risk,0.039448784372769
+Santa Barbara,media_only,random_forest,mean_title_sentiment,0.0737119417539503
+Santa Barbara,media_only,random_forest,tweet_count,0.0629416986702468
+Santa Barbara,media_only,ridge,AR: recent log-change,0.3121873284398773
+Santa Barbara,media_only,ridge,AR: same month last year,0.0995046749788012
+Santa Barbara,media_only,ridge,article_count,0.0565750928639958
+Santa Barbara,media_only,ridge,avg_likes,0.0482990245061726
+Santa Barbara,media_only,ridge,avg_risk,0.0410508488210764
+Santa Barbara,media_only,ridge,avg_sentiment,0.0678008889738898
+Santa Barbara,media_only,ridge,mean_body_risk,0.1223302759217785
+Santa Barbara,media_only,ridge,mean_body_sentiment,0.0843076981397266
+Santa Barbara,media_only,ridge,mean_title_risk,0.0540716222406131
+Santa Barbara,media_only,ridge,mean_title_sentiment,0.0709255704717825
+Santa Barbara,media_only,ridge,tweet_count,0.0429469746422856
+Santa Barbara,media_only,sarimax,article_count,0.2105185835229577
+Santa Barbara,media_only,sarimax,avg_sentiment,0.1536233336031169
+Santa Barbara,media_only,sarimax,mean_body_risk,0.2601686063666374
+Santa Barbara,media_only,sarimax,mean_body_sentiment,0.1689258382829598
+Santa Barbara,media_only,sarimax,mean_title_risk,0.206763638224328
+Santa Barbara,media_only,xgboost,AR: recent log-change,0.2515620561476523
+Santa Barbara,media_only,xgboost,AR: same month last year,0.0914729876987159
+Santa Barbara,media_only,xgboost,article_count,0.0695302676124001
+Santa Barbara,media_only,xgboost,avg_likes,0.0684396553392864
+Santa Barbara,media_only,xgboost,avg_risk,0.0726208708344227
+Santa Barbara,media_only,xgboost,avg_sentiment,0.0736354583324096
+Santa Barbara,media_only,xgboost,mean_body_risk,0.084400933711749
+Santa Barbara,media_only,xgboost,mean_body_sentiment,0.0774062701004632
+Santa Barbara,media_only,xgboost,mean_title_risk,0.0704700390606538
+Santa Barbara,media_only,xgboost,mean_title_sentiment,0.066545557140213
+Santa Barbara,media_only,xgboost,tweet_count,0.0739159040220338
+Santa Clara,media_only,random_forest,AR: recent log-change,0.4164484071656179
+Santa Clara,media_only,random_forest,AR: same month last year,0.0857221964977547
+Santa Clara,media_only,random_forest,article_count,0.025059204305613
+Santa Clara,media_only,random_forest,avg_likes,0.0952769438387004
+Santa Clara,media_only,random_forest,avg_risk,0.0631560657428072
+Santa Clara,media_only,random_forest,avg_sentiment,0.0620017313815506
+Santa Clara,media_only,random_forest,mean_body_risk,0.0617079479555421
+Santa Clara,media_only,random_forest,mean_body_sentiment,0.0515839290801228
+Santa Clara,media_only,random_forest,mean_title_risk,0.027128772003314
+Santa Clara,media_only,random_forest,mean_title_sentiment,0.0698727691808845
+Santa Clara,media_only,random_forest,tweet_count,0.0420420328480923
+Santa Clara,media_only,ridge,AR: recent log-change,0.3743899818348151
+Santa Clara,media_only,ridge,AR: same month last year,0.0839045427424433
+Santa Clara,media_only,ridge,article_count,0.0421424774370182
+Santa Clara,media_only,ridge,avg_likes,0.0561498564460584
+Santa Clara,media_only,ridge,avg_risk,0.0547673871111144
+Santa Clara,media_only,ridge,avg_sentiment,0.06519941122881
+Santa Clara,media_only,ridge,mean_body_risk,0.0667600384229975
+Santa Clara,media_only,ridge,mean_body_sentiment,0.0506924270817047
+Santa Clara,media_only,ridge,mean_title_risk,0.0538792979308411
+Santa Clara,media_only,ridge,mean_title_sentiment,0.0618256080346882
+Santa Clara,media_only,ridge,tweet_count,0.0902889717295087
+Santa Clara,media_only,sarimax,avg_risk,0.1164128172521525
+Santa Clara,media_only,sarimax,mean_body_risk,0.3405033622480531
+Santa Clara,media_only,sarimax,mean_body_sentiment,0.1113771471841165
+Santa Clara,media_only,sarimax,mean_title_sentiment,0.3745309441262592
+Santa Clara,media_only,sarimax,tweet_count,0.0571757291894184
+Santa Clara,media_only,xgboost,AR: recent log-change,0.2801275437476215
+Santa Clara,media_only,xgboost,AR: same month last year,0.0801617970204418
+Santa Clara,media_only,xgboost,article_count,0.0517068106841672
+Santa Clara,media_only,xgboost,avg_likes,0.0839756372939658
+Santa Clara,media_only,xgboost,avg_risk,0.0771113016857551
+Santa Clara,media_only,xgboost,avg_sentiment,0.0743933430800158
+Santa Clara,media_only,xgboost,mean_body_risk,0.072819078457747
+Santa Clara,media_only,xgboost,mean_body_sentiment,0.0724192472078245
+Santa Clara,media_only,xgboost,mean_title_risk,0.0680739318283179
+Santa Clara,media_only,xgboost,mean_title_sentiment,0.0675341182961347
+Santa Clara,media_only,xgboost,tweet_count,0.0716771906980083
+Solano,media_only,random_forest,AR: recent log-change,0.2647426310464876
+Solano,media_only,random_forest,AR: same month last year,0.0628608248379024
+Solano,media_only,random_forest,article_count,0.0408186361767584
+Solano,media_only,random_forest,avg_likes,0.082229449330422
+Solano,media_only,random_forest,avg_risk,0.0832078394174288
+Solano,media_only,random_forest,avg_sentiment,0.087481227477458
+Solano,media_only,random_forest,mean_body_risk,0.0997115468332422
+Solano,media_only,random_forest,mean_body_sentiment,0.0845485727314275
+Solano,media_only,random_forest,mean_title_risk,0.0423420110087589
+Solano,media_only,random_forest,mean_title_sentiment,0.0862529846382026
+Solano,media_only,random_forest,tweet_count,0.0658042765019112
+Solano,media_only,ridge,AR: recent log-change,0.3004462410458727
+Solano,media_only,ridge,AR: same month last year,0.0927559820549398
+Solano,media_only,ridge,article_count,0.0629585292685004
+Solano,media_only,ridge,avg_likes,0.0746684139033267
+Solano,media_only,ridge,avg_risk,0.0804073341637952
+Solano,media_only,ridge,avg_sentiment,0.0789339548595099
+Solano,media_only,ridge,mean_body_risk,0.0639054885240551
+Solano,media_only,ridge,mean_body_sentiment,0.0559778545896144
+Solano,media_only,ridge,mean_title_risk,0.0504751574047235
+Solano,media_only,ridge,mean_title_sentiment,0.0638878905322982
+Solano,media_only,ridge,tweet_count,0.0755831536533637
+Solano,media_only,sarimax,article_count,0.1283464637700596
+Solano,media_only,sarimax,avg_likes,0.0796938211395054
+Solano,media_only,sarimax,avg_sentiment,0.1518673068228695
+Solano,media_only,sarimax,mean_body_risk,0.4178076895295782
+Solano,media_only,sarimax,mean_body_sentiment,0.2222847187379871
+Solano,media_only,xgboost,AR: recent log-change,0.2489432837634182
+Solano,media_only,xgboost,AR: same month last year,0.0739139787170243
+Solano,media_only,xgboost,article_count,0.0632034453183692
+Solano,media_only,xgboost,avg_likes,0.0807130855006509
+Solano,media_only,xgboost,avg_risk,0.0801639317068894
+Solano,media_only,xgboost,avg_sentiment,0.0793851992994695
+Solano,media_only,xgboost,mean_body_risk,0.0792157554332698
+Solano,media_only,xgboost,mean_body_sentiment,0.0785565892014594
+Solano,media_only,xgboost,mean_title_risk,0.0653509607094228
+Solano,media_only,xgboost,mean_title_sentiment,0.0724064602131264
+Solano,media_only,xgboost,tweet_count,0.0781473101368993
+Stanislaus,media_only,random_forest,AR: recent log-change,0.345313785544631
+Stanislaus,media_only,random_forest,AR: same month last year,0.0583372706139262
+Stanislaus,media_only,random_forest,article_count,0.0360776263915003
+Stanislaus,media_only,random_forest,avg_likes,0.0634277138105052
+Stanislaus,media_only,random_forest,avg_risk,0.1062273432472949
+Stanislaus,media_only,random_forest,avg_sentiment,0.0685392765098779
+Stanislaus,media_only,random_forest,mean_body_risk,0.0696074566803141
+Stanislaus,media_only,random_forest,mean_body_sentiment,0.0731752515491698
+Stanislaus,media_only,random_forest,mean_title_risk,0.0468608776089091
+Stanislaus,media_only,random_forest,mean_title_sentiment,0.0625896670302312
+Stanislaus,media_only,random_forest,tweet_count,0.06984373101364
+Stanislaus,media_only,ridge,AR: recent log-change,0.3114538226888161
+Stanislaus,media_only,ridge,AR: same month last year,0.0689332343132887
+Stanislaus,media_only,ridge,article_count,0.0722527271928547
+Stanislaus,media_only,ridge,avg_likes,0.0699986261705235
+Stanislaus,media_only,ridge,avg_risk,0.129190810567296
+Stanislaus,media_only,ridge,avg_sentiment,0.0638436058595939
+Stanislaus,media_only,ridge,mean_body_risk,0.0559233096097854
+Stanislaus,media_only,ridge,mean_body_sentiment,0.0719071947885762
+Stanislaus,media_only,ridge,mean_title_risk,0.0386732801758179
+Stanislaus,media_only,ridge,mean_title_sentiment,0.043268483258129
+Stanislaus,media_only,ridge,tweet_count,0.074554905375318
+Stanislaus,media_only,sarimax,article_count,0.0615248102290534
+Stanislaus,media_only,sarimax,avg_likes,0.0449759420794455
+Stanislaus,media_only,sarimax,avg_risk,0.4169604075165122
+Stanislaus,media_only,sarimax,avg_sentiment,0.3090348893658238
+Stanislaus,media_only,sarimax,mean_body_sentiment,0.1675039508091647
+Stanislaus,media_only,xgboost,AR: recent log-change,0.2547744959106495
+Stanislaus,media_only,xgboost,AR: same month last year,0.0790689920524503
+Stanislaus,media_only,xgboost,article_count,0.063122304476354
+Stanislaus,media_only,xgboost,avg_likes,0.0745700154746555
+Stanislaus,media_only,xgboost,avg_risk,0.0831608564156089
+Stanislaus,media_only,xgboost,avg_sentiment,0.0779887930890381
+Stanislaus,media_only,xgboost,mean_body_risk,0.0724823253537431
+Stanislaus,media_only,xgboost,mean_body_sentiment,0.0755522861480228
+Stanislaus,media_only,xgboost,mean_title_risk,0.0746834262761836
+Stanislaus,media_only,xgboost,mean_title_sentiment,0.0687096015298467
+Stanislaus,media_only,xgboost,tweet_count,0.0758869032734474

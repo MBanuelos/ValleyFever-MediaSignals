@@ -1,17 +1,48 @@
 {
-  "intro": "Models are trained on a rolling 10-year window and forecast 1, 3 and 6 months ahead. Each county is forecast from environmental data, from news and Twitter data, and from both. Every set also uses the county's own recent case history. The seasonal-naive baseline repeats last year's value.",
+  "intro": "Models are trained on a rolling 10-year window and forecast 1, 3 and 6 months ahead. Each county is forecast from environmental data, from news and Twitter data, and from both. Every set also uses the county's own recent case history. The two baselines are seasonal naive (repeats last year's change) and no change (repeats last month's value).",
   "feature_sets": [
-    {"key": "env_only", "title": "Environment"},
-    {"key": "media_only", "title": "Media"},
-    {"key": "media_env", "title": "Media + environment"}
+    {
+      "key": "env_only",
+      "title": "Environment"
+    },
+    {
+      "key": "media_only",
+      "title": "Media"
+    },
+    {
+      "key": "media_env",
+      "title": "Media + environment"
+    }
   ],
   "models": {
-    "seasonal_naive": {"label": "Seasonal naive", "color": "#8A9693"},
-    "ridge": {"label": "Ridge", "color": "#3C5A99"},
-    "random_forest": {"label": "Random forest", "color": "#3E7C4F"},
-    "xgboost": {"label": "XGBoost", "color": "#8A5A9E"},
-    "sarimax": {"label": "SARIMAX", "color": "#B9791A"},
-    "lstm": {"label": "LSTM", "color": "#C2455A"}
+    "seasonal_naive": {
+      "label": "Seasonal naive",
+      "color": "#8A9693"
+    },
+    "no_change": {
+      "label": "No change",
+      "color": "#6B7F4E"
+    },
+    "ridge": {
+      "label": "Ridge",
+      "color": "#3C5A99"
+    },
+    "random_forest": {
+      "label": "Random forest",
+      "color": "#3E7C4F"
+    },
+    "xgboost": {
+      "label": "XGBoost",
+      "color": "#8A5A9E"
+    },
+    "sarimax": {
+      "label": "SARIMAX",
+      "color": "#B9791A"
+    },
+    "lstm": {
+      "label": "LSTM",
+      "color": "#C2455A"
+    }
   },
   "feature_labels": {
     "article_count": "Article count",

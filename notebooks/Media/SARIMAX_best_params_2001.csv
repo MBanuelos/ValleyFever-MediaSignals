@@ -1,0 +1,64 @@
+County,Feature_Set,Horizon,order,seasonal_order,trend
+Alameda,articles,1,"(0, 0, 3)","(0, 0, 0, 12)",n
+Alameda,articles,3,"(0, 0, 3)","(0, 0, 0, 12)",n
+Alameda,articles,6,"(0, 0, 3)","(0, 0, 0, 12)",n
+Contra Costa,articles,1,"(0, 0, 2)","(0, 0, 0, 12)",n
+Contra Costa,articles,3,"(0, 0, 2)","(0, 0, 0, 12)",n
+Contra Costa,articles,6,"(0, 0, 2)","(0, 0, 0, 12)",n
+Fresno,articles,1,"(1, 0, 1)","(1, 0, 1, 12)",n
+Fresno,articles,3,"(1, 0, 1)","(1, 0, 1, 12)",n
+Fresno,articles,6,"(1, 0, 1)","(1, 0, 1, 12)",n
+Kern,articles,1,"(0, 0, 0)","(0, 0, 0, 12)",n
+Kern,articles,3,"(0, 0, 0)","(0, 0, 0, 12)",n
+Kern,articles,6,"(0, 0, 0)","(0, 0, 0, 12)",n
+Los Angeles,articles,1,"(0, 0, 4)","(0, 0, 0, 12)",n
+Los Angeles,articles,3,"(0, 0, 4)","(0, 0, 0, 12)",n
+Los Angeles,articles,6,"(0, 0, 4)","(0, 0, 0, 12)",n
+Merced,articles,1,"(0, 0, 1)","(2, 0, 0, 12)",n
+Merced,articles,3,"(0, 0, 1)","(2, 0, 0, 12)",n
+Merced,articles,6,"(0, 0, 1)","(2, 0, 0, 12)",n
+Monterey,articles,1,"(0, 0, 0)","(0, 0, 0, 12)",n
+Monterey,articles,3,"(0, 0, 0)","(0, 0, 0, 12)",n
+Monterey,articles,6,"(0, 0, 0)","(0, 0, 0, 12)",n
+Orange,articles,1,"(0, 0, 1)","(1, 0, 0, 12)",n
+Orange,articles,3,"(0, 0, 1)","(1, 0, 0, 12)",n
+Orange,articles,6,"(0, 0, 1)","(1, 0, 0, 12)",n
+Riverside,articles,1,"(1, 0, 0)","(0, 0, 0, 12)",n
+Riverside,articles,3,"(1, 0, 0)","(0, 0, 0, 12)",n
+Riverside,articles,6,"(1, 0, 0)","(0, 0, 0, 12)",n
+Sacramento,articles,1,"(0, 0, 1)","(0, 0, 0, 12)",n
+Sacramento,articles,3,"(0, 0, 1)","(0, 0, 0, 12)",n
+Sacramento,articles,6,"(0, 0, 1)","(0, 0, 0, 12)",n
+San Bernardino,articles,1,"(0, 0, 1)","(0, 0, 0, 12)",n
+San Bernardino,articles,3,"(0, 0, 1)","(0, 0, 0, 12)",n
+San Bernardino,articles,6,"(0, 0, 1)","(0, 0, 0, 12)",n
+San Diego,articles,1,"(1, 0, 1)","(0, 0, 0, 12)",n
+San Diego,articles,3,"(1, 0, 1)","(0, 0, 0, 12)",n
+San Diego,articles,6,"(1, 0, 1)","(0, 0, 0, 12)",n
+San Joaquin,articles,1,"(1, 0, 1)","(0, 0, 1, 12)",n
+San Joaquin,articles,3,"(1, 0, 1)","(0, 0, 1, 12)",n
+San Joaquin,articles,6,"(1, 0, 1)","(0, 0, 1, 12)",n
+San Luis Obispo,articles,1,"(1, 0, 1)","(0, 0, 1, 12)",n
+San Luis Obispo,articles,3,"(1, 0, 1)","(0, 0, 1, 12)",n
+San Luis Obispo,articles,6,"(1, 0, 1)","(0, 0, 1, 12)",n
+San Mateo,articles,1,"(0, 0, 1)","(0, 0, 2, 12)",c
+San Mateo,articles,3,"(0, 0, 1)","(0, 0, 2, 12)",c
+San Mateo,articles,6,"(0, 0, 1)","(0, 0, 2, 12)",c
+Santa Barbara,articles,1,"(0, 0, 2)","(0, 0, 1, 12)",c
+Santa Barbara,articles,3,"(0, 0, 2)","(0, 0, 1, 12)",c
+Santa Barbara,articles,6,"(0, 0, 2)","(0, 0, 1, 12)",c
+Santa Clara,articles,1,"(0, 0, 1)","(0, 0, 0, 12)",n
+Santa Clara,articles,3,"(0, 0, 1)","(0, 0, 0, 12)",n
+Santa Clara,articles,6,"(0, 0, 1)","(0, 0, 0, 12)",n
+Solano,articles,1,"(1, 0, 1)","(0, 0, 0, 12)",c
+Solano,articles,3,"(1, 0, 1)","(0, 0, 0, 12)",c
+Solano,articles,6,"(1, 0, 1)","(0, 0, 0, 12)",c
+Stanislaus,articles,1,"(0, 0, 2)","(0, 0, 0, 12)",n
+Stanislaus,articles,3,"(0, 0, 2)","(0, 0, 0, 12)",n
+Stanislaus,articles,6,"(0, 0, 2)","(0, 0, 0, 12)",n
+Tulare,articles,1,"(1, 0, 1)","(1, 0, 0, 12)",n
+Tulare,articles,3,"(1, 0, 1)","(1, 0, 0, 12)",n
+Tulare,articles,6,"(1, 0, 1)","(1, 0, 0, 12)",n
+Ventura,articles,1,"(1, 0, 1)","(2, 0, 1, 12)",c
+Ventura,articles,3,"(1, 0, 1)","(2, 0, 1, 12)",c
+Ventura,articles,6,"(1, 0, 1)","(2, 0, 1, 12)",c

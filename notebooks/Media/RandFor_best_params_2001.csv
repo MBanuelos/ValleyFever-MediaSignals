@@ -1,0 +1,22 @@
+County,Feature_Set,max_depth,max_features,min_samples_leaf,min_samples_split,n_estimators
+Alameda,articles,,sqrt,4,10,300
+Contra Costa,articles,,sqrt,4,10,300
+Fresno,articles,10.0,sqrt,1,10,300
+Kern,articles,,sqrt,4,10,200
+Los Angeles,articles,,sqrt,4,10,100
+Merced,articles,10.0,sqrt,1,10,200
+Monterey,articles,,sqrt,4,10,200
+Orange,articles,,sqrt,4,10,300
+Riverside,articles,10.0,1.0,2,10,100
+Sacramento,articles,,sqrt,4,10,300
+San Bernardino,articles,,sqrt,2,10,100
+San Diego,articles,,sqrt,1,2,100
+San Joaquin,articles,,sqrt,4,2,100
+San Luis Obispo,articles,,sqrt,4,10,100
+San Mateo,articles,,sqrt,4,10,300
+Santa Barbara,articles,,sqrt,4,10,300
+Santa Clara,articles,10.0,sqrt,1,10,300
+Solano,articles,,sqrt,4,2,300
+Stanislaus,articles,10.0,sqrt,1,10,300
+Tulare,articles,,sqrt,2,2,100
+Ventura,articles,,sqrt,4,2,100

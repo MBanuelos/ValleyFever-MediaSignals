@@ -90,14 +90,20 @@
   .metrics tr.best td { font-weight: 650; background: #E3EDEA; }
   .pos { color: var(--good); } .neg { color: var(--bad); }
   .tag { font-size: 11px; background: var(--teal); color: #fff; border-radius: 3px; padding: 0 5px; margin-left: 6px; }
+  .tabs { display: flex; gap: 6px; margin: 22px 0 6px; border-bottom: 1px solid var(--rule); }
+  .tabs button { background: transparent; border: 0; border-bottom: 3px solid transparent; padding: 10px 18px; cursor: pointer; font-size: 16px; font-weight: 600; color: var(--soft); margin-bottom: -1px; }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--teal); }
+  .tabs button:hover { color: var(--ink); }
   footer { margin-top: 30px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Valley Fever forecasts for California's ten highest-burden counties</h1>
+  <h1>Valley Fever forecasts for California counties</h1>
   <p class="lede" id="lede"></p>
   <p class="note" id="scope-note"></p>
+  <div class="tabs" role="tablist" id="tabs" aria-label="County groups"></div>
+  <p class="note" id="group-note" style="margin-top:10px"></p>
 
   <section class="main" aria-label="Main dashboard">
     <p class="finding" id="finding"></p>
@@ -114,8 +120,10 @@
   <div id="sets"></div>
 
   <footer class="note">
-    <p><b>How to read the errors.</b> RMSE and MAE are averaged over every forecast month in every rolling window, on the log-change scale the project uses (month-to-month change in the log of cases per 100,000). Smaller is better. Improvement is measured against the seasonal-naive baseline at the same horizon. Each section's summary line also gives the error in cases per 100,000, and the chart shows rates.</p>
-    <p><b>Feature sets.</b> Environment uses weather, air quality, fire and pesticide data. Media uses California-wide article and tweet measures, so every county sees the same media signal. Media + environment uses both. All three include the county's recent case changes. Feature importance is averaged over every fitted window of the best model that reports it (Ridge, Random forest, XGBoost or SARIMAX). SARIMAX importance covers only its five chosen outside predictors, because it models past cases itself. If the LSTM or the baseline is best, the importance comes from the best of the other four models. Findings are predictive and associational, not causal.</p>
+    <p><b>Log scale.</b> Yes, the models predict on a log scale. The target is the month-to-month change in log(1 + cases per 100,000). Forecasts are converted back to cases per 100,000 for the charts and the rate errors, and each forecast starts from the last observed month.</p>
+    <p><b>How to read the errors.</b> RMSE and MAE are averaged over every forecast month in every rolling window, on that log-change scale. Smaller is better. Each section's summary line also gives the error in cases per 100,000. "vs seasonal naive" and "vs no change" show how much lower a model's RMSE is than each baseline at the same horizon. Seasonal naive repeats last year's change. No change repeats last month's value, which is the stricter test. Baselines are shown for comparison and are never picked as the best model.</p>
+    <p><b>Which model the charts show.</b> Each chart opens with the best model for that county and feature set, chosen by RMSE averaged over the 1, 3 and 6 month horizons, plus the no-change baseline. The best model stays the same when you change the horizon, so at a single horizon another model can score slightly better. Models you turn on or off are kept while you change the horizon and reset when you change county.</p>
+    <p><b>Feature sets.</b> Environment uses weather, air quality, fire and pesticide data. Media uses California-wide article and tweet measures, so every county sees the same media signal. Media + environment uses both. All three include the county's recent case changes. Feature importance is averaged over every fitted window of the best model that reports it (Ridge, Random forest, XGBoost or SARIMAX). SARIMAX importance covers only its five chosen outside predictors, because it models past cases itself. If the LSTM is best, the importance comes from the best of the other four models. Findings are predictive and associational, not causal.</p>
   </footer>
 </div>
 
@@ -123,22 +131,26 @@
 const DATA = /*__DATA__*/null;
 
 const CFG = DATA.config;
-const SETS = CFG.feature_sets;
+const GROUPS = DATA.groups;
+const SETS = CFG.feature_sets;           // every feature set that appears in any group
 const LABELS = CFG.feature_labels;
 const MODEL_ORDER = Object.keys(CFG.models);
 const MODEL_NAME = Object.fromEntries(MODEL_ORDER.map(k => [k, CFG.models[k].label]));
 const MODEL_COLOR = Object.fromEntries(MODEL_ORDER.map(k => [k, CFG.models[k].color]));
 const KIND_COLOR = { media: "#B9791A", env: "#0E6B6A", ar: "#8A9693" };
 const HORIZONS = [1, 3, 6];
+const BASELINE = new Set(["seasonal_naive", "no_change"]);
 
-const state = { county: 0, ui: {} };
+const state = { group: 0, county: 0, ui: {} };
 SETS.forEach(s => state.ui[s.key] = { horizon: 3, visible: null });
 
 const f3 = x => (x == null || isNaN(x)) ? "n/a" : x.toFixed(3);
 const f2 = x => (x == null || isNaN(x)) ? "n/a" : x.toFixed(2);
 const pct = x => (x == null || isNaN(x)) ? "n/a" : (x >= 0 ? "+" : "") + x.toFixed(1) + "%";
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const cur = () => DATA.counties[state.county];
+const G = () => GROUPS[state.group];
+const setsOf = () => G().feature_sets;
+const cur = () => G().counties[state.county];
 
 function metric(S, model, h, key) {
   const r = S.metrics.find(r => r.model === model && r.horizon === h);
@@ -147,22 +159,22 @@ function metric(S, model, h, key) {
 
 /* ---------- main dashboard ---------- */
 function renderMain() {
-  const wins = Object.fromEntries(SETS.map(s => [s.key, 0]));
-  DATA.counties.forEach(c => {
+  const wins = Object.fromEntries(setsOf().map(s => [s.key, 0]));
+  G().counties.forEach(c => {
     let bestK = null, bestV = Infinity;
-    SETS.forEach(s => { const S = c.sets[s.key]; if (S && S.best.mean_rmse < bestV) { bestV = S.best.mean_rmse; bestK = s.key; } });
+    setsOf().forEach(s => { const S = c.sets[s.key]; if (S && S.best.mean_rmse < bestV) { bestV = S.best.mean_rmse; bestK = s.key; } });
     c.winner = bestK; if (bestK) wins[bestK]++;
   });
-  const parts = SETS.map(s => `${s.title.toLowerCase()} in <b>${wins[s.key]}</b>`).join(", ");
+  const parts = setsOf().map(s => `${s.title.toLowerCase()} in <b>${wins[s.key]}</b>`).join(", ");
   document.getElementById("finding").innerHTML =
-    `Lowest average error by feature set across ${DATA.counties.length} counties: ${parts}. A dot marks each county's lowest error. Select a county to open its predictions below.`;
+    `Lowest average error by feature set across ${G().counties.length} counties: ${parts}. A dot marks each county's lowest error. Select a county to open its predictions below.`;
 
-  let h = `<thead><tr class="group"><th></th><th></th><th></th>${SETS.map(s => `<th colspan="2" style="text-align:center">${s.title}</th>`).join("")}</tr>
-    <tr><th class="l">#</th><th class="l">County</th><th>Total cases</th>${SETS.map(() => `<th class="l">Best model</th><th>Avg RMSE</th>`).join("")}</tr></thead><tbody>`;
-  DATA.counties.forEach((c, i) => {
+  let h = `<thead><tr class="group"><th></th><th></th><th></th>${setsOf().map(s => `<th colspan="2" style="text-align:center">${s.title}</th>`).join("")}</tr>
+    <tr><th class="l">#</th><th class="l">County</th><th>Total cases</th>${setsOf().map(() => `<th class="l">Best model</th><th>Avg RMSE</th>`).join("")}</tr></thead><tbody>`;
+  G().counties.forEach((c, i) => {
     h += `<tr class="row" tabindex="0" data-i="${i}" aria-selected="${i === state.county}">
       <td class="rank l">${i + 1}</td><td class="name l">${esc(c.name)}</td><td>${c.cases.toLocaleString()}</td>
-      ${SETS.map(s => { const S = c.sets[s.key]; if (!S) return `<td class="l">n/a</td><td>n/a</td>`;
+      ${setsOf().map(s => { const S = c.sets[s.key]; if (!S) return `<td class="l">n/a</td><td>n/a</td>`;
         const low = c.winner === s.key;
         return `<td class="l cell-model">${MODEL_NAME[S.best.model]}</td><td class="${low ? "low" : ""}">${low ? '<span class="mark"></span>' : ""}${f3(S.best.mean_rmse)}</td>`; }).join("")}
     </tr>`;
@@ -188,10 +200,10 @@ function selectCounty(i) {
 function renderCounty() {
   const c = cur();
   document.getElementById("county-title").textContent = c.name;
-  SETS.forEach(s => {
+  setsOf().forEach(s => {
     const S = c.sets[s.key];
     const sum = document.querySelector(`#set-${s.key} > summary .ss`);
-    sum.textContent = S ? `Best model ${MODEL_NAME[S.best.model]}, average RMSE ${f3(S.best.mean_rmse)} (baseline ${f3(S.best.base_mean_rmse)})` : "No results";
+    sum.textContent = S ? `Best model ${MODEL_NAME[S.best.model]}, average RMSE ${f3(S.best.mean_rmse)} (seasonal naive ${f3(S.best.base_mean_rmse)}, no change ${f3(S.best.nochange_mean_rmse)})` : "No results";
     renderSet(s);
   });
 }
@@ -200,6 +212,7 @@ function chartSVG(key, c, S) {
   const ui = state.ui[key];
   const series = S.forecasts[String(ui.horizon)] || {};
   const base = series[S.best.model] || [];
+  if (!base.length) return `<p class="note">The forecast chart for this county and feature set is not available. Run the model for it and rebuild the dashboard.</p>`;
   const months = base.map(r => r[0]);
   const W = 900, H = 330, m = { l: 52, r: 14, t: 26, b: 30 };
   const iw = W - m.l - m.r, ih = H - m.t - m.b;
@@ -219,7 +232,7 @@ function chartSVG(key, c, S) {
   let lines = "";
   shown.forEach(k => {
     const isBest = k === S.best.model;
-    lines += `<path d="${path(series[k].map(r => r[2]))}" fill="none" stroke="${MODEL_COLOR[k]}" stroke-width="${isBest ? 2.6 : 1.4}" ${k === "seasonal_naive" ? 'stroke-dasharray="5 4"' : ""} stroke-linejoin="round"/>`;
+    lines += `<path d="${path(series[k].map(r => r[2]))}" fill="none" stroke="${MODEL_COLOR[k]}" stroke-width="${isBest ? 2.6 : 1.4}" ${BASELINE.has(k) ? 'stroke-dasharray="5 4"' : ""} stroke-linejoin="round"/>`;
   });
   lines += `<path d="${path(base.map(r => r[1]))}" fill="none" stroke="#1B2A29" stroke-width="2.2" stroke-linejoin="round"/>`;
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Observed and forecast cases per 100,000 for ${esc(c.name)}, ${ui.horizon}-month horizon">
@@ -269,12 +282,13 @@ function metricsTable(S) {
     const m = k => HORIZONS.reduce((s, h) => s + (metric(S, k, h, "rmse") ?? 9), 0);
     return m(a) - m(b);
   });
-  let h = `<table class="metrics"><thead><tr><th class="l">Model</th>${HORIZONS.map(x => `<th>RMSE ${x} mo</th>`).join("")}${HORIZONS.map(x => `<th>MAE ${x} mo</th>`).join("")}${HORIZONS.map(x => `<th>vs baseline ${x} mo</th>`).join("")}</tr></thead><tbody>`;
+  let h = `<table class="metrics"><thead><tr><th class="l">Model</th>${HORIZONS.map(x => `<th>RMSE ${x} mo</th>`).join("")}${HORIZONS.map(x => `<th>MAE ${x} mo</th>`).join("")}${HORIZONS.map(x => `<th>vs seasonal naive ${x} mo</th>`).join("")}${HORIZONS.map(x => `<th>vs no change ${x} mo</th>`).join("")}</tr></thead><tbody>`;
   models.forEach(k => {
     h += `<tr class="${k === S.best.model ? "best" : ""}"><td class="l">${MODEL_NAME[k]}${k === S.best.model ? '<span class="tag">best</span>' : ""}</td>
       ${HORIZONS.map(x => `<td>${f3(metric(S, k, x, "rmse"))}</td>`).join("")}
       ${HORIZONS.map(x => `<td>${f3(metric(S, k, x, "mae"))}</td>`).join("")}
-      ${HORIZONS.map(x => { const v = metric(S, k, x, "pct_improve_rmse"); return `<td class="${v == null ? "" : v >= 0 ? "pos" : "neg"}">${k === "seasonal_naive" ? "baseline" : pct(v)}</td>`; }).join("")}</tr>`;
+      ${HORIZONS.map(x => { const v = metric(S, k, x, "pct_improve_rmse"); return `<td class="${v == null ? "" : v >= 0 ? "pos" : "neg"}">${k === "seasonal_naive" ? "baseline" : pct(v)}</td>`; }).join("")}
+      ${HORIZONS.map(x => { const v = metric(S, k, x, "pct_vs_nochange_rmse"); return `<td class="${v == null ? "" : v >= 0 ? "pos" : "neg"}">${k === "no_change" ? "baseline" : pct(v)}</td>`; }).join("")}</tr>`;
   });
   return h + "</tbody></table>";
 }
@@ -283,15 +297,15 @@ function renderSet(s) {
   const key = s.key, c = cur(), S = c.sets[key], ui = state.ui[key];
   const body = document.querySelector(`#set-${key} .set-body`);
   if (!S) { body.innerHTML = `<p class="note span">No results for this county.</p>`; return; }
-  if (!ui.visible) ui.visible = new Set(["seasonal_naive", S.best.model]);
+  if (!ui.visible) ui.visible = new Set([S.best.model, ...(S.metrics.some(r => r.model === "no_change") ? ["no_change"] : [])]);
   const bm = S.best.model;
   const nW = metric(S, bm, ui.horizon, "n_windows");
   const rr = metric(S, bm, ui.horizon, "rate_rmse"), rm = metric(S, bm, ui.horizon, "rate_mae");
   const chips = MODEL_ORDER.filter(k => (S.forecasts[String(ui.horizon)] || {})[k]).map(k =>
-    `<button class="chip" style="--c:${MODEL_COLOR[k]}" data-m="${k}" aria-pressed="${ui.visible.has(k)}"><i class="${k === "seasonal_naive" ? "dash" : ""}"></i>${MODEL_NAME[k]}${k === bm ? '<span class="best">best</span>' : ""}</button>`).join("");
+    `<button class="chip" style="--c:${MODEL_COLOR[k]}" data-m="${k}" aria-pressed="${ui.visible.has(k)}"><i class="${BASELINE.has(k) ? "dash" : ""}"></i>${MODEL_NAME[k]}${k === bm ? '<span class="best">best</span>' : ""}</button>`).join("");
   body.innerHTML = `
     <div class="chartcol">
-      <p class="sub">${esc(s.title)} forecasts for ${esc(c.name)}: ${MODEL_NAME[bm]} is best on average across the three horizons (RMSE ${f3(S.best.mean_rmse)} against ${f3(S.best.base_mean_rmse)} for seasonal naive). At ${ui.horizon} month${ui.horizon > 1 ? "s" : ""} its rate error is ${f2(rr)} RMSE and ${f2(rm)} MAE cases per 100,000 over ${nW} rolling windows.</p>
+      <p class="sub">${esc(s.title)} forecasts for ${esc(c.name)}: ${MODEL_NAME[bm]} is best on average across the three horizons (RMSE ${f3(S.best.mean_rmse)}, against ${f3(S.best.nochange_mean_rmse)} for a no-change forecast and ${f3(S.best.base_mean_rmse)} for seasonal naive). At ${ui.horizon} month${ui.horizon > 1 ? "s" : ""} its rate error is ${f2(rr)} RMSE and ${f2(rm)} MAE cases per 100,000 over ${nW} rolling windows.</p>
       <div class="controls">
         <div class="seg" role="group" aria-label="Forecast horizon">${HORIZONS.map(h => `<button data-h="${h}" aria-pressed="${h === ui.horizon}">${h} month${h > 1 ? "s" : ""} ahead</button>`).join("")}</div>
         <div class="chips" role="group" aria-label="Models shown">${chips}<span class="chip" style="--c:#1B2A29;cursor:default"><i></i>Observed</span></div>
@@ -300,7 +314,7 @@ function renderSet(s) {
       <div class="readout" aria-live="off"></div>
     </div>
     <div class="side">
-      <div><h3>What drives the ${MODEL_NAME[S.best.features_model]} forecasts</h3><div class="bars">${featureBars(S)}</div>
+      <div><h3>What drives the ${MODEL_NAME[S.best.features_model] || MODEL_NAME[S.best.model]} forecasts</h3><div class="bars">${featureBars(S)}</div>
         <div class="legend-inline"><span><i style="background:#B9791A"></i>News and Twitter</span><span><i style="background:#0E6B6A"></i>Environment</span><span><i style="background:#8A9693"></i>Past case changes</span></div></div>
     </div>
     <div class="span"><h3>All models</h3>${metricsTable(S)}</div>`;
@@ -313,17 +327,35 @@ function renderSet(s) {
   wireChart(key, body, S);
 }
 
+function buildGroup() {
+  const g = G();
+  document.getElementById("group-note").textContent = g.note || "";
+  const sel = document.getElementById("county-select");
+  sel.innerHTML = g.counties.map((c, i) => `<option value="${i}">${i + 1}. ${esc(c.name)}</option>`).join("");
+  const last = g.feature_sets[g.feature_sets.length - 1].key;
+  document.getElementById("sets").innerHTML = g.feature_sets.map(s =>
+    `<details class="set" id="set-${s.key}" ${s.key === last ? "open" : ""}>
+      <summary><span class="st">${s.title}</span><span class="ss"></span></summary><div class="set-body"></div></details>`).join("");
+  document.getElementById("tabs").innerHTML = GROUPS.map((x, i) =>
+    `<button role="tab" data-g="${i}" aria-selected="${i === state.group}">${esc(x.title)} (${x.counties.length})</button>`).join("");
+  document.querySelectorAll("#tabs button").forEach(b => b.addEventListener("click", () => selectGroup(+b.dataset.g)));
+}
+
+function selectGroup(i) {
+  state.group = i; state.county = 0;
+  SETS.forEach(s => state.ui[s.key].visible = null);
+  buildGroup();
+  renderMain();
+  renderCounty();
+}
+
 (function init() {
   const m = DATA.meta;
   document.getElementById("lede").textContent = CFG.intro;
   document.getElementById("scope-note").textContent =
     `Forecast months ${m.first_forecast_month} to ${m.last_forecast_month}. Counties are ranked by total cases among the ${m.n_counties_in_data} counties with data.`;
-  const sel = document.getElementById("county-select");
-  sel.innerHTML = DATA.counties.map((c, i) => `<option value="${i}">${i + 1}. ${esc(c.name)}</option>`).join("");
-  sel.addEventListener("change", () => selectCounty(+sel.value));
-  document.getElementById("sets").innerHTML = SETS.map(s =>
-    `<details class="set" id="set-${s.key}" ${s.key === SETS[SETS.length - 1].key ? "open" : ""}>
-      <summary><span class="st">${s.title}</span><span class="ss"></span></summary><div class="set-body"></div></details>`).join("");
+  document.getElementById("county-select").addEventListener("change", e => selectCounty(+e.target.value));
+  buildGroup();
   renderMain();
   renderCounty();
 })();

@@ -1,6 +1,6 @@
 # Valley Fever forecast dashboard
 
-An interactive page showing walk-forward forecasts for the 10 California counties with the most Valley Fever cases (among the 21 counties in this project's data).
+An interactive page showing walk-forward forecasts for California counties, in two tabs: the 10 counties with the most Valley Fever cases, and the other counties in the project's data. San Mateo and Alameda are left out of every calculation (excluded by request). No other county has mostly missing data, so none is dropped for that reason.
 
 ## Open it
 
@@ -9,9 +9,11 @@ An interactive page showing walk-forward forecasts for the 10 California countie
 
 ## How to use it
 
-**Main dashboard (top of the page)**
+**Tabs.** "Top 10 counties" and "Other counties" sit under the intro. Each tab has the same layout: an overview table, a county picker and the three dropdowns. A note under the tabs says how the group was chosen and which counties were left out.
 
-- The table ranks the 10 counties by total cases. For each feature set (Environment, Media, Media + environment) it shows the best model and its average RMSE, the forecast error. Lower is better.
+**Main dashboard (top of each tab)**
+
+- The table ranks the tab's counties by total cases. For each feature set (Environment, Media, Media + environment) it shows the best model and its average RMSE, the forecast error. Lower is better.
 - A dot marks each county's lowest error across the three feature sets. The sentence above the table counts how many counties each feature set wins.
 - Click a row, or use the **County** dropdown under the table, to choose a county.
 
@@ -19,14 +21,15 @@ An interactive page showing walk-forward forecasts for the 10 California countie
 
 - Click a heading to open or close it. Each heading's summary line gives that county's best model and average RMSE for that feature set.
 - **Horizon buttons** switch between forecasts made 1, 3 and 6 months ahead.
-- **Model toggles** show or hide each model: Seasonal naive, Ridge, Random forest, XGBoost, SARIMAX, LSTM. The best model is tagged "best". At least one model always stays on.
+- **Model toggles** show or hide each model: Seasonal naive, No change, Ridge, Random forest, XGBoost, SARIMAX, LSTM. The best model is tagged "best". At least one model always stays on. Each chart opens with the best model and the no-change baseline. The best model is chosen by RMSE averaged over the 1, 3 and 6 month horizons and stays the same when you change the horizon, so at one horizon another model can score slightly better. Your toggles are kept when you change the horizon and reset when you change county.
 - **Chart:** cases per 100,000 per month, 2021 to 2024. The black line is observed. Each colored line is that model's forecast, made the chosen number of months earlier. Hover over the chart, or click it and use the left and right arrow keys, to read exact values for a month.
 - **What drives the forecasts:** the top features of the best model that reports importance, colored by news and Twitter, environment, or past case changes.
-- **All models:** RMSE and MAE at 1, 3 and 6 months, plus improvement over the seasonal-naive baseline (which repeats last year's value).
+- **All models:** RMSE and MAE at 1, 3 and 6 months, plus improvement over two baselines. Seasonal naive repeats last year's change. No change repeats last month's value, which is the stricter test. Baselines are shown for comparison and are never picked as the best model.
 
 ## What the numbers mean
 
-- RMSE and MAE are averaged over every forecast month in every rolling window, on the log-change scale the project uses (month-to-month change in the log of cases per 100,000). The summary text under each county also gives the error in cases per 100,000.
+- **Log scale:** the models predict on a log scale. The target is the month-to-month change in log(1 + cases per 100,000). Forecasts are converted back to cases per 100,000 for the charts and the rate errors, and each forecast starts from the last observed month.
+- RMSE and MAE are averaged over every forecast month in every rolling window, on the log-change scale. The summary text under each county also gives the error in cases per 100,000.
 - Models are trained on a rolling 10-year window and forecast 2021-02 to 2024-12.
 - Media data are California-wide, so every county sees the same media signal.
 - Results are predictive and associational, not causal.
@@ -35,9 +38,9 @@ An interactive page showing walk-forward forecasts for the 10 California countie
 
 Every chart is drawn from files in `results/media_env_walk_forward/`:
 
-- `top10_forecasts_{env_only,media_only,media_env}.csv`: observed and predicted rates by county, model, horizon and month
-- `top10_metrics_{env_only,media_only,media_env}.csv`: RMSE, MAE and improvement over baseline
-- `top10_feature_importance_{env_only,media_only,media_env}.csv`: feature importance
+- `top10_*` and `other_*` files, each as `forecasts`, `metrics` and `feature_importance`, for `env_only`, `media_only` and `media_env`: observed and predicted rates by county, model, horizon and month; RMSE, MAE and improvement over both baselines; and feature importance. `top10_` is the top-10 tab and `other_` is the other-counties tab.
+- `top10_best_model_top3.csv`, `other_best_model_top3.csv` and `remaining_counties_best_model_top3.csv`: each county's best model and top three features
+- `diagnostic_history_only_metrics.csv`: a check using only each county's own case history (no weather or media). It is saved but not shown on the dashboard.
 
 ## Updating the dashboard
 
@@ -56,7 +59,7 @@ open dashboard.html                 # check it
 | `dashboard_config.json` | Display names, colors, intro text, and which feature sets are shown and in what order |
 | `dashboard_template.html` | Layout, charts, tables, controls and the footer notes |
 | `build_dashboard.py` | Reads the results CSVs and fills the template |
-| `src/media_env_walk_forward.py` | The models and the walk-forward run (what produces the numbers) |
+| `src/media_env_walk_forward.py` | The models and the walk-forward run (what produces the numbers), and which counties are excluded (`EXCLUDED_BY_REQUEST`, `MISSING_SHARE_LIMIT`) |
 | `results/media_env_walk_forward/*.csv` | The saved results the dashboard is built from |
 
 The dashboard shows whatever is in the results folder. A model or feature set that is in the CSVs but not in `dashboard_config.json` still appears, with an automatic label and color.
@@ -66,7 +69,7 @@ The dashboard shows whatever is in the results folder. A model or feature set th
 | I want to... | Do this | Time |
 |:--|:--|:--|
 | Change wording, labels, colors or the intro text | Edit `dashboard_config.json`, then `python build_dashboard.py` | seconds |
-| Change layout, add a chart or control, or edit the footer notes | Edit `dashboard_template.html`, then `python build_dashboard.py`. The data is available as `DATA.counties[i].sets[key]` with `metrics`, `forecasts`, `features` and `best`. | seconds |
+| Change layout, add a chart or control, or edit the footer notes | Edit `dashboard_template.html`, then `python build_dashboard.py`. The data is available as `DATA.groups[g].counties[i].sets[key]` with `metrics`, `forecasts`, `features` and `best`. | seconds |
 | Add a model | See "Adding a model" below | seconds to about 20 minutes |
 | Add a feature set | See "Adding a feature set" below | about 25 minutes |
 | Add a field to the data | Add it in the payload in `build_dashboard.py`, then use it in the template | seconds |
@@ -74,11 +77,11 @@ The dashboard shows whatever is in the results folder. A model or feature set th
 
 ### Adding a model
 
-1. In `src/media_env_walk_forward.py`, add the model's name to `MODELS` and its fitting code to `run_county`. A model that needs no fitting, such as a no-change baseline, is a few lines.
-2. Run only that model. Include `seasonal_naive` so the "vs baseline" column can be computed, and use a new `--tag` for every run:
+1. In `src/media_env_walk_forward.py`, add the model's name to `MODELS` and its fitting code to `run_county`. A model that needs no fitting, such as `no_change`, is a few lines. Baselines go in `BASELINES` so they are never chosen as the best model.
+2. Run only that model. Include `seasonal_naive` and `no_change` so the improvement columns can be computed, and use a new `--tag` for every run. This covers both tabs unless you add `--scope top` or `--scope remaining`:
 
 ```bash
-python src/media_env_walk_forward.py run --models seasonal_naive MYMODEL --tag add-mymodel
+python src/media_env_walk_forward.py run --models seasonal_naive no_change MYMODEL --tag add-mymodel
 ```
 
    To try it on one county first, add `--counties Kern --feature-sets media_env`.
@@ -94,7 +97,7 @@ python src/media_env_walk_forward.py combine
 ### Adding a feature set
 
 1. Add its key to `FEATURE_SETS` and its columns to `_set_cols` in `src/media_env_walk_forward.py`.
-2. Run it for the dashboard's counties, with every model: `python src/media_env_walk_forward.py run --scope top --feature-sets MYSET --tag add-myset`.
+2. Run it for every county, with every model: `python src/media_env_walk_forward.py run --scope all --feature-sets MYSET --tag add-myset`.
 3. Run `combine`, then `python build_dashboard.py`. A new dropdown appears automatically. Add its title to `feature_sets` in `dashboard_config.json`.
 
 ### Safe workflow for any change
@@ -127,7 +130,8 @@ To see the result on GitHub, open the pull request and look at the "Checks" sect
 - `combine` merges new runs into the saved tables. A newer run replaces older rows with the same county, feature set, model and horizon. Old rows are never deleted, so if you remove a model, delete its rows from the CSVs by hand.
 - Running `combine` with no new runs rewrites the same tables, so it's safe to run twice.
 - Re-running a model reproduces the same numbers, because the random seeds are fixed.
-- The dashboard covers the 10 counties with the most cases. The "top10" file names and the `top_counties` call in the code assume 10, so changing that takes some edits.
+- The first tab covers the 10 counties with the most cases and the second tab covers the rest. The "top10" file names and the `top_counties` call in the code assume 10, so changing that takes some edits.
+- To exclude another county, add it to `EXCLUDED_BY_REQUEST` in `src/media_env_walk_forward.py` and run `combine`. It disappears from every table and from the dashboard. A county is also excluded automatically if more than 50% of its environmental values (2011 to 2024) are missing.
 
 ## Setup note: turning on the online link
 
